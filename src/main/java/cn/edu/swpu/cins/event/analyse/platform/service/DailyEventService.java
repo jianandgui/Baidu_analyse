@@ -20,5 +20,11 @@ public interface DailyEventService {
      * 获取页数接口
      * @return
      */
-    public int getPageCount();
+    public int getPageCount() throws BaseException;
+
+    /**
+     * 归集事件接口
+     * @return
+     */
+    public int collectEvent(String recorder,int dailyEventId) throws BaseException;
 }
