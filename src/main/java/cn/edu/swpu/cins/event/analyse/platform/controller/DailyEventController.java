@@ -14,7 +14,7 @@ import java.util.List;
  * Created by lp-deepin on 17-5-7.
  */
 @RestController
-@RequestMapping
+@RequestMapping("/event")
 public class DailyEventController {
     private DailyEventService dailyEventService;
 
@@ -35,7 +35,21 @@ public class DailyEventController {
 
     @GetMapping(value = {"/dailyEvent/pageCount"})
     public ResponseEntity<?> getPageCount(){
-        return new ResponseEntity<>(dailyEventService.getPageCount(),HttpStatus.OK);
+        try {
+            return new ResponseEntity<>(dailyEventService.getPageCount(),HttpStatus.OK);
+        }catch (BaseException e){
+            return new ResponseEntity<>(e.getMessage(),e.getStatus());
+        }
+    }
+
+    @PostMapping(value = {"/dailyEvent/{id}/collect"})
+    public ResponseEntity<?> collectEvent(@RequestBody String recorder,@PathVariable("id") int id){
+        try {
+            dailyEventService.collectEvent(recorder,id);
+        }catch (BaseException e){
+            return new ResponseEntity<>(e.getMessage(),e.getStatus());
+        }
+        return new ResponseEntity<Object>("归集成功",HttpStatus.OK);
     }
 
     @ExceptionHandler(NumberFormatException.class)
@@ -43,8 +57,4 @@ public class DailyEventController {
         return new ResponseEntity<Object>("参数错误", HttpStatus.BAD_REQUEST);
     }
 
-//    @ExceptionHandler(BaseException.class)
-//    public ResponseEntity<?> BaseExceptionHandler(BaseException e) {
-//        return new ResponseEntity<>(e.getMessage(), e.getStatus());
-//    }
 }
