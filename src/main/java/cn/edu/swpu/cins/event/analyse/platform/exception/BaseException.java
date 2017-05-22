@@ -16,6 +16,7 @@ public class BaseException extends Exception {
         return "BaseException{" +
                 "status=" + status +
                 '}';
+
     }
 
     public HttpStatus getStatus() {

@@ -7,6 +7,9 @@ import java.util.Date;
 @Data
 public class HandledEvent {
     private int id;
+    private String theme;
+    private String mainView;
+    private String url;
     private String handledCondition;
     private short feedbackCondition;
     private Date collectedTime;
@@ -16,6 +19,29 @@ public class HandledEvent {
     private int dailyEventId;
     private String recorder;
 
+    public String getTheme() {
+        return theme;
+    }
+
+    public void setTheme(String theme) {
+        this.theme = theme;
+    }
+
+    public String getMainView() {
+        return mainView;
+    }
+
+    public void setMainView(String mainView) {
+        this.mainView = mainView;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
 
     public String getRecorder() {
         return recorder;
@@ -87,5 +113,23 @@ public class HandledEvent {
 
     public void setDailyEventId(int dailyEventId) {
         this.dailyEventId = dailyEventId;
+    }
+
+    @Override
+    public String toString() {
+        return "HandledEvent{" +
+                "id=" + id +
+                ", theme='" + theme + '\'' +
+                ", mainView='" + mainView + '\'' +
+                ", url='" + url + '\'' +
+                ", handledCondition='" + handledCondition + '\'' +
+                ", feedbackCondition=" + feedbackCondition +
+                ", collectedTime=" + collectedTime +
+                ", handledTime=" + handledTime +
+                ", detail='" + detail + '\'' +
+                ", remark='" + remark + '\'' +
+                ", dailyEventId=" + dailyEventId +
+                ", recorder='" + recorder + '\'' +
+                '}';
     }
 }

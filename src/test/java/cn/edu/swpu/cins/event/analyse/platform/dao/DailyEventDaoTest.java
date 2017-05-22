@@ -19,7 +19,7 @@ public class DailyEventDaoTest {
     DailyEventDao dailyEventDao;
     @Test
     public void should_print_daily_event_list()throws Exception{
-        List<DailyEvent> list = dailyEventDao.selectEventsBetweenTime("2017-4-30 00:00:00","2017-5-3 23:59:59");
+        List<DailyEvent> list = dailyEventDao.selectEventsBetweenTime("2017-4-30 00:00:00","2017-5-3 00:00:00","西南石油大学");
         list.forEach(
                 (DailyEvent dailyEvent) -> {
                     System.out.println(dailyEvent.toString());
