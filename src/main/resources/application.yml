@@ -8,7 +8,7 @@ mybatis:
 
 spring:
   datasource:
-    password: 123
+    password: cinscinsb511
     username: root
     driver-class-name: com.mysql.jdbc.Driver
     url: jdbc:mysql://182.150.37.58:3306/university_event_analyse?useUnicode=true&characterEncoding=utf8&useSSL=false
@@ -19,3 +19,9 @@ server:
 event:
   service:
     page-count: 5 #每页展示的事件个数
+
+jwt:
+  header: Authorization
+  secret: mySecret
+  expiration: 604800
+  tokenHead: "Bearer "
