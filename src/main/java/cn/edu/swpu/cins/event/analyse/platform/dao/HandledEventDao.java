@@ -23,7 +23,7 @@ public interface HandledEventDao {
 
     @Insert({"insert into ", TABLE_NAME, " ( ", INSERT_FIELD, " ) " +
             "value(#{handledCondition},#{feedbackCondition},#{collectedTime}" +
-            ",#{handledTime},#{detail},#{remark},#{dailyEventId})"})
+            ",#{handledTime},#{detail},#{remark},#{dailyEventId},#{recorder})"})
     int insertHandledEvent(HandledEvent handledEvent);
 
     @Select({"SELECT ", JOIN_SELECT_FIELD
