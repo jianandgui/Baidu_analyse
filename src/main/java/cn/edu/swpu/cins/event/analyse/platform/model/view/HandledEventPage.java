@@ -29,6 +29,7 @@ public class HandledEventPage {
         setHandledCondition(handledEvent.getHandledCondition());
         setFeedbackCondition(handledEvent.getFeedbackCondition());
         setCollectedTime(handledEvent.getCollectedTime().getTime());
+        //todo handletime 可能为空
         setHandledTime(handledEvent.getHandledTime().getTime());
         setRecorder(handledEvent.getRecorder());
         setDetail(handledEvent.getDetail());

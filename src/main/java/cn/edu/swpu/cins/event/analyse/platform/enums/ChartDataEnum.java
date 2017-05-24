@@ -1,7 +1,26 @@
 package cn.edu.swpu.cins.event.analyse.platform.enums;
 
-/**
- * Created by lp-deepin on 17-5-24.
- */
-public class ChartDataEnum {
+public enum ChartDataEnum {
+    FOLOWCOUNT("跟帖量"),
+    POSTCOUNT("发帖量")
+    ;
+
+    private String dataType;
+
+    ChartDataEnum(String dataType) {
+        this.dataType = dataType;
+    }
+
+    public static boolean isInclude(String dataType){
+        for (ChartDataEnum data : ChartDataEnum.values()){
+            if(data.getDataType().equals(dataType)){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public String getDataType() {
+        return dataType;
+    }
 }

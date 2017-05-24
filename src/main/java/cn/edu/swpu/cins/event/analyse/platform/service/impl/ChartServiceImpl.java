@@ -1,6 +1,7 @@
 package cn.edu.swpu.cins.event.analyse.platform.service.impl;
 
 import cn.edu.swpu.cins.event.analyse.platform.dao.DailyEventDao;
+import cn.edu.swpu.cins.event.analyse.platform.enums.ChartDataEnum;
 import cn.edu.swpu.cins.event.analyse.platform.exception.BaseException;
 import cn.edu.swpu.cins.event.analyse.platform.exception.IlleagalArgumentException;
 import cn.edu.swpu.cins.event.analyse.platform.model.persistence.DailyEvent;
@@ -21,7 +22,7 @@ import java.util.List;
 @Service
 public class ChartServiceImpl implements ChartService {
     private static final DateFormat CHART_PARAMETER_DATE_FORMAT = new SimpleDateFormat("MM/dd/yyyy");
-    private static final DateFormat CHART_DISPLAY_DATE_FORMAT = new SimpleDateFormat("MM-dd");
+    private static final DateFormat CHART_DISPLAY_DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd");
     private static final DateFormat DATABASE_DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd 00:00:00");
     private static final long DAY = 86400000L;
 
@@ -33,7 +34,13 @@ public class ChartServiceImpl implements ChartService {
     }
 
     @Override
-    public List<ChartPoint> getChartPoints(String source, String data, String beginTime, String endTime) throws BaseException {
+    public List<ChartPoint> getChartPoints(String source, String data
+            , String beginTime, String endTime) throws BaseException {
+        if(!ChartDataEnum.isInclude(data)){
+            throw new IlleagalArgumentException();
+        }
+
+        //todo 对日期范围的限制
         try {
             Date endTimeDate = CHART_PARAMETER_DATE_FORMAT.parse(endTime);
             Date beginTimeDate = CHART_PARAMETER_DATE_FORMAT.parse(beginTime);
@@ -68,18 +75,18 @@ public class ChartServiceImpl implements ChartService {
             long time = event.getPostTime().getTime();
             if (time - curDay < DAY) {
                 //事件的发帖时间在当天则统计
-                if ("发帖量".equals(dataType)) {
+                if (ChartDataEnum.POSTCOUNT.getDataType().equals(dataType)) {
                     count++;
-                } else if ("跟帖量".equals(dataType)) {
+                } else if (ChartDataEnum.FOLOWCOUNT.getDataType().equals(dataType)) {
                     count += event.getFollowCount();
                 }
 
             } else {
                 //清算count,生成相应的chartresult插入list
                 day[dayNo] = count;
-                if ("发帖量".equals(dataType)) {
+                if (ChartDataEnum.POSTCOUNT.getDataType().equals(dataType)) {
                     count = 1;
-                } else if ("跟帖量".equals(dataType)) {
+                } else if (ChartDataEnum.FOLOWCOUNT.getDataType().equals(dataType)) {
                     count = event.getFollowCount();
                 }
                 int dayMin = (int) ((time - curDay) / DAY);
