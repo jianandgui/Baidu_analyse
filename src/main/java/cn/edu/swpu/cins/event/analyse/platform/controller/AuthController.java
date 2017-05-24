@@ -8,11 +8,9 @@ import cn.edu.swpu.cins.event.analyse.platform.model.view.ResultData;
 import cn.edu.swpu.cins.event.analyse.platform.service.AuthService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -34,7 +32,6 @@ public class AuthController {
     @RequestMapping("/login")
     public ResultData createTeacherAuthenticationToken(
             @RequestBody JwtAuthenticationRequest authenticationRequest) throws AuthenticationException {
-
 
         User user = userDao.queryByName(authenticationRequest.getUsername());
         if (user == null) {
