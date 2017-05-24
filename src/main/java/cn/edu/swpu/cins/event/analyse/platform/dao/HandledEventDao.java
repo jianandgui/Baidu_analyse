@@ -19,7 +19,7 @@ public interface HandledEventDao {
     static String JOIN_TABLE_NAME = " daily_event ";
     static String JOIN_SELECT_FIELD = " de.theme,de.main_view,de.url," +
             "he.id,he.handled_condition,he.feedback_condition,he.collected_time,he.handled_time,he.detail,he.remark,he.recorder ";
-    static String INSERT_FIELD = " handled_condition,feedback_condition,collected_time,handled_time,detail,remark,daily_event_id ";
+    static String INSERT_FIELD = " handled_condition,feedback_condition,collected_time,handled_time,detail,remark,daily_event_id,recorder ";
 
     @Insert({"insert into ", TABLE_NAME, " ( ", INSERT_FIELD, " ) " +
             "value(#{handledCondition},#{feedbackCondition},#{collectedTime}" +
