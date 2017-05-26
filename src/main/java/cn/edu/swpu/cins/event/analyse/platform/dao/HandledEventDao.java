@@ -38,4 +38,8 @@ public interface HandledEventDao {
             "FROM ", TABLE_NAME,
             " WHERE daily_event_id = #{dailyEventId} LIMIT 1"})
     HandledEvent selectByDailyEvent(int dailyEventId);
+
+    @Select({" SELECT COUNT(id) " +
+            "FROM " , TABLE_NAME})
+    int selectCount();
 }

@@ -9,6 +9,7 @@ import cn.edu.swpu.cins.event.analyse.platform.model.view.HandledEventPage;
 import cn.edu.swpu.cins.event.analyse.platform.service.HandledEventService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -44,6 +45,23 @@ public class HandledEventServiceImpl implements HandledEventService {
             return list.stream()
                     .map(HandledEventPage::new)
                     .collect(toList());
+        }
+    }
+
+    @Override
+    public int getPageCount() throws BaseException {
+        try {
+            int eventCount = handledEventDao.selectCount();
+
+            int pageCount = eventCount/pageSize;
+
+            if(eventCount%pageSize!=0){
+                pageCount++;
+            }
+
+            return pageCount;
+        }catch (Exception e){
+            throw new BaseException("内部错误", HttpStatus.NOT_FOUND);
         }
     }
 }

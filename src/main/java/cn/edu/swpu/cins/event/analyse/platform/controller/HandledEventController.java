@@ -6,10 +6,7 @@ import cn.edu.swpu.cins.event.analyse.platform.service.HandledEventService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -29,11 +26,26 @@ public class HandledEventController {
     @GetMapping("/handledEvent/{page}")
     public ResponseEntity<?> getHandledEvents(@PathVariable("page") int page) {
         try {
-            List<HandledEventPage> list = null;
+            List<HandledEventPage> list;
             list = handledEventService.getHandledEvents(page);
             return new ResponseEntity<>(list, HttpStatus.OK);
         } catch (BaseException e) {
             return new ResponseEntity<>(e.getMessage(), e.getStatus());
         }
     }
+
+    @GetMapping(value = {"/dailyEvent/pageCount"})
+    public ResponseEntity<?> getPageCount(){
+        try {
+            return new ResponseEntity<>(handledEventService.getPageCount(),HttpStatus.OK);
+        }catch (BaseException e){
+            return new ResponseEntity<>(e.getMessage(),e.getStatus());
+        }
+    }
+
+    @ExceptionHandler(NumberFormatException.class)
+    public ResponseEntity<?> ParamExceptionHandler(NumberFormatException e) {
+        return new ResponseEntity<Object>("参数错误", HttpStatus.BAD_REQUEST);
+    }
+
 }

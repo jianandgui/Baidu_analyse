@@ -42,8 +42,8 @@ public class DailyEventController {
         }
     }
 
-    @PostMapping(value = {"/dailyEvent/{id}/collect"})
-    public ResponseEntity<?> collectEvent(@RequestBody String recorder,@PathVariable("id") int id){
+    @PostMapping(value = {"/dailyEvent/{id}/{recorder}/collect"})
+    public ResponseEntity<?> collectEvent(@PathVariable String recorder,@PathVariable("id") int id){
         try {
             dailyEventService.collectEvent(recorder,id);
         }catch (BaseException e){

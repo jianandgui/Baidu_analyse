@@ -8,9 +8,11 @@ import cn.edu.swpu.cins.event.analyse.platform.model.persistence.DailyEvent;
 import cn.edu.swpu.cins.event.analyse.platform.model.view.ChartPoint;
 import cn.edu.swpu.cins.event.analyse.platform.service.ChartService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -40,12 +42,17 @@ public class ChartServiceImpl implements ChartService {
             throw new IlleagalArgumentException();
         }
 
-        //todo 对日期范围的限制
         try {
             Date endTimeDate = CHART_PARAMETER_DATE_FORMAT.parse(endTime);
             Date beginTimeDate = CHART_PARAMETER_DATE_FORMAT.parse(beginTime);
+
             long endTimeLong = endTimeDate.getTime();
             long beginTimeLong = beginTimeDate.getTime();
+
+            //对日期范围的限制
+            if(endTimeLong - beginTimeLong > 30 * DAY){
+                throw new IlleagalArgumentException();
+            }
 
             String endDateFormat;
             endDateFormat = DATABASE_DATE_FORMAT.format(new Date(endTimeLong + DAY));
@@ -56,8 +63,10 @@ public class ChartServiceImpl implements ChartService {
             List<ChartPoint> list = getChart(events, beginTimeLong, endTimeLong, data);
 
             return list;
-        } catch (Exception e) {
+        } catch (ParseException e) {
             throw new IlleagalArgumentException();
+        } catch (Exception e){
+            throw new BaseException("服务器内部错误", HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 

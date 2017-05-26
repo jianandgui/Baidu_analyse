@@ -2,10 +2,7 @@ package cn.edu.swpu.cins.event.analyse.platform.service.impl;
 
 import cn.edu.swpu.cins.event.analyse.platform.dao.DailyEventDao;
 import cn.edu.swpu.cins.event.analyse.platform.dao.HandledEventDao;
-import cn.edu.swpu.cins.event.analyse.platform.exception.BaseException;
-import cn.edu.swpu.cins.event.analyse.platform.exception.IlleagalArgumentException;
-import cn.edu.swpu.cins.event.analyse.platform.exception.NoEventException;
-import cn.edu.swpu.cins.event.analyse.platform.exception.RepeatlyCollectException;
+import cn.edu.swpu.cins.event.analyse.platform.exception.*;
 import cn.edu.swpu.cins.event.analyse.platform.model.persistence.DailyEvent;
 import cn.edu.swpu.cins.event.analyse.platform.model.persistence.HandledEvent;
 import cn.edu.swpu.cins.event.analyse.platform.model.view.DailyPageEvent;
@@ -30,25 +27,25 @@ public class DailyEventServiceImpl implements DailyEventService {
 
     @Autowired
     public DailyEventServiceImpl(DailyEventDao dailyEventDao
-            ,HandledEventDao handledEventDao
-            ,@Value("${event.service.page-count}") int pageSize) {
+            , HandledEventDao handledEventDao
+            , @Value("${event.service.page-count}") int pageSize) {
         this.dailyEventDao = dailyEventDao;
         this.handledEventDao = handledEventDao;
         this.pageSize = pageSize;
     }
 
     @Override
-    public List<DailyPageEvent> getDailyEventsByPage(int page) throws BaseException{
+    public List<DailyPageEvent> getDailyEventsByPage(int page) throws BaseException {
 
-        if(page<=0){
+        if (page <= 0) {
             throw new IlleagalArgumentException();
         }
 
-        List<DailyEvent> list = dailyEventDao.selectAll((--page)* pageSize, pageSize);
+        List<DailyEvent> list = dailyEventDao.selectAll((--page) * pageSize, pageSize);
 
-        if(list.size()<=0){
+        if (list.size() <= 0) {
             throw new NoEventException();
-        }else {
+        } else {
             return list.stream()
                     .map(DailyPageEvent::new)
                     .collect(toList());
@@ -60,24 +57,28 @@ public class DailyEventServiceImpl implements DailyEventService {
         try {
             int eventCount = dailyEventDao.selectCount();
 
-            int pageCount = eventCount/pageSize;
+            int pageCount = eventCount / pageSize;
 
-            if(eventCount%pageSize!=0){
+            if (eventCount % pageSize != 0) {
                 pageCount++;
             }
 
             return pageCount;
-        }catch (Exception e){
-            throw new BaseException("内部错误", HttpStatus.NOT_FOUND);
+        } catch (Exception e) {
+            throw new BaseException("内部错误", HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
     @Override
-    @Transactional
-    public int collectEvent(String recorder,int dailyEventId) throws BaseException{
-        //todo 异常抛出
+    @Transactional(rollbackFor = {RuntimeException.class,BaseException.class})
+    public int collectEvent(String recorder, int dailyEventId) throws BaseException {
+        //todo 1判断recorder是否合法
+        if (recorder.length()>10){
+            throw new IlleagalArgumentException("记录人不存在");
+        }
+
         //1判断recorder是否合法，2判断事件是否已经归集，3执行插入语句 4将对应event的归并状态改变
-        if(handledEventDao.selectByDailyEvent(dailyEventId)!=null){
+        if (handledEventDao.selectByDailyEvent(dailyEventId) != null) {
             throw new RepeatlyCollectException();
         }
 
@@ -86,14 +87,18 @@ public class DailyEventServiceImpl implements DailyEventService {
         handledEvent.setDetail("");
         handledEvent.setCollectedTime(new Date());
         handledEvent.setHandledCondition("未处置");
-        handledEvent.setFeedbackCondition((short)0);
+        handledEvent.setFeedbackCondition((short) 0);
         handledEvent.setRecorder(recorder);
         handledEvent.setDailyEventId(dailyEventId);
         handledEvent.setHandledTime(new Date());
 
-        handledEventDao.insertHandledEvent(handledEvent);
+        int insertCount = handledEventDao.insertHandledEvent(handledEvent);
 
-        dailyEventDao.updateCollectStatus(dailyEventId);
+        int updateCount = dailyEventDao.updateCollectStatus(dailyEventId);
+
+        if (insertCount + updateCount != 2) {
+            throw new OperationFailureException();
+        }
 
         return 1;
     }
