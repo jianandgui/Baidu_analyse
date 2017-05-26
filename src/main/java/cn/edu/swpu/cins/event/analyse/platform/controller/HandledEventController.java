@@ -34,7 +34,7 @@ public class HandledEventController {
         }
     }
 
-    @GetMapping(value = {"/dailyEvent/pageCount"})
+    @GetMapping(value = {"/handledEvent/pageCount"})
     public ResponseEntity<?> getPageCount(){
         try {
             return new ResponseEntity<>(handledEventService.getPageCount(),HttpStatus.OK);
