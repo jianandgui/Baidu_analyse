@@ -35,12 +35,17 @@ public class HandledEventController {
     }
 
     @GetMapping(value = {"/handledEvent/pageCount"})
-    public ResponseEntity<?> getPageCount(){
+    public ResponseEntity<?> getPageCount() {
         try {
-            return new ResponseEntity<>(handledEventService.getPageCount(),HttpStatus.OK);
-        }catch (BaseException e){
-            return new ResponseEntity<>(e.getMessage(),e.getStatus());
+            return new ResponseEntity<>(handledEventService.getPageCount(), HttpStatus.OK);
+        } catch (BaseException e) {
+            return new ResponseEntity<>(e.getMessage(), e.getStatus());
         }
+    }
+
+    @PostMapping("/handledEvent/{id}/handle")
+    public ResponseEntity<?> handle(@PathVariable int id, @RequestBody HandledEventPage handledEventPage) {
+        return new ResponseEntity<>("处置成功", HttpStatus.OK);
     }
 
     @ExceptionHandler(NumberFormatException.class)

@@ -8,6 +8,7 @@ import cn.edu.swpu.cins.event.analyse.platform.model.persistence.DailyEvent;
 import cn.edu.swpu.cins.event.analyse.platform.model.view.ChartPoint;
 import cn.edu.swpu.cins.event.analyse.platform.service.ChartService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
@@ -29,9 +30,11 @@ public class ChartServiceImpl implements ChartService {
     private static final long DAY = 86400000L;
 
     private DailyEventDao dailyEventDao;
+    private int dateRange;
 
     @Autowired
-    public ChartServiceImpl(DailyEventDao dailyEventDao) {
+    public ChartServiceImpl(DailyEventDao dailyEventDao,@Value("${event.service.chart-date-range}") int dateRange) {
+        this.dateRange = dateRange;
         this.dailyEventDao = dailyEventDao;
     }
 
@@ -50,7 +53,7 @@ public class ChartServiceImpl implements ChartService {
             long beginTimeLong = beginTimeDate.getTime();
 
             //对日期范围的限制
-            if(endTimeLong - beginTimeLong > 30 * DAY){
+            if(endTimeLong - beginTimeLong > dateRange * DAY){
                 throw new IlleagalArgumentException();
             }
 

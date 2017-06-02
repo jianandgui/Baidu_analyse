@@ -19,7 +19,7 @@ server:
 event:
   service:
     page-count: 5 #每页展示的事件个数
-
+    chart-date-range: 62 #查询图表的日期范围，单位为天
 jwt:
   header: Authorization
   secret: mySecret
