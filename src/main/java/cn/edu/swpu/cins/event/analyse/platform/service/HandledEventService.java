@@ -10,4 +10,6 @@ public interface HandledEventService {
     List<HandledEventPage> getHandledEvents(int page) throws BaseException;
 
     int getPageCount() throws BaseException;
+
+    int handle(HandledEventPage handledEventPage) throws BaseException;
 }

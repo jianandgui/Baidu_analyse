@@ -1,9 +1,11 @@
 package cn.edu.swpu.cins.event.analyse.platform.service.impl;
 
 import cn.edu.swpu.cins.event.analyse.platform.dao.HandledEventDao;
+import cn.edu.swpu.cins.event.analyse.platform.enums.FeedbackEnum;
 import cn.edu.swpu.cins.event.analyse.platform.exception.BaseException;
 import cn.edu.swpu.cins.event.analyse.platform.exception.IlleagalArgumentException;
 import cn.edu.swpu.cins.event.analyse.platform.exception.NoEventException;
+import cn.edu.swpu.cins.event.analyse.platform.exception.OperationFailureException;
 import cn.edu.swpu.cins.event.analyse.platform.model.persistence.HandledEvent;
 import cn.edu.swpu.cins.event.analyse.platform.model.view.HandledEventPage;
 import cn.edu.swpu.cins.event.analyse.platform.service.HandledEventService;
@@ -12,6 +14,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 import static java.util.stream.Collectors.toList;
@@ -63,5 +66,36 @@ public class HandledEventServiceImpl implements HandledEventService {
         }catch (Exception e){
             throw new BaseException("内部错误", HttpStatus.NOT_FOUND);
         }
+    }
+
+    @Override
+    public int handle(HandledEventPage handledEventPage) throws BaseException {
+
+        String remark = handledEventPage.getRemark();
+        String detail = handledEventPage.getDetail();
+        String handledCondition = handledEventPage.getHandledCondition();
+        String condition = handledEventPage.getFeedbackCondition();
+        short conditionShort = FeedbackEnum.getIndexByFeedback(condition);
+
+        if(remark == null || detail == null || handledCondition == null || conditionShort == -1){
+            throw new IlleagalArgumentException("参数不可为空");
+        }else if(remark.length()>100||detail.length()>100||handledCondition.length()>30){
+            throw new IlleagalArgumentException("输入长度超出限制");
+        }
+
+        HandledEvent handledEvent = new HandledEvent();
+        handledEvent.setRemark(remark);
+        handledEvent.setDetail(detail);
+        handledEvent.setFeedbackCondition(conditionShort);
+        handledEvent.setHandledTime(new Date());
+        handledEvent.setHandledCondition(handledCondition);
+        handledEvent.setId(handledEventPage.getId());
+        int updateCount = handledEventDao.updateHandledEvent(handledEvent);
+
+        if(updateCount<1){
+            throw new OperationFailureException();
+        }
+
+        return 0;
     }
 }

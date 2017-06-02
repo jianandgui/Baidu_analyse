@@ -24,7 +24,7 @@ public class HandledEventDaoTest {
 //            event.setCollectedTime(new Date());
 //            event.setHandledTime(new Date());
 //            event.setDailyEventId(5);
-//            event.setFeedbackCondition((short)0);
+//            event.setFeedbackConditionByShort((short)0);
 //            event.setHandledCondition("test"+i);
 //            event.setDetail("test"+i);
 //            event.setRemark("test"+i);

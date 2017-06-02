@@ -26,6 +26,7 @@ public enum FeedbackEnum {
     public short getIndex() {
         return index;
     }
+
     public void setIndex(short index) {
         this.index = index;
     }
@@ -36,14 +37,15 @@ public enum FeedbackEnum {
                 return feedbackEnum.getFeedbackCondition();
             }
         }
-        return FeedbackEnum.UNFEEDBACK.getFeedbackCondition();
+        return null;
     }
+
     public static short getIndexByFeedback(String feedbackCondition){
         for (FeedbackEnum feedbackEnum :FeedbackEnum.values()){
-            if(feedbackCondition.equals(feedbackEnum.getFeedbackCondition())){
+            if(feedbackEnum.getFeedbackCondition().equals(feedbackCondition)){
                 return feedbackEnum.getIndex();
             }
         }
-        return FeedbackEnum.UNFEEDBACK.getIndex();
+        return -1;
     }
 }

@@ -1,10 +1,7 @@
 package cn.edu.swpu.cins.event.analyse.platform.dao;
 
 import cn.edu.swpu.cins.event.analyse.platform.model.persistence.HandledEvent;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -40,6 +37,12 @@ public interface HandledEventDao {
     HandledEvent selectByDailyEvent(int dailyEventId);
 
     @Select({" SELECT COUNT(id) " +
-            "FROM " , TABLE_NAME})
+            "FROM ", TABLE_NAME})
     int selectCount();
+
+    @Update({"UPDATE ", TABLE_NAME
+            , " SET handled_condition = #{handledCondition} , feedback_condition = #{feedbackCondition} " +
+            ", handled_time = #{handledTime} , detail = #{detail} , remark = #{remark} "
+            , " WHERE id = #{id}"})
+    int updateHandledEvent(HandledEvent handledEvent);
 }

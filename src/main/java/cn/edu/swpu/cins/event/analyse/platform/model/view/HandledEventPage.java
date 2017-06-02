@@ -21,13 +21,33 @@ public class HandledEventPage {
     private String detail;
     private String remark;
 
+    public HandledEventPage() {
+    }
+
+    public HandledEventPage(int id, String theme, String mainView
+            , String url, String handledCondition, String feedbackCondition
+            , long collectedTime, long handledTime, String recorder
+            , String detail, String remark) {
+        this.id = id;
+        this.theme = theme;
+        this.mainView = mainView;
+        this.url = url;
+        this.handledCondition = handledCondition;
+        this.feedbackCondition = feedbackCondition;
+        this.collectedTime = collectedTime;
+        this.handledTime = handledTime;
+        this.recorder = recorder;
+        this.detail = detail;
+        this.remark = remark;
+    }
+
     public HandledEventPage(HandledEvent handledEvent) {
         setId(handledEvent.getId());
         setTheme(handledEvent.getTheme());
         setMainView(handledEvent.getMainView());
         setUrl(handledEvent.getUrl());
         setHandledCondition(handledEvent.getHandledCondition());
-        setFeedbackCondition(handledEvent.getFeedbackCondition());
+        setFeedbackConditionByShort(handledEvent.getFeedbackCondition());
         setCollectedTime(handledEvent.getCollectedTime().getTime());
         //todo handletime 可能为空
         setHandledTime(handledEvent.getHandledTime().getTime());
@@ -80,11 +100,11 @@ public class HandledEventPage {
         return feedbackCondition;
     }
 
-    public void setFeedbackCondition(String feedbackCondition) {
+    public void setFeedbackConditionByShort(String feedbackCondition) {
         this.feedbackCondition = feedbackCondition;
     }
 
-    public void setFeedbackCondition(short feedbackCondition) {
+    public void setFeedbackConditionByShort(short feedbackCondition) {
         this.feedbackCondition = FeedbackEnum.getFeedbackByIndex(feedbackCondition);
     }
 
