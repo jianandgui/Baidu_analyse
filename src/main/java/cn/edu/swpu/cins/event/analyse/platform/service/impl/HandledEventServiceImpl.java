@@ -64,7 +64,7 @@ public class HandledEventServiceImpl implements HandledEventService {
 
             return pageCount;
         }catch (Exception e){
-            throw new BaseException("内部错误", HttpStatus.NOT_FOUND);
+            throw new BaseException("内部错误", HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 

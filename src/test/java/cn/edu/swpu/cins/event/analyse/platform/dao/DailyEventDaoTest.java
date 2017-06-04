@@ -29,12 +29,12 @@ public class DailyEventDaoTest {
 
     @Test
     public void should_update_collectionStatus() throws Exception {
-        dailyEventDao.updateCollectStatus(30);
-        List<DailyEvent> list = dailyEventDao.selectAll(0,40);
-        list.forEach(
-                dailyEvent -> {
-                    System.out.println(dailyEvent);
-                }
-        );
+//        dailyEventDao.updateCollectStatus(30);
+//        List<DailyEvent> list = dailyEventDao.selectAll(0,40);
+//        list.forEach(
+//                dailyEvent -> {
+//                    System.out.println(dailyEvent);
+//                }
+//        );
     }
 }

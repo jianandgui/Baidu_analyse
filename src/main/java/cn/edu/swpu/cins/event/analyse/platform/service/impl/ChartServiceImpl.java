@@ -53,7 +53,7 @@ public class ChartServiceImpl implements ChartService {
             long beginTimeLong = beginTimeDate.getTime();
 
             //对日期范围的限制
-            if(endTimeLong - beginTimeLong > dateRange * DAY){
+            if(endTimeLong - beginTimeLong < DAY || endTimeLong - beginTimeLong > dateRange * DAY){
                 throw new IlleagalArgumentException();
             }
 

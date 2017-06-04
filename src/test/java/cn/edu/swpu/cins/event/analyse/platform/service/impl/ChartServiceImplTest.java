@@ -33,7 +33,7 @@ public class ChartServiceImplTest {
 
     @Before
     public void setUp() throws Exception {
-        chartService = new ChartServiceImpl(dailyEventDao);
+        chartService = new ChartServiceImpl(dailyEventDao,62);
     }
 
     @Test
