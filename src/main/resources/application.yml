@@ -1,6 +1,7 @@
 mybatis:
   postType-aliases-package: cn.edu.swpu.cins.event.analyse.platform.model.persistence
   mapper-locations: classpath:mapper/*.xml
+  type-handlers-package: cn.edu.swpu.cins.event.analyse.platform.mybatis.typehandler
   configuration:
     cache-enabled: true
     use-column-label: true
