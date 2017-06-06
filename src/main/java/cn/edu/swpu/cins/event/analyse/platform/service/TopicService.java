@@ -18,11 +18,10 @@ public interface TopicService {
     /**
      * 获取专题列表接口
      *
-     * @param page
      * @return
      * @throws BaseException
      */
-    List<Topic> getTopicsByPage(int page) throws BaseException;
+    List<Topic> getTopics() throws BaseException;
 
     /**
      * 批量删除专题接口
@@ -33,10 +32,4 @@ public interface TopicService {
      */
     int deleteTopics(List<Integer> ids) throws BaseException;
 
-    /**
-     * 获取页数接口
-     * @return
-     * @throws BaseException
-     */
-    int getPageCount() throws BaseException;
 }

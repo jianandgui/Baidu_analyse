@@ -3,7 +3,6 @@ package cn.edu.swpu.cins.event.analyse.platform.dao;
 import cn.edu.swpu.cins.event.analyse.platform.model.persistence.Topic;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Repository;
 
@@ -22,9 +21,8 @@ public interface TopicDao {
     int insertTopic(Topic topic);
 
     @Select({"SELECT ",SELECT_FIELD
-            ," FROM ",TABLE_NAME
-            ," LIMIT offset , limit "})
-    List<Topic> selectAll(@Param("offset") int offset , @Param("limit") int limit);
+            ," FROM ",TABLE_NAME})
+    List<Topic> selectAll();
 
     int deleteByIds(List<Integer> ids);
 
