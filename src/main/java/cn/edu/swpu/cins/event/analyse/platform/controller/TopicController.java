@@ -21,21 +21,11 @@ public class TopicController {
         this.topicService = topicService;
     }
 
-    @GetMapping("/{page}")
-    public ResponseEntity<?> getTopics(@PathVariable("page") int page) {
+    @GetMapping("/list")
+    public ResponseEntity<?> getTopics() {
         try {
-            List<Topic> list = topicService.getTopicsByPage(page);
+            List<Topic> list = topicService.getTopics();
             return new ResponseEntity<>(list, HttpStatus.OK);
-        } catch (BaseException e) {
-            return new ResponseEntity<>(e.getMessage(), e.getStatus());
-        }
-    }
-
-    @GetMapping("/pageCount")
-    public ResponseEntity<?> getPageCount() {
-        try {
-            int pageCount = topicService.getPageCount();
-            return new ResponseEntity<>(pageCount, HttpStatus.OK);
         } catch (BaseException e) {
             return new ResponseEntity<>(e.getMessage(), e.getStatus());
         }

@@ -9,7 +9,6 @@ import cn.edu.swpu.cins.event.analyse.platform.model.persistence.Topic;
 import cn.edu.swpu.cins.event.analyse.platform.service.TopicService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -54,13 +53,9 @@ public class TopicServiceImpl implements TopicService {
     }
 
     @Override
-    public List<Topic> getTopicsByPage(int page) throws BaseException {
+    public List<Topic> getTopics() throws BaseException {
 
-        if (page <= 0) {
-            throw new IlleagalArgumentException();
-        }
-
-        List<Topic> list = topicDao.selectAll((--page) * pageSize, pageSize);
+        List<Topic> list = topicDao.selectAll();
 
         if (list.size() <= 0) {
             throw new NoEventException();
@@ -69,22 +64,6 @@ public class TopicServiceImpl implements TopicService {
         }
     }
 
-    @Override
-    public int getPageCount() throws BaseException{
-        try {
-            int eventCount = topicDao.selectCount();
-
-            int pageCount = eventCount/pageSize;
-
-            if(eventCount%pageSize!=0){
-                pageCount++;
-            }
-
-            return pageCount;
-        }catch (Exception e){
-            throw new BaseException("内部错误", HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-    }
 
     @Override
     public int deleteTopics(List<Integer> ids) throws BaseException {
