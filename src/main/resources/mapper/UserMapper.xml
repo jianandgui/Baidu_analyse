@@ -13,4 +13,13 @@
     </select>
 
 
+    <update id="updatePwd" parameterType="String">
+        UPDATE
+        user_information
+        SET
+        password=#{password}
+        WHERE
+        username=#{username}
+
+    </update>
 </mapper>
