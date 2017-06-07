@@ -1,6 +1,7 @@
 package cn.edu.swpu.cins.event.analyse.platform.service;
 
 import cn.edu.swpu.cins.event.analyse.platform.exception.BaseException;
+import cn.edu.swpu.cins.event.analyse.platform.model.persistence.DailyEvent;
 import cn.edu.swpu.cins.event.analyse.platform.model.persistence.Topic;
 
 import java.util.List;

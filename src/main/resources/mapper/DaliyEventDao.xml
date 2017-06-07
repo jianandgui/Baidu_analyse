@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.edu.swpu.cins.event.analyse.platform.dao.DailyEventDao">
+
+    <select id="selectByRules" parameterType="String" resultType="cn.edu.swpu.cins.event.analyse.platform.model.persistence.DailyEvent">
+
+        select * from daily_event
+        WHERE
+        main_view
+        like
+         "%"#{rule}"%"
+        ;
+    </select>
+</mapper>
