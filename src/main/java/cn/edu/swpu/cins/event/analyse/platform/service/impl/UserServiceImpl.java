@@ -19,14 +19,15 @@ public class UserServiceImpl implements UserService {
     @Override
     public int updatePwd(String username, String password) throws BaseException {
 
-        int num=userDao.updatePwd(username,password);
-        if(num<1){
-
-            throw new UpdateException("修改密码失败");
+        try{
+            int num=userDao.updatePwd(username,password);
+            if(num==1){
+                return num;
+            }
+            return 0;
+        }catch (Exception e){
+            throw new UpdateException();
         }
-
-        return num;
-
     }
 
 }

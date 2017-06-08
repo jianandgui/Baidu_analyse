@@ -54,9 +54,9 @@ public class UserController {
                 return new ResponseEntity<>(UserEnum.UPDATE_PWD_SUCCESS.getMsg(), HttpStatus.OK);
             }
             else
-                return new ResponseEntity<>(UserEnum.UPDATE_PWD_SUCCESS.getMsg(), HttpStatus.OK);
+                return new ResponseEntity<>(UserEnum.UPDATE_PWD_FAILED.getMsg(), HttpStatus.OK);
         } catch (BaseException e) {
-            return new ResponseEntity<>(UserEnum.UPDATE_PWD_FAILED.getMsg(),e.getStatus());
+            return new ResponseEntity<>(UserEnum.INNER_ERROR.getMsg(),e.getStatus());
         }
     }
 }

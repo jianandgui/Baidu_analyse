@@ -1,5 +1,6 @@
 package cn.edu.swpu.cins.event.analyse.platform.service;
 
+import cn.edu.swpu.cins.event.analyse.platform.exception.BaseException;
 import cn.edu.swpu.cins.event.analyse.platform.model.persistence.User;
 
 /**
@@ -8,7 +9,7 @@ import cn.edu.swpu.cins.event.analyse.platform.model.persistence.User;
 public interface AuthService {
 
     //这个类用于获取授权
-    public String userLogin(String username,String password);
+    public String userLogin(String username,String password) throws BaseException;
 
 
 }

@@ -11,6 +11,6 @@
         main_view
         like
          "%"#{rule}"%"
-        ;
+        
     </select>
 </mapper>
