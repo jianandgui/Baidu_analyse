@@ -27,7 +27,7 @@ public interface HandledEventDao {
             , " FROM ", TABLE_NAME, " as he "
             , " LEFT JOIN ", JOIN_TABLE_NAME, " as de "
             , " ON he.daily_event_id = de.id "
-            , " ORDER BY collected_time "
+            , " ORDER BY collected_time DESC"
             , " LIMIT #{offset} , #{limit}"})
     List<HandledEvent> selectAll(@Param("offset") int offset, @Param("limit") int limit);
 

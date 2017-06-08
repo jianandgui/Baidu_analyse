@@ -8,6 +8,9 @@ public class Topic {
     private String region;
     private List<String> rules;
 
+    public Topic() {
+    }
+
     public int getId() {
         return id;
     }
