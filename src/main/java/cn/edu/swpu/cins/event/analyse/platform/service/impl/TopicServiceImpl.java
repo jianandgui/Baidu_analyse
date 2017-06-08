@@ -2,18 +2,14 @@ package cn.edu.swpu.cins.event.analyse.platform.service.impl;
 
 import cn.edu.swpu.cins.event.analyse.platform.dao.DailyEventDao;
 import cn.edu.swpu.cins.event.analyse.platform.dao.TopicDao;
-import cn.edu.swpu.cins.event.analyse.platform.exception.BaseException;
-import cn.edu.swpu.cins.event.analyse.platform.exception.IlleagalArgumentException;
-import cn.edu.swpu.cins.event.analyse.platform.exception.NoEventException;
-import cn.edu.swpu.cins.event.analyse.platform.exception.OperationFailureException;
-import cn.edu.swpu.cins.event.analyse.platform.model.persistence.DailyEvent;
+import cn.edu.swpu.cins.event.analyse.platform.exception.*;
 import cn.edu.swpu.cins.event.analyse.platform.model.persistence.Topic;
 import cn.edu.swpu.cins.event.analyse.platform.service.TopicService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -55,11 +51,13 @@ public class TopicServiceImpl implements TopicService {
 
         } catch (BaseException be) {
             throw be;
+        } catch (DuplicateKeyException de) {
+            throw new RepeatlyCollectException("重复添加");
         } catch (Exception e) {
+            e.printStackTrace();
             throw new OperationFailureException();
         }
     }
-
 
 
     @Override
@@ -79,7 +77,7 @@ public class TopicServiceImpl implements TopicService {
     public int deleteTopics(List<Integer> ids) throws BaseException {
         try {
 
-            if (ids == null ) {
+            if (ids == null) {
                 throw new IlleagalArgumentException();
             }
 
