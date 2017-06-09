@@ -32,6 +32,7 @@ public class SpecialEventServiceImpl implements SpecialEventService {
             , @Value("${event.service.page-count}") int pageSize) {
         this.dailyEventDao = dailyEventDao;
         this.topicDao = topicDao;
+        this.pageSize = pageSize;
     }
 
 
@@ -58,10 +59,7 @@ public class SpecialEventServiceImpl implements SpecialEventService {
             throw new NoEventException();
         }
 
-        List<DailyEvent> result;
-        result = list.subList(offset , limit);
-
-        return result;
+        return list.subList(offset,limit);
     }
 
     @Override
