@@ -11,6 +11,6 @@ public class UpdateException extends BaseException{
         super(message, HttpStatus.FORBIDDEN);
     }
     public UpdateException(){
-        super("修改密码失败",HttpStatus.FORBIDDEN);
+        super("服务器异常",HttpStatus.FORBIDDEN);
     }
 }

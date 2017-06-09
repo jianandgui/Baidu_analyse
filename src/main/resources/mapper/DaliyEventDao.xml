@@ -11,5 +11,6 @@
         <foreach collection="list" item="item" index="index" open="OR" separator="OR">
             `main_view` LIKE "%"#{item}"%"
         </foreach>
+
     </select>
 </mapper>
