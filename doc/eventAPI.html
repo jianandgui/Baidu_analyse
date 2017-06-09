@@ -313,68 +313,47 @@
 }
 ]</code></pre></div><h2>HTTP status code <a href="http://httpstatus.es/400" target="_blank">400</a></h2><p>获取失败:参数错误</p><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: string</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>参数错误</code></pre></div><h2>HTTP status code <a href="http://httpstatus.es/404" target="_blank">404</a></h2><p>获取失败:暂无资源</p><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: string</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>暂无资源</code></pre></div><h2>HTTP status code <a href="http://httpstatus.es/500" target="_blank">500</a></h2><p>获取失败:服务器错误</p><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: string</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>服务器错误</code></pre></div></div></div></div></div></div></div></div></div></div></div><div class="panel panel-default"><div class="panel-heading"><h3 id="event_specialevent__page_" class="panel-title">专题事件列表接口</h3></div><div class="panel-body"><div class="top-resource-description"><p>根据传入页码获取指定页的事件列表</p></div><div class="panel-group"><div class="panel panel-white resource-modal"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_event_specialevent__page_"><span class="parent"></span>/event/specialEvent/{page}</a> <span class="methods"><a href="#event_specialevent__page__get"><span class="badge badge_get">get</span></a></span></h4></div><div id="panel_event_specialevent__page_" class="panel-collapse collapse"><div class="panel-body"><div class="list-group"><div onclick="window.location.href = '#event_specialevent__page__get'" class="list-group-item"><span class="badge badge_get">get</span><div class="method_description"><p>获取专题事件列表</p></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="event_specialevent__page__get"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_get">get</span> <span class="parent"></span>/event/specialEvent/{page}</h4></div><div class="modal-body"><div class="alert alert-info"><p>获取专题事件列表</p></div><ul class="nav nav-tabs"><li class="active"><a href="#event_specialevent__page__get_request" data-toggle="tab">Request</a></li><li><a href="#event_specialevent__page__get_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="event_specialevent__page__get_request"><h3>URI Parameters</h3><ul><li><strong>page</strong>: <em>required (integer)</em><p>页码</p><p><strong>Examples</strong>:</p><div class="examples"><p><strong>example</strong>:<br></p><pre><code>1</code></pre><p><strong>example1</strong>:<br></p><pre><code>2</code></pre></div></li></ul></div><div class="tab-pane" id="event_specialevent__page__get_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><p>获取成功：返回事件列表</p><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: array of DailyEvent</p><p><strong>Items</strong>: DailyEvent</p><div class="items"><ul></ul></div><p><strong>Example</strong>:</p><div class="examples"><pre><code>[
     {
-        "id": 1,
-        "theme": "借我",
-        "mainView": "绿豆冰、杏皮水、酸梅汤，阳光下白衬衫男生的侧脸，都是喜欢的夏天的味道",
-        "url": "http://tieba.baidu.com/p/5097906156",
-        "handledCondition": "test0",
-        "feedbackCondition": "未反馈",
-        "collectedTime": 1494849765000,
-        "handledTime": 1494849765000,
-        "recorder": "test",
-        "detail": "test0",
-        "remark": "test0"
-    },
-    {
-        "id": 2,
-        "theme": "借我",
-        "mainView": "绿豆冰、杏皮水、酸梅汤，阳光下白衬衫男生的侧脸，都是喜欢的夏天的味道",
-        "url": "http://tieba.baidu.com/p/5097906156",
-        "handledCondition": "test1",
-        "feedbackCondition": "未反馈",
-        "collectedTime": 1494849766000,
-        "handledTime": 1494849766000,
-        "recorder": "test",
-        "detail": "test1",
-        "remark": "test1"
-    },
-    {
-        "id": 3,
-        "theme": "借我",
-        "mainView": "绿豆冰、杏皮水、酸梅汤，阳光下白衬衫男生的侧脸，都是喜欢的夏天的味道",
-        "url": "http://tieba.baidu.com/p/5097906156",
-        "handledCondition": "test2",
-        "feedbackCondition": "未反馈",
-        "collectedTime": 1494849766000,
-        "handledTime": 1494849766000,
-        "recorder": "test",
-        "detail": "test2",
-        "remark": "test2"
-    },
-    {
         "id": 4,
-        "theme": "借我",
-        "mainView": "绿豆冰、杏皮水、酸梅汤，阳光下白衬衫男生的侧脸，都是喜欢的夏天的味道",
-        "url": "http://tieba.baidu.com/p/5097906156",
-        "handledCondition": "test3",
-        "feedbackCondition": "未反馈",
-        "collectedTime": 1494849766000,
-        "handledTime": 1494849766000,
-        "recorder": "test",
-        "detail": "test3",
-        "remark": "test3"
+        "url": "http://tieba.baidu.com/p/5095060642",
+        "theme": "第八次考六级了",
+        "mainView": "突然意识到还有一个月就要考六级了，第八次",
+        "followCount": 1,
+        "postType": "其他",        
+        "postTime": 1493482380000,
+        "source": "西南石油大学",
+        "collectionStatus": 0
     },
     {
         "id": 5,
+        "url": "http://tieba.baidu.com/p/5097906156",
         "theme": "借我",
         "mainView": "绿豆冰、杏皮水、酸梅汤，阳光下白衬衫男生的侧脸，都是喜欢的夏天的味道",
-        "url": "http://tieba.baidu.com/p/5097906156",
-        "handledCondition": "test4",
-        "feedbackCondition": "未反馈",
-        "collectedTime": 1494849766000,
-        "handledTime": 1494849766000,
-        "recorder": "test",
-        "detail": "test4",
-        "remark": "test4"
+        "followCount": 1,
+        "postType": "其他",
+        "postTime": 1493694780000,
+        "source": "西南石油大学",
+        "collectionStatus": 0
+    },
+    {
+        "id": 6,
+        "url": "http://tieba.baidu.com/p/5097201091",
+        "theme": "有没有今年被石大录取的研究生呀？",
+        "mainView": "有的话认识一下呗",
+        "followCount": 1,
+        "postType": "其他",
+        "postTime": 1493637660000,
+        "source": "西南石油大学",
+        "collectionStatus": 0
+    },
+      {
+        "id": 10,
+        "url": "http://tieba.baidu.com/p/5097877765",
+        "theme": "欢迎各位应聘到宁波就业的伙伴们！！！！！！！！",
+        "mainView": "今年是首批我们学校的学生进驻宁波，我之前是一个人过来的，在此寻找校友，没事可以自己做做火锅吃的",
+        "followCount": 1,
+        "postType": "学校发展",
+        "postTime": 1493693640000,
+        "source": "西南石油大学",
+        "collectionStatus": 0
     }
-]</code></pre></div><h2>HTTP status code <a href="http://httpstatus.es/400" target="_blank">400</a></h2><p>获取失败：参数不合法</p><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: string</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>参数错误</code></pre></div><h2>HTTP status code <a href="http://httpstatus.es/404" target="_blank">404</a></h2><p>获取失败：暂无资源</p><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: string</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>暂无资源</code></pre></div><h2>HTTP status code <a href="http://httpstatus.es/500" target="_blank">500</a></h2><p>获取失败：服务器错误</p><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: string</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>服务器错误</code></pre></div></div></div></div></div></div></div></div></div></div></div><div class="panel panel-default"><div class="panel-heading"><h3 id="event_specialevent_pagecount" class="panel-title">获取专题事件总页数接口</h3></div><div class="panel-body"><div class="top-resource-description"><p>获取专题事件总页数</p></div><div class="panel-group"><div class="panel panel-white resource-modal"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_event_specialevent_pagecount"><span class="parent"></span>/event/specialEvent/pageCount</a> <span class="methods"><a href="#event_specialevent_pagecount_get"><span class="badge badge_get">get</span></a></span></h4></div><div id="panel_event_specialevent_pagecount" class="panel-collapse collapse"><div class="panel-body"><div class="list-group"><div onclick="window.location.href = '#event_specialevent_pagecount_get'" class="list-group-item"><span class="badge badge_get">get</span><div class="method_description"><p>获取专题事件总页数</p></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="event_specialevent_pagecount_get"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_get">get</span> <span class="parent"></span>/event/specialEvent/pageCount</h4></div><div class="modal-body"><div class="alert alert-info"><p>获取专题事件总页数</p></div><ul class="nav nav-tabs"><li class="active"><a href="#event_specialevent_pagecount_get_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="event_specialevent_pagecount_get_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><p>获取成功：返回页数</p><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: integer</p><p><strong>Examples</strong>:</p><div class="examples"><p><strong>example</strong>:<br></p><pre><code>1</code></pre><p><strong>example1</strong>:<br></p><pre><code>88</code></pre></div><h2>HTTP status code <a href="http://httpstatus.es/500" target="_blank">500</a></h2><p>获取失败：服务器错误</p><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: string</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>服务器错误</code></pre></div></div></div></div></div></div></div></div></div></div></div></div><div class="col-md-3"><div id="sidebar" class="hidden-print affix" role="complementary"><ul class="nav nav-pills nav-stacked"><li><a href="#event_dailyevent_page__pagenum_">获取日常检测事件列表的api</a></li><li><a href="#event_dailyevent_pagecount">获取日常检测事件总页数的api</a></li><li><a href="#event_chart">chart api</a></li><li><a href="#event_handledevent__page_">handled event api</a></li><li><a href="#event_handledevent_pagecount">处置事件总页数接口</a></li><li><a href="#event_dailyevent__id___recorder__collect">日常检测事件的归集接口</a></li><li><a href="#event_handledevent__id__handle">处置事件接口</a></li><li><a href="#event_topic_add">添加专题接口</a></li><li><a href="#event_topic_delete">删除专题接口</a></li><li><a href="#event_topic_list">获取专题列表接口</a></li><li><a href="#event_specialevent__page_">专题事件列表接口</a></li><li><a href="#event_specialevent_pagecount">获取专题事件总页数接口</a></li></ul></div></div></div></div></body></html>
+  ]</code></pre></div><h2>HTTP status code <a href="http://httpstatus.es/400" target="_blank">400</a></h2><p>获取失败：参数不合法</p><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: string</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>参数错误</code></pre></div><h2>HTTP status code <a href="http://httpstatus.es/404" target="_blank">404</a></h2><p>获取失败：暂无资源</p><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: string</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>暂无资源</code></pre></div><h2>HTTP status code <a href="http://httpstatus.es/500" target="_blank">500</a></h2><p>获取失败：服务器错误</p><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: string</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>服务器错误</code></pre></div></div></div></div></div></div></div></div></div></div></div><div class="panel panel-default"><div class="panel-heading"><h3 id="event_specialevent_pagecount" class="panel-title">获取专题事件总页数接口</h3></div><div class="panel-body"><div class="top-resource-description"><p>获取专题事件总页数</p></div><div class="panel-group"><div class="panel panel-white resource-modal"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_event_specialevent_pagecount"><span class="parent"></span>/event/specialEvent/pageCount</a> <span class="methods"><a href="#event_specialevent_pagecount_get"><span class="badge badge_get">get</span></a></span></h4></div><div id="panel_event_specialevent_pagecount" class="panel-collapse collapse"><div class="panel-body"><div class="list-group"><div onclick="window.location.href = '#event_specialevent_pagecount_get'" class="list-group-item"><span class="badge badge_get">get</span><div class="method_description"><p>获取专题事件总页数</p></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="event_specialevent_pagecount_get"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_get">get</span> <span class="parent"></span>/event/specialEvent/pageCount</h4></div><div class="modal-body"><div class="alert alert-info"><p>获取专题事件总页数</p></div><ul class="nav nav-tabs"><li class="active"><a href="#event_specialevent_pagecount_get_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="event_specialevent_pagecount_get_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><p>获取成功：返回页数</p><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: integer</p><p><strong>Examples</strong>:</p><div class="examples"><p><strong>example</strong>:<br></p><pre><code>1</code></pre><p><strong>example1</strong>:<br></p><pre><code>88</code></pre></div><h2>HTTP status code <a href="http://httpstatus.es/500" target="_blank">500</a></h2><p>获取失败：服务器错误</p><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: string</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>服务器错误</code></pre></div></div></div></div></div></div></div></div></div></div></div></div><div class="col-md-3"><div id="sidebar" class="hidden-print affix" role="complementary"><ul class="nav nav-pills nav-stacked"><li><a href="#event_dailyevent_page__pagenum_">获取日常检测事件列表的api</a></li><li><a href="#event_dailyevent_pagecount">获取日常检测事件总页数的api</a></li><li><a href="#event_chart">chart api</a></li><li><a href="#event_handledevent__page_">handled event api</a></li><li><a href="#event_handledevent_pagecount">处置事件总页数接口</a></li><li><a href="#event_dailyevent__id___recorder__collect">日常检测事件的归集接口</a></li><li><a href="#event_handledevent__id__handle">处置事件接口</a></li><li><a href="#event_topic_add">添加专题接口</a></li><li><a href="#event_topic_delete">删除专题接口</a></li><li><a href="#event_topic_list">获取专题列表接口</a></li><li><a href="#event_specialevent__page_">专题事件列表接口</a></li><li><a href="#event_specialevent_pagecount">获取专题事件总页数接口</a></li></ul></div></div></div></div></body></html>
