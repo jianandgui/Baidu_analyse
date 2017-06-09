@@ -6,7 +6,6 @@ import cn.edu.swpu.cins.event.analyse.platform.exception.BaseException;
 import cn.edu.swpu.cins.event.analyse.platform.model.persistence.User;
 import cn.edu.swpu.cins.event.analyse.platform.model.view.JwtAuthenticationRequest;
 import cn.edu.swpu.cins.event.analyse.platform.model.view.JwtAuthenticationResponse;
-import cn.edu.swpu.cins.event.analyse.platform.model.view.ResultData;
 import cn.edu.swpu.cins.event.analyse.platform.service.AuthService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
