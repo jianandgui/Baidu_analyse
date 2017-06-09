@@ -7,10 +7,9 @@
     <select id="selectByRules" parameterType="String" resultType="cn.edu.swpu.cins.event.analyse.platform.model.persistence.DailyEvent">
 
         select * from daily_event
-        WHERE
-        main_view
-        like
-         "%"#{rule}"%"
-        ;
+        WHERE 1>2
+        <foreach collection="list" item="item" index="index" open="OR" separator="OR">
+            `main_view` LIKE "%"#{item}"%"
+        </foreach>
     </select>
 </mapper>

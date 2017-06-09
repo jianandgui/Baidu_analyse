@@ -10,6 +10,7 @@ import java.util.List;
  */
 public interface SpecialEventService{
 
-    public List<DailyEvent> getSpecialEvent() throws BaseException;
+    public List<DailyEvent> getSpecialEvent(int page) throws BaseException;
 
+    public int getPageCount() throws BaseException;
 }

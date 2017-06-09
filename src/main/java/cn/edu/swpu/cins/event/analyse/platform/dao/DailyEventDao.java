@@ -38,5 +38,5 @@ public interface DailyEventDao {
             , "where id=#{id}"})
     int updateCollectStatus(int id);
 
-    List<DailyEvent> selectByRules(String rule);
+    List<DailyEvent> selectByRules(List<String> rules);
 }

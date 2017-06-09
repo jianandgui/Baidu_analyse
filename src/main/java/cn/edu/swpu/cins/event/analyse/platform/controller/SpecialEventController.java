@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -21,11 +22,21 @@ public class SpecialEventController {
 
 
     //获取专题事件的集合
-    @GetMapping("/list")
+    @GetMapping("/{page}")
+    public ResponseEntity<?> getTopics(@PathVariable int page) {
+        try {
+            List<DailyEvent> list = specialEventService.getSpecialEvent(page);
+            return new ResponseEntity<>(list, HttpStatus.OK);
+        } catch (BaseException e) {
+            return new ResponseEntity<>(e.getMessage(), e.getStatus());
+        }
+    }
+
+    @GetMapping("/pageCount")
     public ResponseEntity<?> getTopics() {
         try {
-            List<DailyEvent> list = specialEventService.getSpecialEvent();
-            return new ResponseEntity<>(list, HttpStatus.OK);
+            int pageCount = specialEventService.getPageCount();
+            return new ResponseEntity<>(pageCount, HttpStatus.OK);
         } catch (BaseException e) {
             return new ResponseEntity<>(e.getMessage(), e.getStatus());
         }

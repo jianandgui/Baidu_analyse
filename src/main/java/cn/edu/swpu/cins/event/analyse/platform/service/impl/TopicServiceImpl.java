@@ -11,6 +11,7 @@ import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class TopicServiceImpl implements TopicService {
@@ -36,9 +37,19 @@ public class TopicServiceImpl implements TopicService {
             List<String> rules = topic.getRules();
 
             if (rules == null || name == null || region == null
-                    || region.length() > 45 || name.length() > 45) {
+                    || region.length() > 45 || name.length() > 45
+                    || "".equals(region.trim()) || "".equals(name.trim())) {
                 throw new IlleagalArgumentException();
             }
+
+            //排除空字符串
+            rules = rules.stream()
+                    .filter(rule -> !"".equals(rule.trim()))
+                    .collect(Collectors.toList());
+
+            topic.setRules(rules);
+            topic.setName(name.trim());
+            topic.setRegion(region.trim());
 
             int insertCount = topicDao.insertTopic(topic);
 

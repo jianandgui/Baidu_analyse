@@ -1,6 +1,8 @@
 package cn.edu.swpu.cins.event.analyse.platform.model.persistence;
 
 import lombok.Data;
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 import java.util.Date;
 
@@ -34,6 +36,16 @@ public class DailyEvent {
                 ", source='" + source + '\'' +
                 ", collectionStatus=" + collectionStatus +
                 '}';
+    }
+
+    @Override
+    public int hashCode() {
+        return HashCodeBuilder.reflectionHashCode(this);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        return EqualsBuilder.reflectionEquals(this,obj);
     }
 
     public int getId() {
