@@ -55,7 +55,7 @@ public class SpecialEventServiceImpl implements SpecialEventService {
 
         int limit = (offset + pageSize) > list.size() ? list.size() : (offset + pageSize);
 
-        if (offset > pageSize || offset < 0 ){
+        if (offset >= list.size() || offset < 0 ){
             throw new NoEventException();
         }
 
