@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
  * Created by muyi on 17-5-23.
  */
 @RestController
-@RequestMapping
+@RequestMapping("/event")
 public class AuthController {
 
     @Value("${jwt.header}")
@@ -34,12 +34,12 @@ public class AuthController {
     private UserDao userDao;
 
     @PostMapping("/login")
-    public ResponseEntity createTeacherAuthenticationToken(
+    public ResponseEntity<?> createTeacherAuthenticationToken(
             @RequestBody JwtAuthenticationRequest authenticationRequest) throws AuthenticationException, BaseException {
 
         User user = userDao.queryByName(authenticationRequest.getUsername());
         if (user == null) {
-            return new ResponseEntity(UserEnum.NO_USER.getMsg(), HttpStatus.OK);
+            return new ResponseEntity<>(UserEnum.NO_USER.getMsg(), HttpStatus.OK);
         }
 
         final String token = authService.userLogin(authenticationRequest.getUsername(), authenticationRequest.getPassword());
@@ -47,10 +47,10 @@ public class AuthController {
 
             String username = user.getUsername();
             String role = user.getRole();
-            return new ResponseEntity(new JwtAuthenticationResponse(token, username, role),HttpStatus.OK);
+            return new ResponseEntity<>(new JwtAuthenticationResponse(token, username, role),HttpStatus.OK);
         }
 
-        return new ResponseEntity(UserEnum.WRONG_PASSWORD.getMsg(),HttpStatus.OK);
+        return new ResponseEntity<>(UserEnum.WRONG_PASSWORD.getMsg(),HttpStatus.OK);
     }
 
 
