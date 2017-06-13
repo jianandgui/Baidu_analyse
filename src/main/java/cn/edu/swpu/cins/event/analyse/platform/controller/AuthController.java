@@ -38,7 +38,7 @@ public class AuthController {
         if (user == null) {
             return new ResponseEntity<>(UserEnum.NO_USER.getMsg(), HttpStatus.OK);
         }
-        final String token = authService.userLogin(user.getUsername(), user.getPassword());
+        final String token = authService.userLogin(request.getUsername(),request.getPassword());
         if(token!=null) {
             String username = user.getUsername();
             String role = user.getRole();
