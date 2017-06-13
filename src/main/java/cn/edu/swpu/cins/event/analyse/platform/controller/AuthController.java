@@ -30,17 +30,17 @@ public class AuthController {
     @Autowired
     private UserDao userDao;
 
-    @GetMapping("/login")
+    @PostMapping("/login")
     public ResponseEntity<?> createUserToken(
-            @RequestParam String username,@RequestParam String password) throws AuthenticationException, BaseException {
+            @RequestBody JwtAuthenticationRequest request) throws AuthenticationException, BaseException {
 
-        User user = userDao.queryByName(username);
+        User user = userDao.queryByName(request.getUsername());
         if (user == null) {
             return new ResponseEntity<>(UserEnum.NO_USER.getMsg(), HttpStatus.OK);
         }
-        final String token = authService.userLogin(username, password);
+        final String token = authService.userLogin(user.getUsername(), user.getPassword());
         if(token!=null) {
-//            String username = user.getUsername();
+            String username = user.getUsername();
             String role = user.getRole();
             return new ResponseEntity<>(new JwtAuthenticationResponse(token, username, role),HttpStatus.OK);
         }
