@@ -45,17 +45,12 @@ public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
         if (authHeader != null && authHeader.startsWith(tokenHead)) {
             final String authToken = authHeader.substring(tokenHead.length()); // The part after "Bearer "
             String username = jwtTokenUtil.getUsernameFromToken(authToken);
-
-
-
             if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
-
                 // 如果我们足够相信token中的数据，也就是我们足够相信签名token的secret的机制足够好
                 // 这种情况下，我们可以不用再查询数据库，而直接采用token中的数据
                 // 本例中，我们还是通过Spring Security的 @UserDetailsService 进行了数据查询
                 // 但简单验证的话，你可以采用直接验证token是否合法来避免昂贵的数据查询
                 UserDetails userDetails = this.userDetailsService.loadUserByUsername(username);
-
                 if (jwtTokenUtil.validateToken(authToken, userDetails)) {
                     UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(
                             userDetails, null, userDetails.getAuthorities());
@@ -65,7 +60,6 @@ public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
                 }
             }
         }
-
         chain.doFilter(request, response);
     }
 }
