@@ -4,7 +4,8 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.edu.swpu.cins.event.analyse.platform.dao.DailyEventDao">
 
-    <select id="selectByRules" parameterType="String" resultType="cn.edu.swpu.cins.event.analyse.platform.model.persistence.DailyEvent">
+    <select id="selectByRules" parameterType="String"
+            resultType="cn.edu.swpu.cins.event.analyse.platform.model.persistence.DailyEvent">
 
         select * from daily_event
         WHERE 1>2
@@ -12,5 +13,16 @@
             `main_view` LIKE "%"#{item}"%"
         </foreach>
 
+    </select>
+
+    <select id="selectEventsBetweenTime"
+            resultType="cn.edu.swpu.cins.event.analyse.platform.model.persistence.DailyEvent">
+        SELECT follow_count,post_time
+        FROM daily_event
+        WHERE `post_time` &gt;= #{startTime} AND `post_time` &lt; #{endTime} AND `source` = #{source}
+        <if test=" isCollected">
+            AND `collection_status` = 1
+        </if>
+        ORDER BY `post_time` ASC
     </select>
 </mapper>

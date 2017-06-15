@@ -6,10 +6,7 @@ import cn.edu.swpu.cins.event.analyse.platform.service.ChartService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -30,13 +27,14 @@ public class ChartController {
     public ResponseEntity<?> getChartPoints(@RequestParam(value = "source") String source,
                                             @RequestParam(value = "data") String data,
                                             @RequestParam(value = "beginTime") String beginTime,
-                                            @RequestParam(value = "endTime") String endTime){
+                                            @RequestParam(value = "endTime") String endTime,
+                                            @RequestParam(value = "table") String table ) {
         try {
             List<ChartPoint> list;
-            list = chartService.getChartPoints(source,data,beginTime,endTime);
+            list = chartService.getChartPoints(source, data, beginTime, endTime, table);
             return new ResponseEntity<>(list, HttpStatus.OK);
-        }catch (BaseException e){
-            return new ResponseEntity<>(e.getMessage(),e.getStatus());
+        } catch (BaseException e) {
+            return new ResponseEntity<>(e.getMessage(), e.getStatus());
         }
     }
 }

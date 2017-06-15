@@ -11,7 +11,8 @@ import java.util.List;
 public interface ChartService {
     /**
      * 获取坐标点列表接口
+     *
      * @return
      */
-    public List<ChartPoint> getChartPoints(String source,String data,String beginTime, String endTime) throws BaseException;
+    public List<ChartPoint> getChartPoints(String source, String data, String beginTime, String endTime, String eventTable) throws BaseException;
 }

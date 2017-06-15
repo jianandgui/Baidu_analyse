@@ -57,9 +57,9 @@ public class ChartServiceImplTest {
 
         list = list.stream().sorted(comparing(DailyEvent::getPostTime)).collect(Collectors.toList());
 
-        Mockito.when(dailyEventDao.selectEventsBetweenTime("2017-05-07 00:00:00","2017-05-21 00:00:00","baidu")).thenReturn(list);
+        Mockito.when(dailyEventDao.selectEventsBetweenTime("2017-05-07 00:00:00","2017-05-21 00:00:00","baidu",false)).thenReturn(list);
 
-        List<ChartPoint> rsltlist = chartService.getChartPoints("baidu","跟帖量","05/07/2017","05/20/2017");
+        List<ChartPoint> rsltlist = chartService.getChartPoints("baidu","跟帖量","05/07/2017","05/20/2017","dailyEvent");
 
     }
 }

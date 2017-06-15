@@ -2,6 +2,7 @@ package cn.edu.swpu.cins.event.analyse.platform.service.impl;
 
 import cn.edu.swpu.cins.event.analyse.platform.dao.DailyEventDao;
 import cn.edu.swpu.cins.event.analyse.platform.enums.ChartDataEnum;
+import cn.edu.swpu.cins.event.analyse.platform.enums.EventTableEnum;
 import cn.edu.swpu.cins.event.analyse.platform.exception.BaseException;
 import cn.edu.swpu.cins.event.analyse.platform.exception.IlleagalArgumentException;
 import cn.edu.swpu.cins.event.analyse.platform.model.persistence.DailyEvent;
@@ -33,19 +34,25 @@ public class ChartServiceImpl implements ChartService {
     private int dateRange;
 
     @Autowired
-    public ChartServiceImpl(DailyEventDao dailyEventDao,@Value("${event.service.chart-date-range}") int dateRange) {
+    public ChartServiceImpl(DailyEventDao dailyEventDao, @Value("${event.service.chart-date-range}") int dateRange) {
         this.dateRange = dateRange;
         this.dailyEventDao = dailyEventDao;
     }
 
     @Override
-    public List<ChartPoint> getChartPoints(String source, String data
-            , String beginTime, String endTime) throws BaseException {
-        if(!ChartDataEnum.isInclude(data)){
+    public List<ChartPoint> getChartPoints(
+            String source
+            , String data
+            , String beginTime
+            , String endTime
+            , String eventTable) throws BaseException {
+        //判断数据类型是否正确
+        if (!ChartDataEnum.isInclude(data)) {
             throw new IlleagalArgumentException();
         }
 
         try {
+            //解析传入的时间字符串
             Date endTimeDate = CHART_PARAMETER_DATE_FORMAT.parse(endTime);
             Date beginTimeDate = CHART_PARAMETER_DATE_FORMAT.parse(beginTime);
 
@@ -53,7 +60,7 @@ public class ChartServiceImpl implements ChartService {
             long beginTimeLong = beginTimeDate.getTime();
 
             //对日期范围的限制
-            if(endTimeLong - beginTimeLong < DAY || endTimeLong - beginTimeLong > dateRange * DAY){
+            if (endTimeLong - beginTimeLong < DAY || endTimeLong - beginTimeLong > dateRange * DAY) {
                 throw new IlleagalArgumentException();
             }
 
@@ -62,13 +69,31 @@ public class ChartServiceImpl implements ChartService {
             String beginDateFormat;
             beginDateFormat = DATABASE_DATE_FORMAT.format(beginTimeDate);
 
-            List<DailyEvent> events = dailyEventDao.selectEventsBetweenTime(beginDateFormat, endDateFormat, source);
+            //判断表参数是否正确
+            if (!EventTableEnum.isInclude(eventTable)) {
+                throw new IlleagalArgumentException();
+            }
+
+            List<DailyEvent> events = null;
+
+            if (EventTableEnum.DAILY_EVENT.getEventTable().equals(eventTable)) {
+                events = dailyEventDao.selectEventsBetweenTime(beginDateFormat, endDateFormat, source, false);
+            } else if (EventTableEnum.HANDLED_EVENT.getEventTable().equals(eventTable)) {
+                events = dailyEventDao.selectEventsBetweenTime(beginDateFormat, endDateFormat, source, true);
+            } else if ((EventTableEnum.SPECIAL_EVENT.getEventTable().equals(eventTable))){
+                //todo 专题事件图表
+                events = dailyEventDao.selectEventsBetweenTime(beginDateFormat, endDateFormat, source, false);
+            }
+
             List<ChartPoint> list = getChart(events, beginTimeLong, endTimeLong, data);
 
             return list;
-        } catch (ParseException e) {
+
+        } catch (IlleagalArgumentException ie) {
             throw new IlleagalArgumentException();
-        } catch (Exception e){
+        } catch (ParseException pe) {
+            throw new IlleagalArgumentException();
+        } catch (Exception e) {
             throw new BaseException("服务器内部错误", HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
@@ -112,6 +137,7 @@ public class ChartServiceImpl implements ChartService {
         }
 
         long beginTime = begin;
+
         for (int cnt : day) {
             ChartPoint result = new ChartPoint();
             result.setX(CHART_DISPLAY_DATE_FORMAT.format(new Date(beginTime)));

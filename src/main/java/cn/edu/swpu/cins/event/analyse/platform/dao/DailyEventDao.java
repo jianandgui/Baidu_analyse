@@ -27,11 +27,14 @@ public interface DailyEventDao {
     @Select({"select count(id) from ", TABLE_NAME})
     int selectCount();
 
-    @Select({" select follow_count,post_time from "
-            , TABLE_NAME
-            , " where source = #{source} and post_time >= #{startTime} and post_time < #{endTime} "
-            , " order by post_time asc"})
-    List<DailyEvent> selectEventsBetweenTime(@Param("startTime") String startTime, @Param("endTime") String endTime, @Param("source") String source);
+//    @Select({" select follow_count,post_time from "
+//            , TABLE_NAME
+//            , " where source = #{source} and post_time >= #{startTime} and post_time < #{endTime} "
+//            , " order by post_time asc"})
+    List<DailyEvent> selectEventsBetweenTime(@Param("startTime") String startTime
+            , @Param("endTime") String endTime
+            , @Param("source") String source
+            , @Param("isCollected") boolean isCollected);
 
     @Update({"update ", TABLE_NAME,
             "set collection_status=1"
