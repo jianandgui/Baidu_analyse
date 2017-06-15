@@ -8,6 +8,7 @@ import cn.edu.swpu.cins.event.analyse.platform.exception.IlleagalArgumentExcepti
 import cn.edu.swpu.cins.event.analyse.platform.model.persistence.DailyEvent;
 import cn.edu.swpu.cins.event.analyse.platform.model.view.ChartPoint;
 import cn.edu.swpu.cins.event.analyse.platform.service.ChartService;
+import cn.edu.swpu.cins.event.analyse.platform.service.SpecialEventService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
@@ -17,8 +18,10 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Created by lp-deepin on 17-5-20.
@@ -31,12 +34,16 @@ public class ChartServiceImpl implements ChartService {
     private static final long DAY = 86400000L;
 
     private DailyEventDao dailyEventDao;
+    private SpecialEventService specialEventService;
     private int dateRange;
 
     @Autowired
-    public ChartServiceImpl(DailyEventDao dailyEventDao, @Value("${event.service.chart-date-range}") int dateRange) {
+    public ChartServiceImpl(DailyEventDao dailyEventDao
+            , @Value("${event.service.chart-date-range}") int dateRange
+            , SpecialEventService specialEventService) {
         this.dateRange = dateRange;
         this.dailyEventDao = dailyEventDao;
+        this.specialEventService = specialEventService;
     }
 
     @Override
@@ -80,9 +87,18 @@ public class ChartServiceImpl implements ChartService {
                 events = dailyEventDao.selectEventsBetweenTime(beginDateFormat, endDateFormat, source, false);
             } else if (EventTableEnum.HANDLED_EVENT.getEventTable().equals(eventTable)) {
                 events = dailyEventDao.selectEventsBetweenTime(beginDateFormat, endDateFormat, source, true);
-            } else if ((EventTableEnum.SPECIAL_EVENT.getEventTable().equals(eventTable))){
-                //todo 专题事件图表
-                events = dailyEventDao.selectEventsBetweenTime(beginDateFormat, endDateFormat, source, false);
+            } else if ((EventTableEnum.SPECIAL_EVENT.getEventTable().equals(eventTable))) {
+                events = specialEventService.getSpecialEvent(0, true);
+                events = events
+                        .stream()
+                        .filter((DailyEvent dailyEvent) -> {
+                            long time = dailyEvent.getPostTime().getTime();
+                            if (time < endTimeLong && time >= beginTimeLong)
+                                return true;
+                            return false;
+                        })
+                        .sorted(Comparator.comparing(DailyEvent::getPostTime))
+                        .collect(Collectors.toList());
             }
 
             List<ChartPoint> list = getChart(events, beginTimeLong, endTimeLong, data);

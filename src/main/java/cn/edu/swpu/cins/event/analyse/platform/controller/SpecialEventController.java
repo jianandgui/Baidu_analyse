@@ -25,7 +25,7 @@ public class SpecialEventController {
     @GetMapping("/{page}")
     public ResponseEntity<?> getTopics(@PathVariable int page) {
         try {
-            List<DailyEvent> list = specialEventService.getSpecialEvent(page);
+            List<DailyEvent> list = specialEventService.getSpecialEvent(page,false);
             return new ResponseEntity<>(list, HttpStatus.OK);
         } catch (BaseException e) {
             return new ResponseEntity<>(e.getMessage(), e.getStatus());

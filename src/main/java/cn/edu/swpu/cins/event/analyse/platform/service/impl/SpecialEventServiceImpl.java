@@ -12,7 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
-import java.util.HashSet;
+import java.util.ArrayList;
 import java.util.List;
 
 import static java.util.stream.Collectors.toList;
@@ -37,15 +37,18 @@ public class SpecialEventServiceImpl implements SpecialEventService {
 
 
     @Override
-    public List<DailyEvent> getSpecialEvent(int page) throws BaseException {
-
+    public List<DailyEvent> getSpecialEvent(int page, boolean getAll) throws BaseException {
         int offset = --page * pageSize;
         List<Topic> topics = topicDao.selectAll();
-        HashSet<DailyEvent> dailyEvents = new HashSet<DailyEvent>();
+        List<DailyEvent> dailyEvents;
+        ArrayList<String> rules = new ArrayList<>();
 
-        for (Topic topic : topics){
-            dailyEvents.addAll(getEventByRules(topic));
+        for (Topic topic : topics) {
+            rules.addAll(topic.getRules());
         }
+
+
+        dailyEvents = getEventByRules(rules);
 
         //获得结果集
         List<DailyEvent> list = dailyEvents
@@ -53,27 +56,35 @@ public class SpecialEventServiceImpl implements SpecialEventService {
                 .filter(dailyEvent -> dailyEvent.getCollectionStatus() == 0)
                 .collect(toList());
 
-        int limit = (offset + pageSize) > list.size() ? list.size() : (offset + pageSize);
+        //分页获取事件
+        if (!getAll) {
+            int limit = (offset + pageSize) > list.size() ? list.size() : (offset + pageSize);
 
-        if (offset >= list.size() || offset < 0 ){
-            throw new NoEventException();
+            if (offset >= list.size() || offset < 0) {
+                throw new NoEventException();
+            }
+
+            return list.subList(offset, limit);
+        } else {
+            return list;
         }
-
-        return list.subList(offset,limit);
     }
 
     @Override
     public int getPageCount() throws BaseException {
 
         List<Topic> topics = topicDao.selectAll();
-        HashSet<DailyEvent> dailyEvents = new HashSet<DailyEvent>();
+        List<DailyEvent> dailyEvents;
+        ArrayList<String> rules = new ArrayList<>();
 
-        if(topics == null){
+        for (Topic topic : topics) {
+            rules.addAll(topic.getRules());
+        }
+
+        if (topics == null) {
             throw new OperationFailureException();
-        }else {
-            for (Topic topic : topics){
-                dailyEvents.addAll(getEventByRules(topic));
-            }
+        } else {
+            dailyEvents = getEventByRules(rules);
         }
 
         //获得结果集
@@ -82,16 +93,16 @@ public class SpecialEventServiceImpl implements SpecialEventService {
                 .filter(dailyEvent -> dailyEvent.getCollectionStatus() == 0)
                 .collect(toList());
 
-        int pageCOunt = list.size()/5 + (list.size() % 5 == 0 ? 0 : 1);
+        int pageCOunt = list.size() / 5 + (list.size() % 5 == 0 ? 0 : 1);
 
         return pageCOunt;
     }
 
 
     //根据填写专题的规则获取事件信息（事件均未处置）
-    public List<DailyEvent> getEventByRules(Topic topicsRules){
+    private List<DailyEvent> getEventByRules(List<String> topicsRules) {
         List<DailyEvent> dailyEvents;
-        List<String> rules = topicsRules.getRules();
+        List<String> rules = topicsRules;
 
         dailyEvents = dailyEventDao.selectByRules(rules);
 
