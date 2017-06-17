@@ -4,6 +4,8 @@ import cn.edu.swpu.cins.event.analyse.platform.enums.FeedbackEnum;
 import cn.edu.swpu.cins.event.analyse.platform.model.persistence.HandledEvent;
 import lombok.Data;
 
+import java.util.Date;
+
 /**
  * Created by lp-deepin on 17-5-22.
  */
@@ -16,29 +18,12 @@ public class HandledEventPage {
     private String handledCondition;
     private String feedbackCondition;
     private long collectedTime;
-    private long handledTime;
+    private Long handledTime; //可能为null
     private String recorder;
     private String detail;
     private String remark;
 
     public HandledEventPage() {
-    }
-
-    public HandledEventPage(int id, String theme, String mainView
-            , String url, String handledCondition, String feedbackCondition
-            , long collectedTime, long handledTime, String recorder
-            , String detail, String remark) {
-        this.id = id;
-        this.theme = theme;
-        this.mainView = mainView;
-        this.url = url;
-        this.handledCondition = handledCondition;
-        this.feedbackCondition = feedbackCondition;
-        this.collectedTime = collectedTime;
-        this.handledTime = handledTime;
-        this.recorder = recorder;
-        this.detail = detail;
-        this.remark = remark;
     }
 
     public HandledEventPage(HandledEvent handledEvent) {
@@ -49,11 +34,14 @@ public class HandledEventPage {
         setHandledCondition(handledEvent.getHandledCondition());
         setFeedbackConditionByShort(handledEvent.getFeedbackCondition());
         setCollectedTime(handledEvent.getCollectedTime().getTime());
-        //todo handletime 可能为空
-        setHandledTime(handledEvent.getHandledTime().getTime());
+        Date handledTime = handledEvent.getHandledTime();
         setRecorder(handledEvent.getRecorder());
         setDetail(handledEvent.getDetail());
         setRemark(handledEvent.getRemark());
+
+        if (handledTime != null) {
+            setHandledTime(handledEvent.getHandledTime().getTime());
+        }
     }
 
     public int getId() {
@@ -116,7 +104,7 @@ public class HandledEventPage {
         this.collectedTime = collectedTime;
     }
 
-    public long getHandledTime() {
+    public Long getHandledTime() {
         return handledTime;
     }
 

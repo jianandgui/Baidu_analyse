@@ -90,7 +90,7 @@ public class DailyEventServiceImpl implements DailyEventService {
         handledEvent.setFeedbackCondition((short) 0);
         handledEvent.setRecorder(recorder);
         handledEvent.setDailyEventId(dailyEventId);
-        handledEvent.setHandledTime(new Date());
+        handledEvent.setHandledTime(null);
 
         int insertCount = handledEventDao.insertHandledEvent(handledEvent);
 
