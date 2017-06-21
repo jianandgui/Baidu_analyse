@@ -8,6 +8,9 @@ mybatis:
     map-underscore-to-camel-case: true
 
 spring:
+  freemarker:
+    settings:
+      number_format: 0.##
   datasource:
     password: cinscinsb511
     username: root

@@ -17,10 +17,8 @@ import org.springframework.stereotype.Service;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
+import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
 /**
@@ -115,7 +113,7 @@ public class ChartServiceImpl implements ChartService {
     }
 
 
-    private List<ChartPoint> getChart(List<DailyEvent> events, long begin, long end, String dataType) {
+    protected static List<ChartPoint> getChart(List<DailyEvent> events, long begin, long end, String dataType) {
         List<ChartPoint> resultlist = new ArrayList<ChartPoint>();
 
         long curDay = begin; //当前天
