@@ -2,8 +2,10 @@ package cn.edu.swpu.cins.event.analyse.platform.service.impl;
 
 import cn.edu.swpu.cins.event.analyse.platform.dao.DailyEventDao;
 import cn.edu.swpu.cins.event.analyse.platform.enums.ChartDataEnum;
+import cn.edu.swpu.cins.event.analyse.platform.enums.ChartTypeEnum;
 import cn.edu.swpu.cins.event.analyse.platform.exception.BaseException;
 import cn.edu.swpu.cins.event.analyse.platform.exception.IlleagalArgumentException;
+import cn.edu.swpu.cins.event.analyse.platform.exception.OperationFailureException;
 import cn.edu.swpu.cins.event.analyse.platform.model.persistence.DailyEvent;
 import cn.edu.swpu.cins.event.analyse.platform.model.view.ChartPoint;
 import cn.edu.swpu.cins.event.analyse.platform.service.ReportService;
@@ -16,9 +18,7 @@ import java.io.IOException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -37,7 +37,7 @@ public class ReportServiceImpl implements ReportService {
     }
 
     @Override
-    public Map<String, Object> getReportDataMap(int year, int issue) throws BaseException {
+    public Map<String, Object> getReportDataMap(int year, int issue) throws Exception {
         try {
             Map<String, Object> reportDataMap = new HashMap<>();
 
@@ -123,27 +123,27 @@ public class ReportServiceImpl implements ReportService {
             calendar.setTime(endTime);
             calendar.add(Calendar.DATE,-1);
             Date endOfEvenMonth = calendar.getTime();
-            List<ChartPoint> pointList = ChartServiceImpl.getChart(list, beginTime.getTime(), endOfEvenMonth.getTime(), ChartDataEnum.POSTCOUNT.getDataType());
-            JFreeChart doubleMonthChart = ChartGenerator.generateDoubleMonthChart(pointList, "专题信息量趋势图", "专题信息量趋势");
+            List<ChartPoint> pointList = ChartGenerator.getChartPoints(list, beginTime.getTime(), endOfEvenMonth.getTime(), ChartDataEnum.POSTCOUNT.getDataType());
+            JFreeChart doubleMonthChart = ChartGenerator.generateChart(pointList, "专题信息量趋势图",ChartTypeEnum.DOUBLE_MONTH);
 
             calendar.setTime(beginTime);
             calendar.add(Calendar.MONTH,1);
             calendar.add(Calendar.DATE,-1);
             Date endOfOddMonth = calendar.getTime();
-            List<ChartPoint> pointList1 = ChartServiceImpl.getChart(oddList, beginTime.getTime(), endOfOddMonth.getTime(), ChartDataEnum.POSTCOUNT.getDataType());
-            JFreeChart oddMonthChart = ChartGenerator.generateSingleMonthChart(pointList1, oddMonthChar + "月份贴吧主题数趋势图");
+            List<ChartPoint> pointList1 = ChartGenerator.getChartPoints(oddList, beginTime.getTime(), endOfOddMonth.getTime(), ChartDataEnum.POSTCOUNT.getDataType());
+            JFreeChart oddMonthChart = ChartGenerator.generateChart(pointList1, oddMonthChar + "月份贴吧主题数趋势图", ChartTypeEnum.SINGLE_MONTH);
 
-            List<ChartPoint> pointList2 = ChartServiceImpl.getChart(oddList, beginTime.getTime(), endOfOddMonth.getTime(), ChartDataEnum.FOLOWCOUNT.getDataType());
-            JFreeChart oddCommentChart = ChartGenerator.generateSingleMonthChart(pointList2, oddMonthChar + "月份贴吧跟帖数趋势图");
+            List<ChartPoint> pointList2 = ChartGenerator.getChartPoints(oddList, beginTime.getTime(), endOfOddMonth.getTime(), ChartDataEnum.FOLOWCOUNT.getDataType());
+            JFreeChart oddCommentChart = ChartGenerator.generateChart(pointList2, oddMonthChar + "月份贴吧跟帖数趋势图", ChartTypeEnum.SINGLE_MONTH);
 
             calendar.setTime(endOfOddMonth);
             calendar.add(Calendar.DATE,1);
             Date beginOfEvenMonth = calendar.getTime();
-            List<ChartPoint> pointList3 = ChartServiceImpl.getChart(evenList, beginOfEvenMonth.getTime(), endOfEvenMonth.getTime(), ChartDataEnum.POSTCOUNT.getDataType());
-            JFreeChart evenMonthChart = ChartGenerator.generateSingleMonthChart(pointList3, evenMonthChar + "月份贴吧主题数趋势图");
+            List<ChartPoint> pointList3 = ChartGenerator.getChartPoints(evenList, beginOfEvenMonth.getTime(), endOfEvenMonth.getTime(), ChartDataEnum.POSTCOUNT.getDataType());
+            JFreeChart evenMonthChart = ChartGenerator.generateChart(pointList3, evenMonthChar + "月份贴吧主题数趋势图", ChartTypeEnum.SINGLE_MONTH);
 
-            List<ChartPoint> pointList4 = ChartServiceImpl.getChart(evenList, beginOfEvenMonth.getTime(), endOfEvenMonth.getTime(), ChartDataEnum.FOLOWCOUNT.getDataType());
-            JFreeChart evenCommentChart = ChartGenerator.generateSingleMonthChart(pointList4, evenMonthChar + "月份贴吧跟帖数趋势图");
+            List<ChartPoint> pointList4 = ChartGenerator.getChartPoints(evenList, beginOfEvenMonth.getTime(), endOfEvenMonth.getTime(), ChartDataEnum.FOLOWCOUNT.getDataType());
+            JFreeChart evenCommentChart = ChartGenerator.generateChart(pointList4, evenMonthChar + "月份贴吧跟帖数趋势图", ChartTypeEnum.SINGLE_MONTH);
 
             reportDataMap.put("year", year);
             reportDataMap.put("generateDate", generateDate);
@@ -166,13 +166,8 @@ public class ReportServiceImpl implements ReportService {
             reportDataMap.put("evenMonthChart", ChartGenerator.chartToString(evenMonthChart));
 
             return reportDataMap;
-        } catch (ParseException e) {
-
-        } catch (IOException e) {
-
-        } catch (BaseException e) {
-
+        } catch (Exception e) {
+            throw new Exception(e);
         }
-        return null;
     }
 }

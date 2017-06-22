@@ -49,14 +49,18 @@ public class ReportController {
             reportDataMap = reportService.getReportDataMap(year,issue);
         } catch (BaseException e) {
             e.printStackTrace();
+        }catch (Exception e){
+            e.printStackTrace();
         }
 
         try {
-            template = freeMarkerConfigurer.getConfiguration().getTemplate("word-template.ftl");
+            template = freeMarkerConfigurer.getConfiguration().getTemplate("template.ftl");
             template.process(reportDataMap, new OutputStreamWriter(response.getOutputStream()));
         } catch (IOException e) {
             e.printStackTrace();
         } catch (TemplateException e) {
+            e.printStackTrace();
+        }catch (Exception e){
             e.printStackTrace();
         }
     }

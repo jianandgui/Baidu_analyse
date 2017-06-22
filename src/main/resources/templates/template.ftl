@@ -21,24 +21,19 @@
               pkg:contentType="application/vnd.openxmlformats-package.relationships+xml" pkg:padding="256">
         <pkg:xmlData>
             <Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">
-                <Relationship Id="rId8"
-                              Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/fontTable"
-                              Target="fontTable.xml"/>
+                <Relationship Id="rId8" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/image"
+                              Target="media/image2.png"/>
+                <Relationship Id="rId13"
+                              Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/theme"
+                              Target="theme/theme1.xml"/>
                 <Relationship Id="rId3"
                               Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/settings"
                               Target="settings.xml"/>
-							  <!--picture relationships-->
-                <Relationship Id="pId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/image"
+                <Relationship Id="rId7" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/image"
                               Target="media/image1.png"/>
-                <Relationship Id="pId2" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/image"
-                              Target="media/image2.png"/>
-                <Relationship Id="pId3" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/image"
-                              Target="media/image3.png"/>
-                <Relationship Id="pId4" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/image"
-                              Target="media/image4.png"/>
-                <Relationship Id="pId5" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/image"
-                              Target="media/image5.png"/>
-							  <!--picture relationships-->
+                <Relationship Id="rId12"
+                              Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/fontTable"
+                              Target="fontTable.xml"/>
                 <Relationship Id="rId2"
                               Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/styles"
                               Target="styles.xml"/>
@@ -48,14 +43,20 @@
                 <Relationship Id="rId6"
                               Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/endnotes"
                               Target="endnotes.xml"/>
+                <Relationship Id="rId11"
+                              Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/image"
+                              Target="media/image5.png"/>
                 <Relationship Id="rId5"
                               Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/footnotes"
                               Target="footnotes.xml"/>
+                <Relationship Id="rId10"
+                              Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/image"
+                              Target="media/image4.png"/>
                 <Relationship Id="rId4"
                               Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/webSettings"
                               Target="webSettings.xml"/>
-                <Relationship Id="rId9" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/theme"
-                              Target="theme/theme1.xml"/>
+                <Relationship Id="rId9" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/image"
+                              Target="media/image3.png"/>
             </Relationships>
         </pkg:xmlData>
     </pkg:part>
@@ -88,6 +89,8 @@
                                 <w:szCs w:val="24"/>
                             </w:rPr>
                         </w:pPr>
+                        <w:bookmarkStart w:id="0" w:name="_GoBack"/>
+                        <w:bookmarkEnd w:id="0"/>
                         <w:r w:rsidRPr="003E1CFF">
                             <w:rPr>
                                 <w:sz w:val="24"/>
@@ -196,7 +199,7 @@
                             </w:rPr>
                             <w:t>（</w:t>
                         </w:r>
-                        <w:r w:rsidR="00F02968" w:rsidRPr="008A4DF2">
+                        <w:r w:rsidR="00611054" w:rsidRPr="00611054">
                             <w:rPr>
                                 <w:rFonts w:asciiTheme="minorEastAsia" w:hAnsiTheme="minorEastAsia"/>
                                 <w:sz w:val="24"/>
@@ -212,7 +215,7 @@
                             </w:rPr>
                             <w:t>年</w:t>
                         </w:r>
-                        <w:r w:rsidR="00F02968" w:rsidRPr="008A4DF2">
+                        <w:r w:rsidR="00611054" w:rsidRPr="00611054">
                             <w:rPr>
                                 <w:rFonts w:asciiTheme="minorEastAsia" w:hAnsiTheme="minorEastAsia"/>
                                 <w:sz w:val="24"/>
@@ -228,7 +231,7 @@
                             </w:rPr>
                             <w:t>-</w:t>
                         </w:r>
-                        <w:r w:rsidR="00171E76" w:rsidRPr="00171E76">
+                        <w:r w:rsidR="00611054" w:rsidRPr="00611054">
                             <w:rPr>
                                 <w:rFonts w:asciiTheme="minorEastAsia" w:hAnsiTheme="minorEastAsia"/>
                                 <w:sz w:val="24"/>
@@ -244,7 +247,7 @@
                             </w:rPr>
                             <w:t>月·</w:t>
                         </w:r>
-                        <w:r w:rsidR="00171E76" w:rsidRPr="008A4DF2">
+                        <w:r w:rsidR="00611054" w:rsidRPr="00611054">
                             <w:rPr>
                                 <w:rFonts w:asciiTheme="minorEastAsia" w:hAnsiTheme="minorEastAsia"/>
                                 <w:sz w:val="24"/>
@@ -350,24 +353,31 @@
                                 <w:sz w:val="24"/>
                                 <w:szCs w:val="24"/>
                             </w:rPr>
-                            <w:t xml:space="preserve">党委宣传部网络舆情管理中心                        </w:t>
+                            <w:t>党委宣传部网络舆情管理中心</w:t>
                         </w:r>
-                        <w:r w:rsidR="00171E76" w:rsidRPr="008A4DF2">
+                        <w:r w:rsidR="006813C6">
+                            <w:rPr>
+                                <w:rFonts w:asciiTheme="minorEastAsia" w:hAnsiTheme="minorEastAsia" w:hint="eastAsia"/>
+                                <w:sz w:val="24"/>
+                                <w:szCs w:val="24"/>
+                            </w:rPr>
+                            <w:t xml:space="preserve">  </w:t>
+                        </w:r>
+                        <w:r>
+                            <w:rPr>
+                                <w:rFonts w:asciiTheme="minorEastAsia" w:hAnsiTheme="minorEastAsia" w:hint="eastAsia"/>
+                                <w:sz w:val="24"/>
+                                <w:szCs w:val="24"/>
+                            </w:rPr>
+                            <w:t xml:space="preserve">                        </w:t>
+                        </w:r>
+                        <w:r w:rsidR="00611054" w:rsidRPr="00611054">
                             <w:rPr>
                                 <w:rFonts w:asciiTheme="minorEastAsia" w:hAnsiTheme="minorEastAsia"/>
                                 <w:sz w:val="24"/>
                                 <w:szCs w:val="24"/>
                             </w:rPr>
                             <w:t>${generateDate}</w:t>
-                        </w:r>
-                        <w:r w:rsidR="004B2DC0" w:rsidRPr="0015373F">
-                            <w:rPr>
-                                <w:rFonts w:asciiTheme="minorEastAsia" w:hAnsiTheme="minorEastAsia" w:hint="eastAsia"/>
-                                <w:color w:val="7030A0"/>
-                                <w:sz w:val="24"/>
-                                <w:szCs w:val="24"/>
-                            </w:rPr>
-                            <w:t>（注：月报生成日期）</w:t>
                         </w:r>
                     </w:p>
                     <w:p w:rsidR="00FD506F" w:rsidRDefault="00FD506F" w:rsidP="00FD506F">
@@ -431,28 +441,7 @@
                             <w:t>】</w:t>
                         </w:r>
                     </w:p>
-                    <w:p w:rsidR="00FD506F" w:rsidRPr="006E3581" w:rsidRDefault="00FD506F" w:rsidP="00FD506F">
-                        <w:pPr>
-                            <w:widowControl/>
-                            <w:jc w:val="center"/>
-                            <w:rPr>
-                                <w:rFonts w:asciiTheme="minorEastAsia" w:hAnsiTheme="minorEastAsia"/>
-                                <w:color w:val="0070C0"/>
-                                <w:sz w:val="30"/>
-                                <w:szCs w:val="30"/>
-                            </w:rPr>
-                        </w:pPr>
-                        <w:r w:rsidRPr="0015373F">
-                            <w:rPr>
-                                <w:rFonts w:asciiTheme="minorEastAsia" w:hAnsiTheme="minorEastAsia" w:hint="eastAsia"/>
-                                <w:color w:val="5B9BD5" w:themeColor="accent1"/>
-                                <w:sz w:val="30"/>
-                                <w:szCs w:val="30"/>
-                            </w:rPr>
-                            <w:t>这里列出热点舆情题目（人工）</w:t>
-                        </w:r>
-                    </w:p>
-                    <w:p w:rsidR="00FD506F" w:rsidRDefault="00FD506F">
+                    <w:p w:rsidR="00FD506F" w:rsidRDefault="00FD506F" w:rsidP="006813C6">
                         <w:pPr>
                             <w:widowControl/>
                             <w:jc w:val="left"/>
@@ -725,7 +714,7 @@
                             <w:t>舆情整体情况</w:t>
                         </w:r>
                     </w:p>
-                    <w:p w:rsidR="004D6D0E" w:rsidRPr="006E3581" w:rsidRDefault="004B29FD" w:rsidP="006E3581">
+                    <w:p w:rsidR="004D6D0E" w:rsidRPr="006E3581" w:rsidRDefault="00611054" w:rsidP="006E3581">
                         <w:pPr>
                             <w:spacing w:line="360" w:lineRule="auto"/>
                             <w:ind w:firstLine="420"/>
@@ -734,7 +723,7 @@
                                 <w:szCs w:val="24"/>
                             </w:rPr>
                         </w:pPr>
-                        <w:r w:rsidRPr="008A4DF2">
+                        <w:r w:rsidRPr="00611054">
                             <w:rPr>
                                 <w:sz w:val="24"/>
                                 <w:szCs w:val="24"/>
@@ -748,7 +737,7 @@
                             </w:rPr>
                             <w:t>-</w:t>
                         </w:r>
-                        <w:r w:rsidRPr="008A4DF2">
+                        <w:r w:rsidRPr="00611054">
                             <w:rPr>
                                 <w:sz w:val="24"/>
                                 <w:szCs w:val="24"/>
@@ -763,7 +752,7 @@
                             </w:rPr>
                             <w:t>月份网络舆情系统总共收集与我校相关信息</w:t>
                         </w:r>
-                        <w:r w:rsidRPr="008A4DF2">
+                        <w:r w:rsidRPr="00611054">
                             <w:rPr>
                                 <w:sz w:val="24"/>
                                 <w:szCs w:val="24"/>
@@ -778,7 +767,7 @@
                             </w:rPr>
                             <w:t>条，局部舆论热点</w:t>
                         </w:r>
-                        <w:r w:rsidRPr="008A4DF2">
+                        <w:r w:rsidRPr="00611054">
                             <w:rPr>
                                 <w:sz w:val="24"/>
                                 <w:szCs w:val="24"/>
@@ -793,7 +782,7 @@
                             </w:rPr>
                             <w:t>个，百度贴吧成为我校网络民意反映的主渠道。网络舆情管理中心（以下简称“中心”）</w:t>
                         </w:r>
-                        <w:r w:rsidRPr="008A4DF2">
+                        <w:r w:rsidRPr="00611054">
                             <w:rPr>
                                 <w:sz w:val="24"/>
                                 <w:szCs w:val="24"/>
@@ -817,31 +806,6 @@
                             </w:rPr>
                             <w:t>XX</w:t>
                         </w:r>
-                        <w:r w:rsidR="004B2DC0">
-                            <w:rPr>
-                                <w:color w:val="5B9BD5" w:themeColor="accent1"/>
-                                <w:sz w:val="24"/>
-                                <w:szCs w:val="24"/>
-                            </w:rPr>
-                            <w:t>(</w:t>
-                        </w:r>
-                        <w:r w:rsidR="004B2DC0">
-                            <w:rPr>
-                                <w:rFonts w:hint="eastAsia"/>
-                                <w:color w:val="5B9BD5" w:themeColor="accent1"/>
-                                <w:sz w:val="24"/>
-                                <w:szCs w:val="24"/>
-                            </w:rPr>
-                            <w:t>空</w:t>
-                        </w:r>
-                        <w:r w:rsidR="004B2DC0">
-                            <w:rPr>
-                                <w:color w:val="5B9BD5" w:themeColor="accent1"/>
-                                <w:sz w:val="24"/>
-                                <w:szCs w:val="24"/>
-                            </w:rPr>
-                            <w:t>)</w:t>
-                        </w:r>
                         <w:r w:rsidR="004D6D0E" w:rsidRPr="006E3581">
                             <w:rPr>
                                 <w:rFonts w:hint="eastAsia"/>
@@ -850,7 +814,7 @@
                             </w:rPr>
                             <w:t>次，妥善处置舆情</w:t>
                         </w:r>
-                        <w:r w:rsidRPr="008A4DF2">
+                        <w:r w:rsidRPr="00611054">
                             <w:rPr>
                                 <w:sz w:val="24"/>
                                 <w:szCs w:val="24"/>
@@ -874,33 +838,6 @@
                             </w:rPr>
                             <w:t>XX</w:t>
                         </w:r>
-                        <w:r w:rsidR="004B2DC0">
-                            <w:rPr>
-                                <w:rFonts w:hint="eastAsia"/>
-                                <w:color w:val="5B9BD5" w:themeColor="accent1"/>
-                                <w:sz w:val="24"/>
-                                <w:szCs w:val="24"/>
-                            </w:rPr>
-                            <w:t>（例：</w:t>
-                        </w:r>
-                        <w:r w:rsidR="004B2DC0">
-                            <w:rPr>
-                                <w:rFonts w:hint="eastAsia"/>
-                                <w:color w:val="5B9BD5" w:themeColor="accent1"/>
-                                <w:sz w:val="24"/>
-                                <w:szCs w:val="24"/>
-                            </w:rPr>
-                            <w:t>50%</w:t>
-                        </w:r>
-                        <w:r w:rsidR="004B2DC0">
-                            <w:rPr>
-                                <w:rFonts w:hint="eastAsia"/>
-                                <w:color w:val="5B9BD5" w:themeColor="accent1"/>
-                                <w:sz w:val="24"/>
-                                <w:szCs w:val="24"/>
-                            </w:rPr>
-                            <w:t>）</w:t>
-                        </w:r>
                         <w:r w:rsidR="004D6D0E" w:rsidRPr="006E3581">
                             <w:rPr>
                                 <w:rFonts w:hint="eastAsia"/>
@@ -909,7 +846,7 @@
                             </w:rPr>
                             <w:t>；</w:t>
                         </w:r>
-                        <w:r w:rsidR="008A4DF2" w:rsidRPr="008A4DF2">
+                        <w:r w:rsidRPr="00611054">
                             <w:rPr>
                                 <w:sz w:val="24"/>
                                 <w:szCs w:val="24"/>
@@ -933,15 +870,6 @@
                             </w:rPr>
                             <w:t>XX</w:t>
                         </w:r>
-                        <w:r w:rsidR="004B2DC0">
-                            <w:rPr>
-                                <w:rFonts w:hint="eastAsia"/>
-                                <w:color w:val="5B9BD5" w:themeColor="accent1"/>
-                                <w:sz w:val="24"/>
-                                <w:szCs w:val="24"/>
-                            </w:rPr>
-                            <w:t>（空）</w:t>
-                        </w:r>
                         <w:r w:rsidR="004D6D0E" w:rsidRPr="006E3581">
                             <w:rPr>
                                 <w:rFonts w:hint="eastAsia"/>
@@ -950,7 +878,7 @@
                             </w:rPr>
                             <w:t>次，妥善处置舆情</w:t>
                         </w:r>
-                        <w:r w:rsidRPr="008A4DF2">
+                        <w:r w:rsidRPr="00611054">
                             <w:rPr>
                                 <w:sz w:val="24"/>
                                 <w:szCs w:val="24"/>
@@ -974,33 +902,6 @@
                             </w:rPr>
                             <w:t>XX</w:t>
                         </w:r>
-                        <w:r w:rsidR="004B43BB">
-                            <w:rPr>
-                                <w:rFonts w:hint="eastAsia"/>
-                                <w:color w:val="5B9BD5" w:themeColor="accent1"/>
-                                <w:sz w:val="24"/>
-                                <w:szCs w:val="24"/>
-                            </w:rPr>
-                            <w:t>（例：</w:t>
-                        </w:r>
-                        <w:r w:rsidR="004B43BB">
-                            <w:rPr>
-                                <w:rFonts w:hint="eastAsia"/>
-                                <w:color w:val="5B9BD5" w:themeColor="accent1"/>
-                                <w:sz w:val="24"/>
-                                <w:szCs w:val="24"/>
-                            </w:rPr>
-                            <w:t>50%</w:t>
-                        </w:r>
-                        <w:r w:rsidR="004B43BB">
-                            <w:rPr>
-                                <w:rFonts w:hint="eastAsia"/>
-                                <w:color w:val="5B9BD5" w:themeColor="accent1"/>
-                                <w:sz w:val="24"/>
-                                <w:szCs w:val="24"/>
-                            </w:rPr>
-                            <w:t>）</w:t>
-                        </w:r>
                         <w:r w:rsidR="008D3E03">
                             <w:rPr>
                                 <w:rFonts w:hint="eastAsia"/>
@@ -1010,63 +911,7 @@
                             <w:t>。</w:t>
                         </w:r>
                     </w:p>
-                    <w:p w:rsidR="004D6D0E" w:rsidRPr="008D3E03" w:rsidRDefault="004D6D0E" w:rsidP="008D3E03">
-                        <w:pPr>
-                            <w:spacing w:line="360" w:lineRule="auto"/>
-                            <w:ind w:firstLine="420"/>
-                            <w:rPr>
-                                <w:color w:val="7030A0"/>
-                                <w:sz w:val="24"/>
-                                <w:szCs w:val="24"/>
-                            </w:rPr>
-                        </w:pPr>
-                        <w:r w:rsidRPr="008D3E03">
-                            <w:rPr>
-                                <w:rFonts w:hint="eastAsia"/>
-                                <w:color w:val="7030A0"/>
-                                <w:sz w:val="24"/>
-                                <w:szCs w:val="24"/>
-                            </w:rPr>
-                            <w:t>此处生成双月（例：</w:t>
-                        </w:r>
-                        <w:r w:rsidRPr="008D3E03">
-                            <w:rPr>
-                                <w:rFonts w:hint="eastAsia"/>
-                                <w:color w:val="7030A0"/>
-                                <w:sz w:val="24"/>
-                                <w:szCs w:val="24"/>
-                            </w:rPr>
-                            <w:t>9-10</w:t>
-                        </w:r>
-                        <w:r w:rsidRPr="008D3E03">
-                            <w:rPr>
-                                <w:rFonts w:hint="eastAsia"/>
-                                <w:color w:val="7030A0"/>
-                                <w:sz w:val="24"/>
-                                <w:szCs w:val="24"/>
-                            </w:rPr>
-                            <w:t>月份）信息量发帖趋势。（折线图</w:t>
-                        </w:r>
-                        <w:r w:rsidR="008D3E03" w:rsidRPr="008D3E03">
-                            <w:rPr>
-                                <w:rFonts w:hint="eastAsia"/>
-                                <w:color w:val="7030A0"/>
-                                <w:sz w:val="24"/>
-                                <w:szCs w:val="24"/>
-                            </w:rPr>
-                            <w:t>应注明标题，例：十月份贴吧主题数量趋势图</w:t>
-                        </w:r>
-                        <w:r w:rsidRPr="008D3E03">
-                            <w:rPr>
-                                <w:rFonts w:hint="eastAsia"/>
-                                <w:color w:val="7030A0"/>
-                                <w:sz w:val="24"/>
-                                <w:szCs w:val="24"/>
-                            </w:rPr>
-                            <w:t>）</w:t>
-                        </w:r>
-                    </w:p>
-                    <w:p w:rsidR="004D6D0E" w:rsidRPr="006E3581" w:rsidRDefault="009E70D4" w:rsidP="00FB1A7C">
+                    <w:p w:rsidR="00333735" w:rsidRDefault="009E70D4" w:rsidP="00084334">
                         <w:pPr>
                             <w:spacing w:line="360" w:lineRule="auto"/>
                             <w:jc w:val="center"/>
@@ -1076,7 +921,6 @@
                                 <w:szCs w:val="24"/>
                             </w:rPr>
                         </w:pPr>
-                        <w:bookmarkStart w:id="0" w:name="_GoBack"/>
                         <w:r>
                             <w:rPr>
                                 <w:noProof/>
@@ -1084,7 +928,7 @@
                             <w:drawing>
                                 <wp:inline distT="0" distB="0" distL="0" distR="0" wp14:anchorId="741E2535"
                                            wp14:editId="43864D8D">
-                                    <wp:extent cx="4572396" cy="2690093"/>
+                                    <wp:extent cx="5508000" cy="3240000"/>
                                     <wp:effectExtent l="0" t="0" r="0" b="0"/>
                                     <wp:docPr id="5" name="图片 5"/>
                                     <wp:cNvGraphicFramePr>
@@ -1100,7 +944,7 @@
                                                     <pic:cNvPicPr/>
                                                 </pic:nvPicPr>
                                                 <pic:blipFill>
-                                                    <a:blip r:embed="pId1"/>
+                                                    <a:blip r:embed="rId7"/>
                                                     <a:stretch>
                                                         <a:fillRect/>
                                                     </a:stretch>
@@ -1108,7 +952,7 @@
                                                 <pic:spPr>
                                                     <a:xfrm>
                                                         <a:off x="0" y="0"/>
-                                                        <a:ext cx="4572396" cy="2690093"/>
+                                                        <a:ext cx="5508000" cy="3240000"/>
                                                     </a:xfrm>
                                                     <a:prstGeom prst="rect">
                                                         <a:avLst/>
@@ -1119,38 +963,6 @@
                                     </a:graphic>
                                 </wp:inline>
                             </w:drawing>
-                        </w:r>
-                        <w:bookmarkEnd w:id="0"/>
-                    </w:p>
-                    <w:p w:rsidR="004D6D0E" w:rsidRPr="006E3581" w:rsidRDefault="004D6D0E" w:rsidP="008D3E03">
-                        <w:pPr>
-                            <w:spacing w:line="360" w:lineRule="auto"/>
-                            <w:ind w:firstLine="420"/>
-                            <w:rPr>
-                                <w:color w:val="000000" w:themeColor="text1"/>
-                                <w:sz w:val="24"/>
-                                <w:szCs w:val="24"/>
-                            </w:rPr>
-                        </w:pPr>
-                    </w:p>
-                    <w:p w:rsidR="004D6D0E" w:rsidRPr="008D3E03" w:rsidRDefault="004D6D0E" w:rsidP="008D3E03">
-                        <w:pPr>
-                            <w:spacing w:line="360" w:lineRule="auto"/>
-                            <w:ind w:firstLine="420"/>
-                            <w:rPr>
-                                <w:color w:val="7030A0"/>
-                                <w:sz w:val="24"/>
-                                <w:szCs w:val="24"/>
-                            </w:rPr>
-                        </w:pPr>
-                        <w:r w:rsidRPr="008D3E03">
-                            <w:rPr>
-                                <w:rFonts w:hint="eastAsia"/>
-                                <w:color w:val="7030A0"/>
-                                <w:sz w:val="24"/>
-                                <w:szCs w:val="24"/>
-                            </w:rPr>
-                            <w:t>此处相关描述（人工）</w:t>
                         </w:r>
                     </w:p>
                     <w:p w:rsidR="00333735" w:rsidRDefault="00333735" w:rsidP="008D3E03">
@@ -1164,7 +976,7 @@
                             </w:rPr>
                         </w:pPr>
                     </w:p>
-                    <w:p w:rsidR="00333735" w:rsidRPr="006E3581" w:rsidRDefault="00333735" w:rsidP="008D3E03">
+                    <w:p w:rsidR="00084334" w:rsidRPr="006E3581" w:rsidRDefault="00084334" w:rsidP="008D3E03">
                         <w:pPr>
                             <w:spacing w:line="360" w:lineRule="auto"/>
                             <w:ind w:firstLine="420"/>
@@ -1227,7 +1039,7 @@
                             <w:t>贴吧整体舆情分析</w:t>
                         </w:r>
                     </w:p>
-                    <w:p w:rsidR="00BE0892" w:rsidRPr="006E3581" w:rsidRDefault="004B43BB" w:rsidP="004B43BB">
+                    <w:p w:rsidR="00BE0892" w:rsidRPr="006E3581" w:rsidRDefault="00611054" w:rsidP="00611054">
                         <w:pPr>
                             <w:pStyle w:val="a3"/>
                             <w:numPr>
@@ -1242,7 +1054,7 @@
                                 <w:szCs w:val="28"/>
                             </w:rPr>
                         </w:pPr>
-                        <w:r w:rsidRPr="004B43BB">
+                        <w:r w:rsidRPr="00611054">
                             <w:rPr>
                                 <w:b/>
                                 <w:color w:val="000000" w:themeColor="text1"/>
@@ -1262,7 +1074,7 @@
                             <w:t>月份贴吧整体舆情</w:t>
                         </w:r>
                     </w:p>
-                    <w:p w:rsidR="00BE0892" w:rsidRPr="006E3581" w:rsidRDefault="004B29FD" w:rsidP="00333735">
+                    <w:p w:rsidR="00BE0892" w:rsidRPr="006E3581" w:rsidRDefault="00611054" w:rsidP="00333735">
                         <w:pPr>
                             <w:pStyle w:val="a3"/>
                             <w:spacing w:line="360" w:lineRule="auto"/>
@@ -1273,7 +1085,7 @@
                                 <w:szCs w:val="24"/>
                             </w:rPr>
                         </w:pPr>
-                        <w:r w:rsidRPr="004B29FD">
+                        <w:r w:rsidRPr="00611054">
                             <w:rPr>
                                 <w:color w:val="000000" w:themeColor="text1"/>
                                 <w:sz w:val="24"/>
@@ -1290,7 +1102,7 @@
                             </w:rPr>
                             <w:t>年</w:t>
                         </w:r>
-                        <w:r w:rsidRPr="004B29FD">
+                        <w:r w:rsidRPr="00611054">
                             <w:rPr>
                                 <w:color w:val="000000" w:themeColor="text1"/>
                                 <w:sz w:val="24"/>
@@ -1307,7 +1119,7 @@
                             </w:rPr>
                             <w:t>月，贴吧发布主题</w:t>
                         </w:r>
-                        <w:r w:rsidR="000B4216" w:rsidRPr="000B4216">
+                        <w:r w:rsidRPr="00611054">
                             <w:rPr>
                                 <w:color w:val="000000" w:themeColor="text1"/>
                                 <w:sz w:val="24"/>
@@ -1324,7 +1136,7 @@
                             </w:rPr>
                             <w:t>个，网友回帖</w:t>
                         </w:r>
-                        <w:r w:rsidR="000B4216" w:rsidRPr="000B4216">
+                        <w:r w:rsidR="00853AFB" w:rsidRPr="00853AFB">
                             <w:rPr>
                                 <w:color w:val="000000" w:themeColor="text1"/>
                                 <w:sz w:val="24"/>
@@ -1342,35 +1154,13 @@
                             <w:t>个。趋势变化图如下：</w:t>
                         </w:r>
                     </w:p>
-                    <w:p w:rsidR="00BE0892" w:rsidRPr="004B2DC0" w:rsidRDefault="00BE0892" w:rsidP="004B2DC0">
-                        <w:pPr>
-                            <w:pStyle w:val="a3"/>
-                            <w:spacing w:line="360" w:lineRule="auto"/>
-                            <w:ind w:firstLineChars="0" w:firstLine="360"/>
-                            <w:rPr>
-                                <w:color w:val="7030A0"/>
-                                <w:sz w:val="24"/>
-                                <w:szCs w:val="24"/>
-                            </w:rPr>
-                        </w:pPr>
-                        <w:r w:rsidRPr="004B2DC0">
-                            <w:rPr>
-                                <w:rFonts w:hint="eastAsia"/>
-                                <w:color w:val="7030A0"/>
-                                <w:sz w:val="24"/>
-                                <w:szCs w:val="24"/>
-                            </w:rPr>
-                            <w:t>此处插入九月份贴吧主题数量（发帖量）趋势图（折线图）</w:t>
-                        </w:r>
-                    </w:p>
-                    <w:p w:rsidR="00FB1A7C" w:rsidRPr="00FB1A7C" w:rsidRDefault="009E70D4" w:rsidP="00FB1A7C">
+                    <w:p w:rsidR="00BE0892" w:rsidRPr="00084334" w:rsidRDefault="009E70D4" w:rsidP="00084334">
                         <w:pPr>
                             <w:pStyle w:val="a3"/>
                             <w:spacing w:line="360" w:lineRule="auto"/>
                             <w:ind w:firstLineChars="0" w:firstLine="0"/>
                             <w:jc w:val="center"/>
                             <w:rPr>
-                                <w:rFonts w:hint="eastAsia"/>
                                 <w:color w:val="000000" w:themeColor="text1"/>
                                 <w:sz w:val="24"/>
                                 <w:szCs w:val="24"/>
@@ -1384,7 +1174,7 @@
                             <w:drawing>
                                 <wp:inline distT="0" distB="0" distL="0" distR="0" wp14:anchorId="741E2535"
                                            wp14:editId="43864D8D">
-                                    <wp:extent cx="4572396" cy="2690093"/>
+                                    <wp:extent cx="5508000" cy="3240000"/>
                                     <wp:effectExtent l="0" t="0" r="0" b="0"/>
                                     <wp:docPr id="3" name="图片 3"/>
                                     <wp:cNvGraphicFramePr>
@@ -1400,7 +1190,7 @@
                                                     <pic:cNvPicPr/>
                                                 </pic:nvPicPr>
                                                 <pic:blipFill>
-                                                    <a:blip r:embed="pId2"/>
+                                                    <a:blip r:embed="rId8"/>
                                                     <a:stretch>
                                                         <a:fillRect/>
                                                     </a:stretch>
@@ -1408,7 +1198,7 @@
                                                 <pic:spPr>
                                                     <a:xfrm>
                                                         <a:off x="0" y="0"/>
-                                                        <a:ext cx="4572396" cy="2690093"/>
+                                                        <a:ext cx="5508000" cy="3240000"/>
                                                     </a:xfrm>
                                                     <a:prstGeom prst="rect">
                                                         <a:avLst/>
@@ -1421,7 +1211,7 @@
                             </w:drawing>
                         </w:r>
                     </w:p>
-                    <w:p w:rsidR="00BE0892" w:rsidRPr="006E3581" w:rsidRDefault="00BE0892" w:rsidP="00333735">
+                    <w:p w:rsidR="00BE0892" w:rsidRDefault="00BE0892" w:rsidP="00333735">
                         <w:pPr>
                             <w:pStyle w:val="a3"/>
                             <w:spacing w:line="360" w:lineRule="auto"/>
@@ -1433,28 +1223,7 @@
                             </w:rPr>
                         </w:pPr>
                     </w:p>
-                    <w:p w:rsidR="00BE0892" w:rsidRPr="008D3E03" w:rsidRDefault="00BE0892" w:rsidP="00333735">
-                        <w:pPr>
-                            <w:pStyle w:val="a3"/>
-                            <w:spacing w:line="360" w:lineRule="auto"/>
-                            <w:ind w:left="360" w:firstLineChars="0" w:firstLine="0"/>
-                            <w:rPr>
-                                <w:color w:val="7030A0"/>
-                                <w:sz w:val="24"/>
-                                <w:szCs w:val="24"/>
-                            </w:rPr>
-                        </w:pPr>
-                        <w:r w:rsidRPr="008D3E03">
-                            <w:rPr>
-                                <w:rFonts w:hint="eastAsia"/>
-                                <w:color w:val="7030A0"/>
-                                <w:sz w:val="24"/>
-                                <w:szCs w:val="24"/>
-                            </w:rPr>
-                            <w:t>图的描述（人工做）</w:t>
-                        </w:r>
-                    </w:p>
-                    <w:p w:rsidR="00BE0892" w:rsidRPr="006E3581" w:rsidRDefault="00BE0892" w:rsidP="00333735">
+                    <w:p w:rsidR="00084334" w:rsidRPr="006E3581" w:rsidRDefault="00084334" w:rsidP="00333735">
                         <w:pPr>
                             <w:pStyle w:val="a3"/>
                             <w:spacing w:line="360" w:lineRule="auto"/>
@@ -1466,40 +1235,7 @@
                             </w:rPr>
                         </w:pPr>
                     </w:p>
-                    <w:p w:rsidR="00BE0892" w:rsidRPr="006E3581" w:rsidRDefault="00BE0892" w:rsidP="00333735">
-                        <w:pPr>
-                            <w:pStyle w:val="a3"/>
-                            <w:spacing w:line="360" w:lineRule="auto"/>
-                            <w:ind w:left="360" w:firstLineChars="0" w:firstLine="0"/>
-                            <w:rPr>
-                                <w:color w:val="000000" w:themeColor="text1"/>
-                                <w:sz w:val="24"/>
-                                <w:szCs w:val="24"/>
-                            </w:rPr>
-                        </w:pPr>
-                    </w:p>
-                    <w:p w:rsidR="00BE0892" w:rsidRPr="008D3E03" w:rsidRDefault="00BE0892" w:rsidP="00333735">
-                        <w:pPr>
-                            <w:pStyle w:val="a3"/>
-                            <w:spacing w:line="360" w:lineRule="auto"/>
-                            <w:ind w:left="360" w:firstLineChars="0" w:firstLine="0"/>
-                            <w:rPr>
-                                <w:color w:val="7030A0"/>
-                                <w:sz w:val="24"/>
-                                <w:szCs w:val="24"/>
-                            </w:rPr>
-                        </w:pPr>
-                        <w:r w:rsidRPr="008D3E03">
-                            <w:rPr>
-                                <w:rFonts w:hint="eastAsia"/>
-                                <w:color w:val="7030A0"/>
-                                <w:sz w:val="24"/>
-                                <w:szCs w:val="24"/>
-                            </w:rPr>
-                            <w:t>此处插入九月份贴吧跟帖数量（跟贴量）趋势图（折线图）</w:t>
-                        </w:r>
-                    </w:p>
-                    <w:p w:rsidR="00BE0892" w:rsidRPr="008D3E03" w:rsidRDefault="009E70D4" w:rsidP="00FB1A7C">
+                    <w:p w:rsidR="006E3581" w:rsidRPr="00084334" w:rsidRDefault="009E70D4" w:rsidP="00084334">
                         <w:pPr>
                             <w:pStyle w:val="a3"/>
                             <w:spacing w:line="360" w:lineRule="auto"/>
@@ -1518,7 +1254,7 @@
                             <w:drawing>
                                 <wp:inline distT="0" distB="0" distL="0" distR="0" wp14:anchorId="741E2535"
                                            wp14:editId="43864D8D">
-                                    <wp:extent cx="4572396" cy="2690093"/>
+                                    <wp:extent cx="5508000" cy="3240000"/>
                                     <wp:effectExtent l="0" t="0" r="0" b="0"/>
                                     <wp:docPr id="4" name="图片 4"/>
                                     <wp:cNvGraphicFramePr>
@@ -1534,7 +1270,7 @@
                                                     <pic:cNvPicPr/>
                                                 </pic:nvPicPr>
                                                 <pic:blipFill>
-                                                    <a:blip r:embed="pId3"/>
+                                                    <a:blip r:embed="rId9"/>
                                                     <a:stretch>
                                                         <a:fillRect/>
                                                     </a:stretch>
@@ -1542,7 +1278,7 @@
                                                 <pic:spPr>
                                                     <a:xfrm>
                                                         <a:off x="0" y="0"/>
-                                                        <a:ext cx="4572396" cy="2690093"/>
+                                                        <a:ext cx="5508000" cy="3240000"/>
                                                     </a:xfrm>
                                                     <a:prstGeom prst="rect">
                                                         <a:avLst/>
@@ -1553,39 +1289,6 @@
                                     </a:graphic>
                                 </wp:inline>
                             </w:drawing>
-                        </w:r>
-                    </w:p>
-                    <w:p w:rsidR="00BE0892" w:rsidRPr="006E3581" w:rsidRDefault="00BE0892" w:rsidP="00333735">
-                        <w:pPr>
-                            <w:pStyle w:val="a3"/>
-                            <w:spacing w:line="360" w:lineRule="auto"/>
-                            <w:ind w:left="360" w:firstLineChars="0" w:firstLine="0"/>
-                            <w:rPr>
-                                <w:color w:val="000000" w:themeColor="text1"/>
-                                <w:sz w:val="24"/>
-                                <w:szCs w:val="24"/>
-                            </w:rPr>
-                        </w:pPr>
-                    </w:p>
-                    <w:p w:rsidR="006E3581" w:rsidRPr="008D3E03" w:rsidRDefault="00BE0892" w:rsidP="00333735">
-                        <w:pPr>
-                            <w:pStyle w:val="a3"/>
-                            <w:spacing w:line="360" w:lineRule="auto"/>
-                            <w:ind w:left="360" w:firstLineChars="0" w:firstLine="0"/>
-                            <w:rPr>
-                                <w:color w:val="7030A0"/>
-                                <w:sz w:val="24"/>
-                                <w:szCs w:val="24"/>
-                            </w:rPr>
-                        </w:pPr>
-                        <w:r w:rsidRPr="008D3E03">
-                            <w:rPr>
-                                <w:rFonts w:hint="eastAsia"/>
-                                <w:color w:val="7030A0"/>
-                                <w:sz w:val="24"/>
-                                <w:szCs w:val="24"/>
-                            </w:rPr>
-                            <w:t>图的描述（人工做）</w:t>
                         </w:r>
                     </w:p>
                     <w:p w:rsidR="006E3581" w:rsidRDefault="006E3581" w:rsidP="00333735">
@@ -1600,7 +1303,7 @@
                             </w:rPr>
                         </w:pPr>
                     </w:p>
-                    <w:p w:rsidR="006E3581" w:rsidRPr="006E3581" w:rsidRDefault="006E3581" w:rsidP="00333735">
+                    <w:p w:rsidR="00084334" w:rsidRPr="006E3581" w:rsidRDefault="00084334" w:rsidP="00333735">
                         <w:pPr>
                             <w:pStyle w:val="a3"/>
                             <w:spacing w:line="360" w:lineRule="auto"/>
@@ -1612,7 +1315,7 @@
                             </w:rPr>
                         </w:pPr>
                     </w:p>
-                    <w:p w:rsidR="00BE0892" w:rsidRPr="006E3581" w:rsidRDefault="004B43BB" w:rsidP="004B43BB">
+                    <w:p w:rsidR="00BE0892" w:rsidRPr="006E3581" w:rsidRDefault="00611054" w:rsidP="00611054">
                         <w:pPr>
                             <w:pStyle w:val="a3"/>
                             <w:numPr>
@@ -1627,7 +1330,7 @@
                                 <w:szCs w:val="28"/>
                             </w:rPr>
                         </w:pPr>
-                        <w:r w:rsidRPr="004B43BB">
+                        <w:r w:rsidRPr="00611054">
                             <w:rPr>
                                 <w:b/>
                                 <w:color w:val="000000" w:themeColor="text1"/>
@@ -1647,7 +1350,7 @@
                             <w:t>月份贴吧整体舆情</w:t>
                         </w:r>
                     </w:p>
-                    <w:p w:rsidR="00BE0892" w:rsidRPr="006E3581" w:rsidRDefault="004B29FD" w:rsidP="00333735">
+                    <w:p w:rsidR="00BE0892" w:rsidRPr="006E3581" w:rsidRDefault="00611054" w:rsidP="00333735">
                         <w:pPr>
                             <w:pStyle w:val="a3"/>
                             <w:spacing w:line="360" w:lineRule="auto"/>
@@ -1658,13 +1361,12 @@
                                 <w:szCs w:val="24"/>
                             </w:rPr>
                         </w:pPr>
-                        <w:r w:rsidRPr="004B29FD">
+                        <w:r w:rsidRPr="00611054">
                             <w:rPr>
                                 <w:color w:val="000000" w:themeColor="text1"/>
                                 <w:sz w:val="24"/>
                                 <w:szCs w:val="24"/>
                             </w:rPr>
-                            <w:lastRenderedPageBreak/>
                             <w:t>${year}</w:t>
                         </w:r>
                         <w:r w:rsidR="00BE0892" w:rsidRPr="006E3581">
@@ -1676,7 +1378,7 @@
                             </w:rPr>
                             <w:t>年</w:t>
                         </w:r>
-                        <w:r w:rsidR="00FD2BF6" w:rsidRPr="00FD2BF6">
+                        <w:r w:rsidRPr="00611054">
                             <w:rPr>
                                 <w:color w:val="000000" w:themeColor="text1"/>
                                 <w:sz w:val="24"/>
@@ -1693,7 +1395,7 @@
                             </w:rPr>
                             <w:t>月，贴吧发布主题</w:t>
                         </w:r>
-                        <w:r w:rsidR="000B4216" w:rsidRPr="000B4216">
+                        <w:r w:rsidRPr="00611054">
                             <w:rPr>
                                 <w:color w:val="000000" w:themeColor="text1"/>
                                 <w:sz w:val="24"/>
@@ -1710,12 +1412,13 @@
                             </w:rPr>
                             <w:t>个，网友回帖</w:t>
                         </w:r>
-                        <w:r w:rsidR="000B4216" w:rsidRPr="000B4216">
+                        <w:r w:rsidRPr="00611054">
                             <w:rPr>
                                 <w:color w:val="000000" w:themeColor="text1"/>
                                 <w:sz w:val="24"/>
                                 <w:szCs w:val="24"/>
                             </w:rPr>
+                            <w:lastRenderedPageBreak/>
                             <w:t>${evenCommentCount}</w:t>
                         </w:r>
                         <w:r w:rsidR="00BE0892" w:rsidRPr="006E3581">
@@ -1728,70 +1431,11 @@
                             <w:t>个。趋势变化图如下：</w:t>
                         </w:r>
                     </w:p>
-                    <w:p w:rsidR="003F72D9" w:rsidRPr="00333735" w:rsidRDefault="003F72D9" w:rsidP="00333735">
-                        <w:pPr>
-                            <w:spacing w:line="360" w:lineRule="auto"/>
-                            <w:rPr>
-                                <w:color w:val="000000" w:themeColor="text1"/>
-                                <w:sz w:val="24"/>
-                                <w:szCs w:val="24"/>
-                            </w:rPr>
-                        </w:pPr>
-                        <w:r w:rsidRPr="00333735">
-                            <w:rPr>
-                                <w:rFonts w:hint="eastAsia"/>
-                                <w:color w:val="000000" w:themeColor="text1"/>
-                                <w:sz w:val="24"/>
-                                <w:szCs w:val="24"/>
-                            </w:rPr>
-                            <w:t>此处插入九月份贴吧主题数量</w:t>
-                        </w:r>
-                        <w:r w:rsidRPr="008D3E03">
-                            <w:rPr>
-                                <w:rFonts w:hint="eastAsia"/>
-                                <w:color w:val="7030A0"/>
-                                <w:sz w:val="24"/>
-                                <w:szCs w:val="24"/>
-                            </w:rPr>
-                            <w:t>（发帖量）</w:t>
-                        </w:r>
-                        <w:r w:rsidRPr="00333735">
-                            <w:rPr>
-                                <w:rFonts w:hint="eastAsia"/>
-                                <w:color w:val="000000" w:themeColor="text1"/>
-                                <w:sz w:val="24"/>
-                                <w:szCs w:val="24"/>
-                            </w:rPr>
-                            <w:t>趋势图</w:t>
-                        </w:r>
-                        <w:r w:rsidRPr="008D3E03">
-                            <w:rPr>
-                                <w:rFonts w:hint="eastAsia"/>
-                                <w:color w:val="7030A0"/>
-                                <w:sz w:val="24"/>
-                                <w:szCs w:val="24"/>
-                            </w:rPr>
-                            <w:t>（折线图）</w:t>
-                        </w:r>
-                    </w:p>
-                    <w:p w:rsidR="003F72D9" w:rsidRPr="006E3581" w:rsidRDefault="003F72D9" w:rsidP="00333735">
-                        <w:pPr>
-                            <w:pStyle w:val="a3"/>
-                            <w:spacing w:line="360" w:lineRule="auto"/>
-                            <w:ind w:left="360" w:firstLineChars="0" w:firstLine="0"/>
-                            <w:rPr>
-                                <w:color w:val="000000" w:themeColor="text1"/>
-                                <w:sz w:val="24"/>
-                                <w:szCs w:val="24"/>
-                            </w:rPr>
-                        </w:pPr>
-                    </w:p>
-                    <w:p w:rsidR="003F72D9" w:rsidRPr="006E3581" w:rsidRDefault="009E70D4" w:rsidP="00FB1A7C">
+                    <w:p w:rsidR="003F72D9" w:rsidRPr="006E3581" w:rsidRDefault="009E70D4" w:rsidP="00084334">
                         <w:pPr>
                             <w:pStyle w:val="a3"/>
                             <w:spacing w:line="360" w:lineRule="auto"/>
                             <w:ind w:firstLineChars="0" w:firstLine="0"/>
-                            <w:jc w:val="center"/>
                             <w:rPr>
                                 <w:color w:val="000000" w:themeColor="text1"/>
                                 <w:sz w:val="24"/>
@@ -1805,7 +1449,7 @@
                             <w:drawing>
                                 <wp:inline distT="0" distB="0" distL="0" distR="0" wp14:anchorId="106AF0EE"
                                            wp14:editId="11E1F46A">
-                                    <wp:extent cx="4572396" cy="2690093"/>
+                                    <wp:extent cx="5508000" cy="3240000"/>
                                     <wp:effectExtent l="0" t="0" r="0" b="0"/>
                                     <wp:docPr id="1" name="图片 1"/>
                                     <wp:cNvGraphicFramePr>
@@ -1821,7 +1465,7 @@
                                                     <pic:cNvPicPr/>
                                                 </pic:nvPicPr>
                                                 <pic:blipFill>
-                                                    <a:blip r:embed="pId4"/>
+                                                    <a:blip r:embed="rId10"/>
                                                     <a:stretch>
                                                         <a:fillRect/>
                                                     </a:stretch>
@@ -1829,7 +1473,7 @@
                                                 <pic:spPr>
                                                     <a:xfrm>
                                                         <a:off x="0" y="0"/>
-                                                        <a:ext cx="4572396" cy="2690093"/>
+                                                        <a:ext cx="5508000" cy="3240000"/>
                                                     </a:xfrm>
                                                     <a:prstGeom prst="rect">
                                                         <a:avLst/>
@@ -1853,15 +1497,6 @@
                                 <w:szCs w:val="24"/>
                             </w:rPr>
                         </w:pPr>
-                        <w:r w:rsidRPr="008D3E03">
-                            <w:rPr>
-                                <w:rFonts w:hint="eastAsia"/>
-                                <w:color w:val="7030A0"/>
-                                <w:sz w:val="24"/>
-                                <w:szCs w:val="24"/>
-                            </w:rPr>
-                            <w:t>图的描述（人工做）</w:t>
-                        </w:r>
                     </w:p>
                     <w:p w:rsidR="003F72D9" w:rsidRPr="008D3E03" w:rsidRDefault="003F72D9" w:rsidP="00333735">
                         <w:pPr>
@@ -1874,39 +1509,6 @@
                                 <w:szCs w:val="24"/>
                             </w:rPr>
                         </w:pPr>
-                    </w:p>
-                    <w:p w:rsidR="003F72D9" w:rsidRPr="008D3E03" w:rsidRDefault="003F72D9" w:rsidP="00333735">
-                        <w:pPr>
-                            <w:pStyle w:val="a3"/>
-                            <w:spacing w:line="360" w:lineRule="auto"/>
-                            <w:ind w:left="360" w:firstLineChars="0" w:firstLine="0"/>
-                            <w:rPr>
-                                <w:color w:val="7030A0"/>
-                                <w:sz w:val="24"/>
-                                <w:szCs w:val="24"/>
-                            </w:rPr>
-                        </w:pPr>
-                    </w:p>
-                    <w:p w:rsidR="003F72D9" w:rsidRPr="008D3E03" w:rsidRDefault="003F72D9" w:rsidP="00333735">
-                        <w:pPr>
-                            <w:pStyle w:val="a3"/>
-                            <w:spacing w:line="360" w:lineRule="auto"/>
-                            <w:ind w:left="360" w:firstLineChars="0" w:firstLine="0"/>
-                            <w:rPr>
-                                <w:color w:val="7030A0"/>
-                                <w:sz w:val="24"/>
-                                <w:szCs w:val="24"/>
-                            </w:rPr>
-                        </w:pPr>
-                        <w:r w:rsidRPr="008D3E03">
-                            <w:rPr>
-                                <w:rFonts w:hint="eastAsia"/>
-                                <w:color w:val="7030A0"/>
-                                <w:sz w:val="24"/>
-                                <w:szCs w:val="24"/>
-                            </w:rPr>
-                            <w:t>此处插入十月份贴吧跟帖数量（跟贴量）趋势图（折线图）</w:t>
-                        </w:r>
                     </w:p>
                     <w:p w:rsidR="003F72D9" w:rsidRPr="008D3E03" w:rsidRDefault="009E70D4" w:rsidP="00FB1A7C">
                         <w:pPr>
@@ -1927,8 +1529,8 @@
                             <w:drawing>
                                 <wp:inline distT="0" distB="0" distL="0" distR="0" wp14:anchorId="741E2535"
                                            wp14:editId="43864D8D">
-                                    <wp:extent cx="4572396" cy="2690093"/>
-                                    <wp:effectExtent l="0" t="0" r="0" b="0"/>
+                                    <wp:extent cx="5400000" cy="3178800"/>
+                                    <wp:effectExtent l="0" t="0" r="0" b="3175"/>
                                     <wp:docPr id="2" name="图片 2"/>
                                     <wp:cNvGraphicFramePr>
                                         <a:graphicFrameLocks noChangeAspect="1"
@@ -1943,7 +1545,7 @@
                                                     <pic:cNvPicPr/>
                                                 </pic:nvPicPr>
                                                 <pic:blipFill>
-                                                    <a:blip r:embed="pId5"/>
+                                                    <a:blip r:embed="rId11"/>
                                                     <a:stretch>
                                                         <a:fillRect/>
                                                     </a:stretch>
@@ -1951,7 +1553,7 @@
                                                 <pic:spPr>
                                                     <a:xfrm>
                                                         <a:off x="0" y="0"/>
-                                                        <a:ext cx="4572396" cy="2690093"/>
+                                                        <a:ext cx="5400000" cy="3178800"/>
                                                     </a:xfrm>
                                                     <a:prstGeom prst="rect">
                                                         <a:avLst/>
@@ -1975,27 +1577,6 @@
                                 <w:szCs w:val="24"/>
                             </w:rPr>
                         </w:pPr>
-                    </w:p>
-                    <w:p w:rsidR="003F72D9" w:rsidRPr="008D3E03" w:rsidRDefault="003F72D9" w:rsidP="00333735">
-                        <w:pPr>
-                            <w:pStyle w:val="a3"/>
-                            <w:spacing w:line="360" w:lineRule="auto"/>
-                            <w:ind w:left="360" w:firstLineChars="0" w:firstLine="0"/>
-                            <w:rPr>
-                                <w:color w:val="7030A0"/>
-                                <w:sz w:val="24"/>
-                                <w:szCs w:val="24"/>
-                            </w:rPr>
-                        </w:pPr>
-                        <w:r w:rsidRPr="008D3E03">
-                            <w:rPr>
-                                <w:rFonts w:hint="eastAsia"/>
-                                <w:color w:val="7030A0"/>
-                                <w:sz w:val="24"/>
-                                <w:szCs w:val="24"/>
-                            </w:rPr>
-                            <w:t>图的描述（人工做）</w:t>
-                        </w:r>
                     </w:p>
                     <w:p w:rsidR="003F72D9" w:rsidRPr="008D3E03" w:rsidRDefault="003F72D9" w:rsidP="00333735">
                         <w:pPr>
@@ -2024,7 +1605,6 @@
                                 <w:sz w:val="24"/>
                                 <w:szCs w:val="24"/>
                             </w:rPr>
-                            <w:lastRenderedPageBreak/>
                             <w:t>***</w:t>
                         </w:r>
                         <w:r w:rsidRPr="00E42230">
@@ -2079,6 +1659,7 @@
                                 <w:sz w:val="24"/>
                                 <w:szCs w:val="24"/>
                             </w:rPr>
+                            <w:lastRenderedPageBreak/>
                             <w:t>党委宣传部网络舆情管理中心通过每天实时对贴吧的监管，</w:t>
                         </w:r>
                         <w:r w:rsidRPr="004B2DC0">
@@ -2809,14 +2390,14 @@
                          xmlns:wne="http://schemas.microsoft.com/office/word/2006/wordml"
                          xmlns:wps="http://schemas.microsoft.com/office/word/2010/wordprocessingShape">
                 <w:footnote w:type="separator" w:id="-1">
-                    <w:p w:rsidR="00577AA4" w:rsidRDefault="00577AA4" w:rsidP="00F925C6">
+                    <w:p w:rsidR="00E022F2" w:rsidRDefault="00E022F2" w:rsidP="00F925C6">
                         <w:r>
                             <w:separator/>
                         </w:r>
                     </w:p>
                 </w:footnote>
                 <w:footnote w:type="continuationSeparator" w:id="0">
-                    <w:p w:rsidR="00577AA4" w:rsidRDefault="00577AA4" w:rsidP="00F925C6">
+                    <w:p w:rsidR="00E022F2" w:rsidRDefault="00E022F2" w:rsidP="00F925C6">
                         <w:r>
                             <w:continuationSeparator/>
                         </w:r>
@@ -2846,14 +2427,14 @@
                         xmlns:wne="http://schemas.microsoft.com/office/word/2006/wordml"
                         xmlns:wps="http://schemas.microsoft.com/office/word/2010/wordprocessingShape">
                 <w:endnote w:type="separator" w:id="-1">
-                    <w:p w:rsidR="00577AA4" w:rsidRDefault="00577AA4" w:rsidP="00F925C6">
+                    <w:p w:rsidR="00E022F2" w:rsidRDefault="00E022F2" w:rsidP="00F925C6">
                         <w:r>
                             <w:separator/>
                         </w:r>
                     </w:p>
                 </w:endnote>
                 <w:endnote w:type="continuationSeparator" w:id="0">
-                    <w:p w:rsidR="00577AA4" w:rsidRDefault="00577AA4" w:rsidP="00F925C6">
+                    <w:p w:rsidR="00E022F2" w:rsidRDefault="00E022F2" w:rsidP="00F925C6">
                         <w:r>
                             <w:continuationSeparator/>
                         </w:r>
@@ -3127,20 +2708,20 @@
             </a:theme>
         </pkg:xmlData>
     </pkg:part>
-    <pkg:part pkg:name="/word/media/image1.png" pkg:contentType="image/png" pkg:compression="store">
-        <pkg:binaryData>${doubleMonthChart}</pkg:binaryData>
-    </pkg:part>
-    <pkg:part pkg:name="/word/media/image2.png" pkg:contentType="image/png" pkg:compression="store">
-        <pkg:binaryData>${oddMonthChart}</pkg:binaryData>
+    <pkg:part pkg:name="/word/media/image4.png" pkg:contentType="image/png" pkg:compression="store">
+        <pkg:binaryData>${evenMonthChart}</pkg:binaryData>
     </pkg:part>
     <pkg:part pkg:name="/word/media/image3.png" pkg:contentType="image/png" pkg:compression="store">
         <pkg:binaryData>${oddCommentChart}</pkg:binaryData>
     </pkg:part>
-    <pkg:part pkg:name="/word/media/image4.png" pkg:contentType="image/png" pkg:compression="store">
-        <pkg:binaryData>${evenMonthChart}</pkg:binaryData>
+    <pkg:part pkg:name="/word/media/image1.png" pkg:contentType="image/png" pkg:compression="store">
+        <pkg:binaryData>${doubleMonthChart}</pkg:binaryData>
     </pkg:part>
     <pkg:part pkg:name="/word/media/image5.png" pkg:contentType="image/png" pkg:compression="store">
         <pkg:binaryData>${evenCommentChart}</pkg:binaryData>
+    </pkg:part>
+    <pkg:part pkg:name="/word/media/image2.png" pkg:contentType="image/png" pkg:compression="store">
+        <pkg:binaryData>${oddMonthChart}</pkg:binaryData>
     </pkg:part>
     <pkg:part pkg:name="/word/settings.xml"
               pkg:contentType="application/vnd.openxmlformats-officedocument.wordprocessingml.settings+xml">
@@ -3154,7 +2735,7 @@
                         xmlns:w14="http://schemas.microsoft.com/office/word/2010/wordml"
                         xmlns:w15="http://schemas.microsoft.com/office/word/2012/wordml"
                         xmlns:sl="http://schemas.openxmlformats.org/schemaLibrary/2006/main">
-                <w:zoom w:percent="100"/>
+                <w:zoom w:percent="120"/>
                 <w:bordersDoNotSurroundHeader/>
                 <w:bordersDoNotSurroundFooter/>
                 <w:defaultTabStop w:val="420"/>
@@ -3194,11 +2775,13 @@
                 </w:compat>
                 <w:rsids>
                     <w:rsidRoot w:val="00CE53A4"/>
+                    <w:rsid w:val="00084334"/>
                     <w:rsid w:val="000B4216"/>
                     <w:rsid w:val="0014205B"/>
                     <w:rsid w:val="0015373F"/>
                     <w:rsid w:val="00171E76"/>
                     <w:rsid w:val="00223AE9"/>
+                    <w:rsid w:val="002360D6"/>
                     <w:rsid w:val="002C35FA"/>
                     <w:rsid w:val="00300851"/>
                     <w:rsid w:val="00333735"/>
@@ -3211,24 +2794,31 @@
                     <w:rsid w:val="004D6D0E"/>
                     <w:rsid w:val="00535C6D"/>
                     <w:rsid w:val="00577AA4"/>
+                    <w:rsid w:val="00611054"/>
+                    <w:rsid w:val="006813C6"/>
                     <w:rsid w:val="006E3581"/>
                     <w:rsid w:val="006F26AF"/>
                     <w:rsid w:val="00797830"/>
                     <w:rsid w:val="007D65DD"/>
+                    <w:rsid w:val="00853AFB"/>
                     <w:rsid w:val="008A4DF2"/>
                     <w:rsid w:val="008D3E03"/>
                     <w:rsid w:val="009808EB"/>
+                    <w:rsid w:val="009C7910"/>
                     <w:rsid w:val="009E70D4"/>
                     <w:rsid w:val="00B01AB7"/>
                     <w:rsid w:val="00B05BD5"/>
                     <w:rsid w:val="00BE0892"/>
                     <w:rsid w:val="00C36CF8"/>
+                    <w:rsid w:val="00C56B38"/>
                     <w:rsid w:val="00CE53A4"/>
                     <w:rsid w:val="00D013D6"/>
                     <w:rsid w:val="00D57BF1"/>
+                    <w:rsid w:val="00E022F2"/>
                     <w:rsid w:val="00E42230"/>
                     <w:rsid w:val="00F02968"/>
                     <w:rsid w:val="00F925C6"/>
+                    <w:rsid w:val="00FA15A7"/>
                     <w:rsid w:val="00FB1A7C"/>
                     <w:rsid w:val="00FD2BF6"/>
                     <w:rsid w:val="00FD506F"/>
@@ -4292,9 +3882,9 @@
                 <cp:keywords/>
                 <dc:description/>
                 <cp:lastModifiedBy>Peng Lin</cp:lastModifiedBy>
-                <cp:revision>3</cp:revision>
-                <dcterms:created xsi:type="dcterms:W3CDTF">2017-06-19T11:40:00Z</dcterms:created>
-                <dcterms:modified xsi:type="dcterms:W3CDTF">2017-06-20T11:47:00Z</dcterms:modified>
+                <cp:revision>2</cp:revision>
+                <dcterms:created xsi:type="dcterms:W3CDTF">2017-06-22T08:18:00Z</dcterms:created>
+                <dcterms:modified xsi:type="dcterms:W3CDTF">2017-06-22T08:18:00Z</dcterms:modified>
             </cp:coreProperties>
         </pkg:xmlData>
     </pkg:part>
@@ -4348,18 +3938,18 @@
             <Properties xmlns="http://schemas.openxmlformats.org/officeDocument/2006/extended-properties"
                         xmlns:vt="http://schemas.openxmlformats.org/officeDocument/2006/docPropsVTypes">
                 <Template>Normal.dotm</Template>
-                <TotalTime>22</TotalTime>
+                <TotalTime>0</TotalTime>
                 <Pages>6</Pages>
-                <Words>314</Words>
-                <Characters>1793</Characters>
+                <Words>276</Words>
+                <Characters>1575</Characters>
                 <Application>Microsoft Office Word</Application>
                 <DocSecurity>0</DocSecurity>
-                <Lines>14</Lines>
-                <Paragraphs>4</Paragraphs>
+                <Lines>13</Lines>
+                <Paragraphs>3</Paragraphs>
                 <ScaleCrop>false</ScaleCrop>
                 <Company/>
                 <LinksUpToDate>false</LinksUpToDate>
-                <CharactersWithSpaces>2103</CharactersWithSpaces>
+                <CharactersWithSpaces>1848</CharactersWithSpaces>
                 <SharedDoc>false</SharedDoc>
                 <HyperlinksChanged>false</HyperlinksChanged>
                 <AppVersion>15.0000</AppVersion>
