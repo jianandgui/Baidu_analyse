@@ -22,6 +22,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * Created by LLPP on 2017/6/19.
@@ -41,12 +42,15 @@ public class ReportServiceImpl implements ReportService {
         try {
             Map<String, Object> reportDataMap = new HashMap<>();
 
-            if (issue > 6 || issue < 1)
+            int oddMonth = issue ;//起始月
+
+            int evenMonth = issue + 1;//结束月
+
+            LocalDateTime localTime = LocalDateTime.now();
+
+            //日期校验
+            if (issue > 11 || issue < 1 || localTime.isBefore(LocalDateTime.of(year,evenMonth,15,0,0,0,0)))
                 throw new IlleagalArgumentException();
-
-            int oddMonth = issue * 2 - 1;//奇数月份
-
-            int evenMonth = issue * 2;//偶数月份
 
             Date beginTime;//检索开始日期
 
@@ -69,14 +73,14 @@ public class ReportServiceImpl implements ReportService {
             List<DailyEvent> oddList = list.stream()
                     .filter(dailyEvent -> {
                         calendar.setTime(dailyEvent.getPostTime());
-                        return calendar.get(Calendar.MONTH) % 2 == 0;
+                        return calendar.get(Calendar.MONTH) % issue != 0; //Month value is 0-based. e.g., 0 for January.
                     })
                     .collect(Collectors.toList());//奇数月事件列表
 
             List<DailyEvent> evenList = list.stream()
                     .filter(dailyEvent -> {
                         calendar.setTime(dailyEvent.getPostTime());
-                        return calendar.get(Calendar.MONTH) % 2 != 0;
+                        return calendar.get(Calendar.MONTH) % issue == 0;
                     })
                     .collect(Collectors.toList());//偶数月事件列表
 
@@ -166,8 +170,10 @@ public class ReportServiceImpl implements ReportService {
             reportDataMap.put("evenMonthChart", ChartGenerator.chartToString(evenMonthChart));
 
             return reportDataMap;
+        }catch (BaseException e){
+            throw e;
         } catch (Exception e) {
-            throw new Exception(e);
+            throw e;
         }
     }
 }
