@@ -48,8 +48,9 @@ public class ReportController {
             template = freeMarkerConfigurer.getConfiguration().getTemplate("template.ftl");
             //文件类型
             response.setHeader("content-Type", "application/msword");
-            // 下载文件的名称
-            response.setHeader("Content-Disposition", "attachment;filename=" + year + "-" + issue +".doc");
+            // 下载文件的名称 "西南石油大学yyyy年m-m月舆情月报.doc"
+            String fileName = "西南石油大学" + year + "年" + issue + "-" + (issue+1) + "月舆情月报.doc";
+            response.setHeader("Content-Disposition", "attachment;filename=" + fileName);
             //将数据写入模板文件，写入流
             template.process(reportDataMap, new OutputStreamWriter(response.getOutputStream()));
         } catch (BaseException e) {
