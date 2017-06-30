@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
+import java.net.URLEncoder;
 import java.util.Map;
 
 /**
@@ -50,6 +51,12 @@ public class ReportController {
             response.setHeader("content-Type", "application/msword");
             // 下载文件的名称 "西南石油大学yyyy年m-m月舆情月报.doc"
             String fileName = "西南石油大学" + year + "年" + issue + "-" + (issue+1) + "月舆情月报.doc";
+            //解决文件名乱码问题
+            if (request.getHeader("User-Agent").toUpperCase().indexOf("MSIE") > 0) {
+                fileName = URLEncoder.encode(fileName, "UTF-8");
+            } else {
+                fileName = new String(fileName.getBytes("UTF-8"), "ISO8859-1");
+            }
             response.setHeader("Content-Disposition", "attachment;filename=" + fileName);
             //将数据写入模板文件，写入流
             template.process(reportDataMap, new OutputStreamWriter(response.getOutputStream()));
