@@ -54,7 +54,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public RoleList queryAll() throws UserException,AuthException {
+    public RoleList queryAll() throws UserException {
         try{
             List<Role> roles=userDao.queryAll();
             List<Role> VIP=new ArrayList<Role>();

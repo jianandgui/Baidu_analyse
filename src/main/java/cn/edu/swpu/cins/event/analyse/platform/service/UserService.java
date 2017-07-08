@@ -18,7 +18,7 @@ public interface UserService{
 
     public int insertUser(User user) throws UserException;
 
-    public RoleList queryAll() throws UserException,AuthException;
+    public RoleList queryAll() throws UserException;
 
-    public int changeRole(Role role) throws UserException,AuthException;
+    public int changeRole(Role role) throws UserException;
 }
