@@ -6,6 +6,7 @@ import freemarker.template.Template;
 import freemarker.template.TemplateException;
 import jdk.nashorn.internal.ir.debug.JSONWriter;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,6 +25,7 @@ import java.util.Map;
  */
 @RequestMapping("/event")
 @RestController
+@PreAuthorize("hasAnyRole('ADMIN','VIP')")
 public class ReportController {
     private ReportService reportService;
     private FreeMarkerConfigurer freeMarkerConfigurer;
