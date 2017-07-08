@@ -46,7 +46,7 @@ public class DailyEventControllerTest {
         int page = 1;
         DailyEventPage event = new DailyEventPage();
         List<DailyEventPage> list = Lists.newArrayList(event);
-        when(dailyEventService.getDailyEventsByPage(1)).thenReturn(list);
+        when(dailyEventService.getDailyEventsByPage(1,0)).thenReturn(list);
         mockMvc.perform(MockMvcRequestBuilders.get("/event/dailyEvent/page/1")
                 .accept(MediaType.APPLICATION_JSON_UTF8))
                 .andExpect(status().isOk());
