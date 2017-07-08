@@ -4,6 +4,7 @@ import cn.edu.swpu.cins.event.analyse.platform.exception.BaseException;
 import cn.edu.swpu.cins.event.analyse.platform.model.view.ChartPoint;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by lp-deepin on 17-5-20.
@@ -14,5 +15,5 @@ public interface ChartService {
      *
      * @return
      */
-    public List<ChartPoint> getChartPoints(String source, String data, String beginTime, String endTime, String eventTable) throws BaseException;
+    public Map<String, List<ChartPoint>> getChartPoints(String source, String data, String beginTime, String endTime, String eventTable) throws BaseException;
 }

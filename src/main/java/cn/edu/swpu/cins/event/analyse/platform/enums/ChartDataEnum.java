@@ -2,7 +2,8 @@ package cn.edu.swpu.cins.event.analyse.platform.enums;
 
 public enum ChartDataEnum {
     FOLOWCOUNT("跟帖量"),
-    POSTCOUNT("发帖量")
+    POSTCOUNT("发帖量"),
+    DOUBLELINE("双折线图")
     ;
 
     private String dataType;

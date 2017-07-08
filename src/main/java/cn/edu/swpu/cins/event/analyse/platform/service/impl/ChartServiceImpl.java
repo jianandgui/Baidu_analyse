@@ -2,6 +2,7 @@ package cn.edu.swpu.cins.event.analyse.platform.service.impl;
 
 import cn.edu.swpu.cins.event.analyse.platform.dao.DailyEventDao;
 import cn.edu.swpu.cins.event.analyse.platform.enums.ChartDataEnum;
+import cn.edu.swpu.cins.event.analyse.platform.enums.ChartTypeEnum;
 import cn.edu.swpu.cins.event.analyse.platform.enums.EventTableEnum;
 import cn.edu.swpu.cins.event.analyse.platform.exception.BaseException;
 import cn.edu.swpu.cins.event.analyse.platform.exception.IlleagalArgumentException;
@@ -45,12 +46,13 @@ public class ChartServiceImpl implements ChartService {
     }
 
     @Override
-    public List<ChartPoint> getChartPoints(
+    public Map<String, List<ChartPoint>> getChartPoints(
             String source
             , String data
             , String beginTime
             , String endTime
             , String eventTable) throws BaseException {
+        Map<String, List<ChartPoint>> map = new HashMap<String, List<ChartPoint>>();
         //判断数据类型是否正确
         if (!ChartDataEnum.isInclude(data)) {
             throw new IlleagalArgumentException();
@@ -99,9 +101,17 @@ public class ChartServiceImpl implements ChartService {
                         .collect(Collectors.toList());
             }
 
-            List<ChartPoint> list = ChartGenerator.getChartPoints(events, beginTimeLong, endTimeLong, data);
+            if(ChartDataEnum.DOUBLELINE.getDataType().equals(data)){
+                List<ChartPoint> postCountPoints = ChartGenerator.getChartPoints(events, beginTimeLong, endTimeLong, ChartDataEnum.POSTCOUNT.getDataType());
+                List<ChartPoint> followCountPoints = ChartGenerator.getChartPoints(events, beginTimeLong, endTimeLong, ChartDataEnum.FOLOWCOUNT.getDataType());
+                map.put("postCountPoints",postCountPoints);
+                map.put("followCountPoints",followCountPoints);
+            }else {
+                List<ChartPoint> list = ChartGenerator.getChartPoints(events, beginTimeLong, endTimeLong, data);
+                map.put("chartPoints",list);
+            }
 
-            return list;
+            return map;
 
         } catch (IlleagalArgumentException ie) {
             throw new IlleagalArgumentException();

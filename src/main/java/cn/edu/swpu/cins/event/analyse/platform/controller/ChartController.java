@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by lp-deepin on 17-5-20.
@@ -30,9 +31,9 @@ public class ChartController {
                                             @RequestParam(value = "endTime") String endTime,
                                             @RequestParam(value = "table") String table ) {
         try {
-            List<ChartPoint> list;
-            list = chartService.getChartPoints(source, data, beginTime, endTime, table);
-            return new ResponseEntity<>(list, HttpStatus.OK);
+            Map<String, List<ChartPoint>> result;
+            result = chartService.getChartPoints(source, data, beginTime, endTime, table);
+            return new ResponseEntity<>(result, HttpStatus.OK);
         } catch (BaseException e) {
             return new ResponseEntity<>(e.getMessage(), e.getStatus());
         }
