@@ -43,7 +43,7 @@ public interface DailyEventDao {
     int updateCollectStatus(int id);
 
     @Update({"UPDATE ", TABLE_NAME,
-            "SET main_view = #{mainView} AND postType = #{postType}"
+            "SET main_view = #{mainView} , post_type = #{postType}"
             , "WHERE id=#{id}"})
     int updateMainViewAndPostTypeById(@Param("id") int id,@Param("mainView") String mainView, @Param("postType") String postType);
 

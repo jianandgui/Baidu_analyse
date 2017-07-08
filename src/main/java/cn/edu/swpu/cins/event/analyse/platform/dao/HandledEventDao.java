@@ -42,7 +42,7 @@ public interface HandledEventDao {
 
     @Update({"UPDATE ", TABLE_NAME
             , " SET handled_condition = #{handledCondition} , feedback_condition = #{feedbackCondition} " +
-            ", handled_time = #{handledTime} , detail = #{detail} , event_handler = #{event_Handler} "
+            ", handled_time = #{handledTime} , detail = #{detail} , event_handler = #{eventHandler} "
             , " WHERE id = #{id}"})
     int updateHandledEvent(HandledEvent handledEvent);
 }

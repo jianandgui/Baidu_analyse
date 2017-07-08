@@ -19,6 +19,14 @@ public class HandledEvent {
     private int dailyEventId;
     private String recorder;
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public String getTheme() {
         return theme;
     }
@@ -41,22 +49,6 @@ public class HandledEvent {
 
     public void setUrl(String url) {
         this.url = url;
-    }
-
-    public String getRecorder() {
-        return recorder;
-    }
-
-    public void setRecorder(String recorder) {
-        this.recorder = recorder;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getHandledCondition() {
@@ -113,6 +105,14 @@ public class HandledEvent {
 
     public void setDailyEventId(int dailyEventId) {
         this.dailyEventId = dailyEventId;
+    }
+
+    public String getRecorder() {
+        return recorder;
+    }
+
+    public void setRecorder(String recorder) {
+        this.recorder = recorder;
     }
 
     @Override
