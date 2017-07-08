@@ -24,10 +24,11 @@ public class HandledEventController {
     }
 
     @GetMapping("/handledEvent/{page}")
-    public ResponseEntity<?> getHandledEvents(@PathVariable("page") int page) {
+    public ResponseEntity<?> getHandledEvents(@PathVariable("page") int page
+            , @RequestParam(required = false,name = "more",defaultValue = "0") int more) {
         try {
             List<HandledEventPage> list;
-            list = handledEventService.getHandledEvents(page);
+            list = handledEventService.getHandledEvents(page,more);
             return new ResponseEntity<>(list, HttpStatus.OK);
         } catch (BaseException e) {
             return new ResponseEntity<>(e.getMessage(), e.getStatus());
@@ -35,9 +36,9 @@ public class HandledEventController {
     }
 
     @GetMapping(value = {"/handledEvent/pageCount"})
-    public ResponseEntity<?> getPageCount() {
+    public ResponseEntity<?> getPageCount(@RequestParam(required = false,name = "more",defaultValue = "0") int more) {
         try {
-            return new ResponseEntity<>(handledEventService.getPageCount(), HttpStatus.OK);
+            return new ResponseEntity<>(handledEventService.getPageCount(more), HttpStatus.OK);
         } catch (BaseException e) {
             return new ResponseEntity<>(e.getMessage(), e.getStatus());
         }

@@ -1,7 +1,7 @@
 package cn.edu.swpu.cins.event.analyse.platform.controller;
 
 import cn.edu.swpu.cins.event.analyse.platform.exception.BaseException;
-import cn.edu.swpu.cins.event.analyse.platform.model.view.DailyPageEvent;
+import cn.edu.swpu.cins.event.analyse.platform.model.view.DailyEventPage;
 import cn.edu.swpu.cins.event.analyse.platform.service.DailyEventService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -23,10 +23,11 @@ public class DailyEventController {
         this.dailyEventService = dailyEventService;
     }
 
-    @GetMapping(value = {"/dailyEvent/page/{pageNum}"})
-    public ResponseEntity<?> getDailyEventList(@PathVariable("pageNum") int pageNum){
+    @GetMapping(value = {"/dailyEvent/{pageNum}"})
+    public ResponseEntity<?> getDailyEventList(@PathVariable("pageNum") int pageNum
+            ,@RequestParam(required = false,name = "more",defaultValue = "0") int more){
         try{
-            List<DailyPageEvent> resultList = dailyEventService.getDailyEventsByPage(pageNum);
+            List<DailyEventPage> resultList = dailyEventService.getDailyEventsByPage(pageNum,more);
             return new ResponseEntity<>(resultList, HttpStatus.OK);
         }catch (BaseException e){
             return new ResponseEntity<>(e.getMessage(),e.getStatus());
@@ -34,18 +35,21 @@ public class DailyEventController {
     }
 
     @GetMapping(value = {"/dailyEvent/pageCount"})
-    public ResponseEntity<?> getPageCount(){
+    public ResponseEntity<?> getPageCount(@RequestParam(required = false,name = "more",defaultValue = "0") int more){
         try {
-            return new ResponseEntity<>(dailyEventService.getPageCount(),HttpStatus.OK);
+            return new ResponseEntity<>(dailyEventService.getPageCount(more),HttpStatus.OK);
         }catch (BaseException e){
             return new ResponseEntity<>(e.getMessage(),e.getStatus());
         }
     }
 
-    @PostMapping(value = {"/dailyEvent/{id}/{recorder}/collect"})
-    public ResponseEntity<?> collectEvent(@PathVariable String recorder,@PathVariable("id") int id){
+    @PostMapping(value = {"/dailyEvent/{id}/collect"})
+    public ResponseEntity<?> collectEvent(@RequestParam("recorder") String recorder
+            , @PathVariable("id") int id
+            , @RequestParam("mainView") String mainView
+            , @RequestParam("postType") String postType){
         try {
-            dailyEventService.collectEvent(recorder,id);
+            dailyEventService.collectEvent(mainView, postType, recorder, id);
         }catch (BaseException e){
             return new ResponseEntity<>(e.getMessage(),e.getStatus());
         }

@@ -15,12 +15,12 @@ public interface HandledEventDao {
     static String TABLE_NAME = " handled_event ";
     static String JOIN_TABLE_NAME = " daily_event ";
     static String JOIN_SELECT_FIELD = " de.theme as `theme` ,de.main_view as `main_view`,de.url as `url`," +
-            "he.id,he.handled_condition,he.feedback_condition,he.collected_time,he.handled_time,he.detail,he.remark,he.recorder ";
-    static String INSERT_FIELD = " handled_condition,feedback_condition,collected_time,handled_time,detail,remark,daily_event_id,recorder ";
+            "he.id,he.handled_condition,he.feedback_condition,he.collected_time,he.handled_time,he.detail,he.event_handler,he.recorder ";
+    static String INSERT_FIELD = " handled_condition,feedback_condition,collected_time,handled_time,detail,event_handler,daily_event_id,recorder ";
 
     @Insert({"insert into ", TABLE_NAME, " ( ", INSERT_FIELD, " ) " +
             "value(#{handledCondition},#{feedbackCondition},#{collectedTime}" +
-            ",#{handledTime},#{detail},#{remark},#{dailyEventId},#{recorder})"})
+            ",#{handledTime},#{detail},#{eventHandler},#{dailyEventId},#{recorder})"})
     int insertHandledEvent(HandledEvent handledEvent);
 
     @Select({"SELECT ", JOIN_SELECT_FIELD
@@ -42,7 +42,7 @@ public interface HandledEventDao {
 
     @Update({"UPDATE ", TABLE_NAME
             , " SET handled_condition = #{handledCondition} , feedback_condition = #{feedbackCondition} " +
-            ", handled_time = #{handledTime} , detail = #{detail} , remark = #{remark} "
+            ", handled_time = #{handledTime} , detail = #{detail} , event_handler = #{event_Handler} "
             , " WHERE id = #{id}"})
     int updateHandledEvent(HandledEvent handledEvent);
 }

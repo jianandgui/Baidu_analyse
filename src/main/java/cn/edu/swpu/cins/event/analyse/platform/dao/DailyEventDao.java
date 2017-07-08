@@ -37,10 +37,15 @@ public interface DailyEventDao {
             , @Param("source") String source
             , @Param("isCollected") boolean isCollected);
 
-    @Update({"update ", TABLE_NAME,
+    @Update({"UPDATE ", TABLE_NAME,
             "set collection_status=1"
             , "where id=#{id}"})
     int updateCollectStatus(int id);
+
+    @Update({"UPDATE ", TABLE_NAME,
+            "SET main_view = #{mainView} AND postType = #{postType}"
+            , "WHERE id=#{id}"})
+    int updateMainViewAndPostTypeById(@Param("id") int id,@Param("mainView") String mainView, @Param("postType") String postType);
 
     List<DailyEvent> selectByRules(List<String> rules);
 }

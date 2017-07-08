@@ -21,7 +21,7 @@ public class HandledEventPage {
     private Long handledTime; //可能为null
     private String recorder;
     private String detail;
-    private String remark;
+    private String eventHandler;
 
     public HandledEventPage() {
     }
@@ -37,7 +37,7 @@ public class HandledEventPage {
         Date handledTime = handledEvent.getHandledTime();
         setRecorder(handledEvent.getRecorder());
         setDetail(handledEvent.getDetail());
-        setRemark(handledEvent.getRemark());
+        setEventHandler(handledEvent.getEventHandler());
 
         if (handledTime != null) {
             setHandledTime(handledEvent.getHandledTime().getTime());
@@ -128,11 +128,11 @@ public class HandledEventPage {
         this.detail = detail;
     }
 
-    public String getRemark() {
-        return remark;
+    public String getEventHandler() {
+        return eventHandler;
     }
 
-    public void setRemark(String remark) {
-        this.remark = remark;
+    public void setEventHandler(String eventHandler) {
+        this.eventHandler = eventHandler;
     }
 }

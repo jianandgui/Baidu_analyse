@@ -7,7 +7,7 @@ import lombok.Data;
  * Created by lp-deepin on 17-5-7.
  */
 @Data
-public class DailyPageEvent {
+public class DailyEventPage {
     private int id;
     private String url;
     private String theme;
@@ -18,10 +18,10 @@ public class DailyPageEvent {
     private String source;
     private short collectionStatus;
 
-    public DailyPageEvent() {
+    public DailyEventPage() {
     }
 
-    public DailyPageEvent(DailyEvent dailyEvent) {
+    public DailyEventPage(DailyEvent dailyEvent) {
         id=dailyEvent.getId();
         url=dailyEvent.getUrl();
         theme=dailyEvent.getTheme();
@@ -107,7 +107,7 @@ public class DailyPageEvent {
 
     @Override
     public String toString() {
-        return "DailyPageEvent{" +
+        return "DailyEventPage{" +
                 "id=" + id +
                 ", url='" + url + '\'' +
                 ", theme='" + theme + '\'' +

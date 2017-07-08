@@ -1,6 +1,6 @@
 package cn.edu.swpu.cins.event.analyse.platform.controller;
 
-import cn.edu.swpu.cins.event.analyse.platform.model.view.DailyPageEvent;
+import cn.edu.swpu.cins.event.analyse.platform.model.view.DailyEventPage;
 import cn.edu.swpu.cins.event.analyse.platform.service.DailyEventService;
 import org.assertj.core.util.Lists;
 import org.junit.Before;
@@ -44,8 +44,8 @@ public class DailyEventControllerTest {
     @Test
     public void should_get_events_return_OK()throws Exception{
         int page = 1;
-        DailyPageEvent event = new DailyPageEvent();
-        List<DailyPageEvent> list = Lists.newArrayList(event);
+        DailyEventPage event = new DailyEventPage();
+        List<DailyEventPage> list = Lists.newArrayList(event);
         when(dailyEventService.getDailyEventsByPage(1)).thenReturn(list);
         mockMvc.perform(MockMvcRequestBuilders.get("/event/dailyEvent/page/1")
                 .accept(MediaType.APPLICATION_JSON_UTF8))

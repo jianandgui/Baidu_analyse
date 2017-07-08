@@ -35,7 +35,14 @@ public class HandledEventServiceImpl implements HandledEventService {
     }
 
     @Override
-    public List<HandledEventPage> getHandledEvents(int page) throws BaseException{
+    public List<HandledEventPage> getHandledEvents(int page,int more) throws BaseException{
+
+        int pageSize = this.pageSize;
+
+        if(more>0){
+            pageSize += more;
+        }
+
         if(page<=0){
             throw new IlleagalArgumentException();
         }
@@ -52,7 +59,14 @@ public class HandledEventServiceImpl implements HandledEventService {
     }
 
     @Override
-    public int getPageCount() throws BaseException {
+    public int getPageCount(int more) throws BaseException {
+
+        int pageSize = this.pageSize;
+
+        if(more>0){
+            pageSize += more;
+        }
+
         try {
             int eventCount = handledEventDao.selectCount();
 
@@ -71,20 +85,20 @@ public class HandledEventServiceImpl implements HandledEventService {
     @Override
     public int handle(HandledEventPage handledEventPage) throws BaseException {
 
-        String remark = handledEventPage.getRemark();
+        String eventHandler= handledEventPage.getEventHandler();
         String detail = handledEventPage.getDetail();
         String handledCondition = handledEventPage.getHandledCondition();
         String condition = handledEventPage.getFeedbackCondition();
         short conditionShort = FeedbackEnum.getIndexByFeedback(condition);
 
-        if(remark == null || detail == null || handledCondition == null || conditionShort == -1){
+        if(eventHandler == null || detail == null || handledCondition == null || conditionShort == -1){
             throw new IlleagalArgumentException("参数不可为空");
-        }else if(remark.length()>100||detail.length()>100||handledCondition.length()>30){
+        }else if(eventHandler.length()>10||detail.length()>100||handledCondition.length()>30){
             throw new IlleagalArgumentException("输入长度超出限制");
         }
 
         HandledEvent handledEvent = new HandledEvent();
-        handledEvent.setRemark(remark);
+        handledEvent.setEventHandler(eventHandler);
         handledEvent.setDetail(detail);
         handledEvent.setFeedbackCondition(conditionShort);
         handledEvent.setHandledTime(new Date());

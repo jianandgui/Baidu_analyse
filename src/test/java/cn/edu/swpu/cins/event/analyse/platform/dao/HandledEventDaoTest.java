@@ -27,7 +27,7 @@ public class HandledEventDaoTest {
 //            event.setFeedbackConditionByShort((short)0);
 //            event.setHandledCondition("test"+i);
 //            event.setDetail("test"+i);
-//            event.setRemark("test"+i);
+//            event.setEventHandler("test"+i);
 //            handledEventDao.insertHandledEvent(event);
 //        }
     }

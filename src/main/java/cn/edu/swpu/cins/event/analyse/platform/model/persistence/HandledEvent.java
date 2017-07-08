@@ -15,7 +15,7 @@ public class HandledEvent {
     private Date collectedTime;
     private Date handledTime;
     private String detail;
-    private String remark;
+    private String eventHandler;
     private int dailyEventId;
     private String recorder;
 
@@ -99,12 +99,12 @@ public class HandledEvent {
         this.detail = detail;
     }
 
-    public String getRemark() {
-        return remark;
+    public String getEventHandler() {
+        return eventHandler;
     }
 
-    public void setRemark(String remark) {
-        this.remark = remark;
+    public void setEventHandler(String eventHandler) {
+        this.eventHandler = eventHandler;
     }
 
     public int getDailyEventId() {
@@ -127,7 +127,7 @@ public class HandledEvent {
                 ", collectedTime=" + collectedTime +
                 ", handledTime=" + handledTime +
                 ", detail='" + detail + '\'' +
-                ", remark='" + remark + '\'' +
+                ", eventHandler='" + eventHandler + '\'' +
                 ", dailyEventId=" + dailyEventId +
                 ", recorder='" + recorder + '\'' +
                 '}';

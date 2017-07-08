@@ -5,7 +5,7 @@ import cn.edu.swpu.cins.event.analyse.platform.dao.HandledEventDao;
 import cn.edu.swpu.cins.event.analyse.platform.exception.*;
 import cn.edu.swpu.cins.event.analyse.platform.model.persistence.DailyEvent;
 import cn.edu.swpu.cins.event.analyse.platform.model.persistence.HandledEvent;
-import cn.edu.swpu.cins.event.analyse.platform.model.view.DailyPageEvent;
+import cn.edu.swpu.cins.event.analyse.platform.model.view.DailyEventPage;
 import cn.edu.swpu.cins.event.analyse.platform.service.DailyEventService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -21,8 +21,8 @@ import static java.util.stream.Collectors.toList;
 @Service
 public class DailyEventServiceImpl implements DailyEventService {
 
-    private DailyEventDao dailyEventDao;
     private int pageSize;
+    private DailyEventDao dailyEventDao;
     private HandledEventDao handledEventDao;
 
     @Autowired
@@ -35,7 +35,13 @@ public class DailyEventServiceImpl implements DailyEventService {
     }
 
     @Override
-    public List<DailyPageEvent> getDailyEventsByPage(int page) throws BaseException {
+    public List<DailyEventPage> getDailyEventsByPage(int page, int more) throws BaseException {
+
+        int pageSize = this.pageSize;
+
+        if(more>0){
+            pageSize += more;
+        }
 
         if (page <= 0) {
             throw new IlleagalArgumentException();
@@ -47,13 +53,20 @@ public class DailyEventServiceImpl implements DailyEventService {
             throw new NoEventException();
         } else {
             return list.stream()
-                    .map(DailyPageEvent::new)
+                    .map(DailyEventPage::new)
                     .collect(toList());
         }
     }
 
     @Override
-    public int getPageCount() throws BaseException {
+    public int getPageCount(int more) throws BaseException {
+
+        int pageSize = this.pageSize;
+
+        if(more>0){
+            pageSize += more;
+        }
+
         try {
             int eventCount = dailyEventDao.selectCount();
 
@@ -71,7 +84,7 @@ public class DailyEventServiceImpl implements DailyEventService {
 
     @Override
     @Transactional(rollbackFor = {RuntimeException.class,BaseException.class})
-    public int collectEvent(String recorder, int dailyEventId) throws BaseException {
+    public int collectEvent(String mainView, String type, String recorder, int dailyEventId) throws BaseException {
         //todo 1判断recorder是否合法
         if (recorder.length()>10){
             throw new IlleagalArgumentException("记录人不存在");
@@ -83,7 +96,7 @@ public class DailyEventServiceImpl implements DailyEventService {
         }
 
         HandledEvent handledEvent = new HandledEvent();
-        handledEvent.setRemark("");
+        handledEvent.setEventHandler("");
         handledEvent.setDetail("");
         handledEvent.setCollectedTime(new Date());
         handledEvent.setHandledCondition("未处置");
@@ -96,7 +109,9 @@ public class DailyEventServiceImpl implements DailyEventService {
 
         int updateCount = dailyEventDao.updateCollectStatus(dailyEventId);
 
-        if (insertCount + updateCount != 2) {
+        int updateDailyCount = dailyEventDao.updateMainViewAndPostTypeById(dailyEventId,mainView,type);
+
+        if (insertCount + updateCount + updateDailyCount!= 3) {
             throw new OperationFailureException();
         }
 
