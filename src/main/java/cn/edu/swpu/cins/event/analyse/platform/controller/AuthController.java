@@ -41,7 +41,7 @@ public class AuthController {
         final String token = authService.userLogin(request.getUsername(),request.getPassword());
         if(token!=null) {
             String username = user.getUsername();
-            String role = user.getRole();
+            String role = user.getRole().substring(5);
             return new ResponseEntity<>(new JwtAuthenticationResponse(token, username, role),HttpStatus.OK);
         }
         return new ResponseEntity<>(UserEnum.WRONG_PASSWORD.getMsg(),HttpStatus.OK);

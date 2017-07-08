@@ -22,4 +22,23 @@
         username=#{username}
 
     </update>
+
+    <insert id="addUser" parameterType="cn.edu.swpu.cins.event.analyse.platform.model.persistence.User">
+        INSERT
+        user_information
+        (username,password,role)
+        VALUES (#{username},#{password},#{role})
+
+    </insert>
+
+    <select id="queryAll" resultType="cn.edu.swpu.cins.event.analyse.platform.model.view.Role">
+        SELECT username,role from user_information WHERE role = 'ROLE_VIP' OR role= 'ROLE_NORMAL'
+    </select>
+
+    <update id="updateRole" parameterType="cn.edu.swpu.cins.event.analyse.platform.model.view.Role">
+
+      UPDATE user_information
+      SET role=#{role}
+      WHERE username=#{username}
+    </update>
 </mapper>

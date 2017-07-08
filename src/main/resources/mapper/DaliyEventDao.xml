@@ -18,6 +18,7 @@
 
     </select>
 
+
     <select id="selectEventsBetweenTime"
             resultType="cn.edu.swpu.cins.event.analyse.platform.model.persistence.DailyEvent">
         SELECT
