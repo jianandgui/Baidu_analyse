@@ -94,4 +94,13 @@ public class UserServiceImpl implements UserService {
 
     }
 
+    @Override
+    public int deleteUser(String username) throws UserException {
+        try{
+            return userDao.deleteUser(username)>0?1:0;
+        }catch (Exception e){
+            throw new UserException("服务器内部异常",HttpStatus.FORBIDDEN);
+        }
+    }
+
 }

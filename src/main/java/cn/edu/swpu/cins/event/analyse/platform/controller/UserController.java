@@ -115,4 +115,19 @@ public class UserController {
      }
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
+    @PostMapping("/deleteUser/{username}")
+    public ResponseEntity<?> deleteUser(@PathVariable String username) throws UserException{
+        try{
+            int num=userService.deleteUser(username);
+            if(num==1){
+                return new ResponseEntity<Object>("删除用户成功",HttpStatus.OK);
+            }
+            return new ResponseEntity<Object>("删除用户失败",HttpStatus.CONFLICT);
+        }catch (Exception e){
+            return new ResponseEntity<Object>(e.getMessage(),HttpStatus.FORBIDDEN);
+        }
+
+    }
+
 }
