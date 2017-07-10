@@ -32,9 +32,9 @@ public class SpecialEventController {
     }
 
     @GetMapping("/pageCount")
-    public ResponseEntity<?> getTopics() {
+    public ResponseEntity<?> getTopics(@RequestParam(value = "more" , required = false , defaultValue = "0") int more) {
         try {
-            int pageCount = specialEventService.getPageCount();
+            int pageCount = specialEventService.getPageCount(more);
             return new ResponseEntity<>(pageCount, HttpStatus.OK);
         } catch (BaseException e) {
             return new ResponseEntity<>(e.getMessage(), e.getStatus());
