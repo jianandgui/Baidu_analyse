@@ -18,6 +18,7 @@ public class HandledEvent {
     private String eventHandler;
     private int dailyEventId;
     private String recorder;
+    private String postType;
 
     public int getId() {
         return id;
@@ -113,6 +114,14 @@ public class HandledEvent {
 
     public void setRecorder(String recorder) {
         this.recorder = recorder;
+    }
+
+    public String getPostType() {
+        return postType;
+    }
+
+    public void setPostType(String postType) {
+        this.postType = postType;
     }
 
     @Override

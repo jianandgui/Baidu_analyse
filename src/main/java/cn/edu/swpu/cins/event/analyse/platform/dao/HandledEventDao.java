@@ -14,7 +14,7 @@ import java.util.List;
 public interface HandledEventDao {
     static String TABLE_NAME = " handled_event ";
     static String JOIN_TABLE_NAME = " daily_event ";
-    static String JOIN_SELECT_FIELD = " de.theme as `theme` ,de.main_view as `main_view`,de.url as `url`," +
+    static String JOIN_SELECT_FIELD = " de.theme as `theme` ,de.main_view as `main_view`,de.url as `url`,de.post_type as `post_type`," +
             "he.id,he.handled_condition,he.feedback_condition,he.collected_time,he.handled_time,he.detail,he.event_handler,he.recorder ";
     static String INSERT_FIELD = " handled_condition,feedback_condition,collected_time,handled_time,detail,event_handler,daily_event_id,recorder ";
 

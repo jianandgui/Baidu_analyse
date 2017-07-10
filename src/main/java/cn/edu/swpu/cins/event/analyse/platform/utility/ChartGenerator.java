@@ -41,7 +41,6 @@ public class ChartGenerator {
      *  获得
      * @param list
      * @param title
-     * @param seriesName
      * @param chartType
      * @return
      * @throws ParseException
