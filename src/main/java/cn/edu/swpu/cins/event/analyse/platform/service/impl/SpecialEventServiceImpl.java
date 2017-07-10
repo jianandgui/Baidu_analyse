@@ -37,7 +37,14 @@ public class SpecialEventServiceImpl implements SpecialEventService {
 
 
     @Override
-    public List<DailyEvent> getSpecialEvent(int page, boolean getAll) throws BaseException {
+    public List<DailyEvent> getSpecialEvent(int page, boolean getAll ,int more) throws BaseException {
+
+        int pageSize = this.pageSize;
+
+        if(more>0){
+            pageSize += more;
+        }
+
         int offset = --page * pageSize;
         List<Topic> topics = topicDao.selectAll();
         List<DailyEvent> dailyEvents;
@@ -71,7 +78,12 @@ public class SpecialEventServiceImpl implements SpecialEventService {
     }
 
     @Override
-    public int getPageCount() throws BaseException {
+    public int getPageCount(int more) throws BaseException {
+        int pageSize = this.pageSize;
+
+        if(more>0){
+            pageSize += more;
+        }
 
         List<Topic> topics = topicDao.selectAll();
         List<DailyEvent> dailyEvents;
