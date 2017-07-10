@@ -28,7 +28,6 @@ import java.util.stream.Collectors;
 @Service
 public class ChartServiceImpl implements ChartService {
     private static final DateFormat CHART_PARAMETER_DATE_FORMAT = new SimpleDateFormat("MM/dd/yyyy");
-    private static final DateFormat CHART_DISPLAY_DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd");
     private static final DateFormat DATABASE_DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd 00:00:00");
     private static final long DAY = 86400000L;
 
@@ -88,7 +87,7 @@ public class ChartServiceImpl implements ChartService {
             } else if (EventTableEnum.HANDLED_EVENT.getEventTable().equals(eventTable)) {
                 events = dailyEventDao.selectEventsBetweenTime(beginDateFormat, endDateFormat, source, true);
             } else if ((EventTableEnum.SPECIAL_EVENT.getEventTable().equals(eventTable))) {
-                events = specialEventService.getSpecialEvent(0, true);
+                events = specialEventService.getSpecialEvent(0, true,0);
                 events = events
                         .stream()
                         .filter((DailyEvent dailyEvent) -> {

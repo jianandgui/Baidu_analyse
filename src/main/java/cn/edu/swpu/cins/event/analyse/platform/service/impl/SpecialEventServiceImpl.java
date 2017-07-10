@@ -63,8 +63,9 @@ public class SpecialEventServiceImpl implements SpecialEventService {
                 .filter(dailyEvent -> dailyEvent.getCollectionStatus() == 0)
                 .collect(toList());
 
-        //分页获取事件
+        //判断是否需要分页。
         if (!getAll) {
+            //分页获取事件
             int limit = (offset + pageSize) > list.size() ? list.size() : (offset + pageSize);
 
             if (offset >= list.size() || offset < 0) {
@@ -105,7 +106,7 @@ public class SpecialEventServiceImpl implements SpecialEventService {
                 .filter(dailyEvent -> dailyEvent.getCollectionStatus() == 0)
                 .collect(toList());
 
-        int pageCOunt = list.size() / 5 + (list.size() % 5 == 0 ? 0 : 1);
+        int pageCOunt = list.size() / pageSize + (list.size() % pageSize == 0 ? 0 : 1);
 
         return pageCOunt;
     }
