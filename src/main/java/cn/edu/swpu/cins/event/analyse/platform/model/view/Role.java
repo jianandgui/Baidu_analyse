@@ -7,10 +7,20 @@ public class Role {
 
     private String username;
     private String role;
+    private String password;
 
-    public Role(String username, String role) {
+    public Role(String username, String role, String password) {
         this.username = username;
         this.role = role;
+        this.password = password;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public Role() {

@@ -28,4 +28,6 @@ public interface UserDao {
     public List<Role> queryAll();
 
     public int updateRole(Role role);
+
+    public int deleteUser(String username);
 }

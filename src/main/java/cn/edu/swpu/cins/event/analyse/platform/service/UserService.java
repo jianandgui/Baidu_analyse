@@ -21,4 +21,7 @@ public interface UserService{
     public RoleList queryAll() throws UserException;
 
     public int changeRole(Role role) throws UserException;
+
+    public int deleteUser(String username) throws UserException;
+
 }
