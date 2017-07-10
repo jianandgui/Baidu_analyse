@@ -12,8 +12,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.util.*;
 
 import static java.util.stream.Collectors.toList;
 
@@ -46,19 +47,37 @@ public class SpecialEventServiceImpl implements SpecialEventService {
         }
 
         int offset = --page * pageSize;
+
         List<Topic> topics = topicDao.selectAll();
         List<DailyEvent> dailyEvents;
-        ArrayList<String> rules = new ArrayList<>();
+        ArrayList<String> regions = new ArrayList<>();
 
         for (Topic topic : topics) {
-            rules.addAll(topic.getRules());
+            regions.add(topic.getRegion());
         }
 
+        dailyEvents = getEventByRegions(regions);
 
-        dailyEvents = getEventByRules(rules);
+        List<DailyEvent> matchedList = new ArrayList<>();
+
+        //count begin
+
+        for (DailyEvent event : dailyEvents){
+            String mainView = event.getMainView();
+            for (Topic topic:topics){
+                if(mainView.contains(topic.getRegion())){
+                    for (String rule:topic.getRules()){
+                        if(mainView.contains(rule)){
+                            matchedList.add(event);
+                        }
+                    }
+                }
+            }
+        }
+        //count end
 
         //获得结果集
-        List<DailyEvent> list = dailyEvents
+        List<DailyEvent> list = matchedList
                 .stream()
                 .filter(dailyEvent -> dailyEvent.getCollectionStatus() == 0)
                 .collect(toList());
@@ -88,20 +107,34 @@ public class SpecialEventServiceImpl implements SpecialEventService {
 
         List<Topic> topics = topicDao.selectAll();
         List<DailyEvent> dailyEvents;
-        ArrayList<String> rules = new ArrayList<>();
+        ArrayList<String> regions = new ArrayList<>();
 
         for (Topic topic : topics) {
-            rules.addAll(topic.getRules());
+            regions.add(topic.getRegion());
         }
 
-        if (topics == null) {
-            throw new OperationFailureException();
-        } else {
-            dailyEvents = getEventByRules(rules);
+        dailyEvents = getEventByRegions(regions);
+
+        List<DailyEvent> matchedList = new ArrayList<>();
+
+        //count begin
+
+        for (DailyEvent event : dailyEvents){
+            String mainView = event.getMainView();
+            for (Topic topic:topics){
+                if(mainView.contains(topic.getRegion())){
+                    for (String rule:topic.getRules()){
+                        if(mainView.contains(rule)){
+                            matchedList.add(event);
+                        }
+                    }
+                }
+            }
         }
+        //count end
 
         //获得结果集
-        List<DailyEvent> list = dailyEvents
+        List<DailyEvent> list = matchedList
                 .stream()
                 .filter(dailyEvent -> dailyEvent.getCollectionStatus() == 0)
                 .collect(toList());
@@ -113,11 +146,17 @@ public class SpecialEventServiceImpl implements SpecialEventService {
 
 
     //根据填写专题的规则获取事件信息（事件均未处置）
-    private List<DailyEvent> getEventByRules(List<String> topicsRules) {
+    private List<DailyEvent> getEventByRules(List<String> rules) {
         List<DailyEvent> dailyEvents;
-        List<String> rules = topicsRules;
-
         dailyEvents = dailyEventDao.selectByRules(rules);
+
+        return dailyEvents;
+    }
+
+    //根据填写专题的规则获取事件信息（事件均未处置）
+    private List<DailyEvent> getEventByRegions(List<String> regions) {
+        List<DailyEvent> dailyEvents;
+        dailyEvents = dailyEventDao.selectByRegions(regions);
 
         return dailyEvents;
     }

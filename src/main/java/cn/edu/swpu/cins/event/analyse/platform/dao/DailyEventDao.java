@@ -48,4 +48,6 @@ public interface DailyEventDao {
     int updateMainViewAndPostTypeById(@Param("id") int id,@Param("mainView") String mainView, @Param("postType") String postType);
 
     List<DailyEvent> selectByRules(List<String> rules);
+
+    List<DailyEvent> selectByRegions(List<String> regions);
 }

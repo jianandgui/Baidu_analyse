@@ -6,6 +6,7 @@
 
     <sql id="select_field"> id,url,theme,main_view,follow_count,post_type,created_time,source,collection_status,post_time </sql>
 
+    <!--根据规则查询事件-->
     <select id="selectByRules" parameterType="String"
             resultType="cn.edu.swpu.cins.event.analyse.platform.model.persistence.DailyEvent">
 
@@ -18,7 +19,20 @@
 
     </select>
 
+    <!--根据地区查询事件-->
+    <select id="selectByRegions" parameterType="String"
+            resultType="cn.edu.swpu.cins.event.analyse.platform.model.persistence.DailyEvent">
 
+        select * from daily_event
+        WHERE 1>2
+
+        <foreach collection="list" item="item" index="index" open="OR" separator="OR">
+            `main_view` LIKE "%"#{item}"%"
+        </foreach>
+
+    </select>
+
+    <!--按日期区间检索事件-->
     <select id="selectEventsBetweenTime"
             resultType="cn.edu.swpu.cins.event.analyse.platform.model.persistence.DailyEvent">
         SELECT
