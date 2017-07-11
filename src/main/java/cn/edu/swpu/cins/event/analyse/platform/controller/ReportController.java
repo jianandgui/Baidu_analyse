@@ -25,7 +25,7 @@ import java.util.Map;
  */
 @RequestMapping("/event")
 @RestController
-@PreAuthorize("hasAnyRole('ADMIN','VIP')")
+//@PreAuthorize("hasAnyRole('ADMIN','VIP')")
 public class ReportController {
     private ReportService reportService;
     private FreeMarkerConfigurer freeMarkerConfigurer;
