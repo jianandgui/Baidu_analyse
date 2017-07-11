@@ -1,24 +1,26 @@
 package cn.edu.swpu.cins.event.analyse.platform.controller;
 
 import cn.edu.swpu.cins.event.analyse.platform.exception.BaseException;
+import cn.edu.swpu.cins.event.analyse.platform.exception.UserException;
 import cn.edu.swpu.cins.event.analyse.platform.service.ReportService;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
 import jdk.nashorn.internal.ir.debug.JSONWriter;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.net.URLEncoder;
 import java.util.Map;
+import java.util.UUID;
 
 /**
  * Created by LLPP on 2017/6/19.
@@ -41,12 +43,19 @@ public class ReportController {
     public void getReport(HttpServletRequest request
             , HttpServletResponse response
             , @PathVariable int year
-            , @PathVariable int issue){
+            , @PathVariable int issue
+            , @RequestParam("permission") String permission
+            , HttpSession httpSession){
         Template template = null;
-
         Map<String , Object> reportDataMap = null;
 
         try {
+            //check whether the session has the downloading permision
+            String storedPermission = (String) httpSession.getAttribute("permission");
+            if(storedPermission == null || !storedPermission.equals(permission)){
+                throw new UserException("权限不足",HttpStatus.FORBIDDEN);
+            }
+
             reportDataMap = reportService.getReportDataMap(year,issue);
             template = freeMarkerConfigurer.getConfiguration().getTemplate("template.ftl");
             //文件类型
@@ -81,5 +90,14 @@ public class ReportController {
                 e1.printStackTrace();
             }
         }
+    }
+
+    @PreAuthorize("hasAnyRole('ADMIN','VIP')")
+    @GetMapping("/report/permission")
+    public ResponseEntity<?> permission(HttpSession session){
+        session.setMaxInactiveInterval(600);
+        String permission = UUID.randomUUID().toString().replace("-","").substring(0,16);
+        session.setAttribute("permission",permission);
+        return new ResponseEntity<>(permission, HttpStatus.OK);
     }
 }
