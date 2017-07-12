@@ -16,6 +16,7 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.*;
 
+import static java.util.Comparator.comparing;
 import static java.util.stream.Collectors.toList;
 
 /**
@@ -80,6 +81,7 @@ public class SpecialEventServiceImpl implements SpecialEventService {
         List<DailyEvent> list = matchedList
                 .stream()
                 .filter(dailyEvent -> dailyEvent.getCollectionStatus() == 0)
+                .sorted(comparing(DailyEvent::getPostTime).reversed())
                 .collect(toList());
 
         //判断是否需要分页。
