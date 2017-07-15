@@ -10,7 +10,9 @@
     <select id="selectByRules" parameterType="String"
             resultType="cn.edu.swpu.cins.event.analyse.platform.model.persistence.DailyEvent">
 
-        select * from daily_event
+        SELECT
+        <include refid="select_field"/>
+        FROM daily_event
         WHERE 1>2
 
         <foreach collection="list" item="item" index="index" open="OR" separator="OR">
@@ -22,14 +24,13 @@
     <!--根据地区查询事件-->
     <select id="selectByRegions" parameterType="String"
             resultType="cn.edu.swpu.cins.event.analyse.platform.model.persistence.DailyEvent">
-
-        select * from daily_event
+        SELECT
+        <include refid="select_field"/>
+        FROM daily_event
         WHERE 1>2
-
         <foreach collection="list" item="item" index="index" open="OR" separator="OR">
             `main_view` LIKE "%"#{item}"%"
         </foreach>
-
     </select>
 
     <!--按日期区间检索事件-->
@@ -39,11 +40,9 @@
         <include refid="select_field"/>
         FROM daily_event
         WHERE `post_time` &gt;= #{startTime} AND `post_time` &lt; #{endTime}
-
         <if test=" isCollected">
             AND `collection_status` = 1
         </if>
-
         ORDER BY `post_time` ASC
     </select>
 

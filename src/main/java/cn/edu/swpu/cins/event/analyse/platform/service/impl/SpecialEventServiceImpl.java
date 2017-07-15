@@ -59,30 +59,14 @@ public class SpecialEventServiceImpl implements SpecialEventService {
 
         dailyEvents = getEventByRegions(regions);
 
-        List<DailyEvent> matchedList = new ArrayList<>();
-
         //count begin
-
-        for (DailyEvent event : dailyEvents){
-            String mainView = event.getMainView();
-            for (Topic topic:topics){
-                if(mainView.contains(topic.getRegion())){
-                    for (String rule:topic.getRules()){
-                        if(mainView.contains(rule)){
-                            matchedList.add(event);
-                        }
-                    }
-                }
-            }
-        }
-        //count end
-
-        //获得结果集
-        List<DailyEvent> list = matchedList
+        List<DailyEvent> list = dailyEvents
                 .stream()
+                .filter(dailyEvent -> matchEventByTopics(dailyEvent,topics))
                 .filter(dailyEvent -> dailyEvent.getCollectionStatus() == 0)
                 .sorted(comparing(DailyEvent::getPostTime).reversed())
                 .collect(toList());
+        //count end
 
         //判断是否需要分页。
         if (!getAll) {
@@ -117,33 +101,17 @@ public class SpecialEventServiceImpl implements SpecialEventService {
 
         dailyEvents = getEventByRegions(regions);
 
-        List<DailyEvent> matchedList = new ArrayList<>();
-
         //count begin
-
-        for (DailyEvent event : dailyEvents){
-            String mainView = event.getMainView();
-            for (Topic topic:topics){
-                if(mainView.contains(topic.getRegion())){
-                    for (String rule:topic.getRules()){
-                        if(mainView.contains(rule)){
-                            matchedList.add(event);
-                        }
-                    }
-                }
-            }
-        }
-        //count end
-
-        //获得结果集
-        List<DailyEvent> list = matchedList
+        List<DailyEvent> list = dailyEvents
                 .stream()
+                .filter(dailyEvent -> matchEventByTopics(dailyEvent,topics))
                 .filter(dailyEvent -> dailyEvent.getCollectionStatus() == 0)
                 .collect(toList());
+        //count end
 
-        int pageCOunt = list.size() / pageSize + (list.size() % pageSize == 0 ? 0 : 1);
+        int pageCount = list.size() / pageSize + (list.size() % pageSize == 0 ? 0 : 1);
 
-        return pageCOunt;
+        return pageCount;
     }
 
 
@@ -155,11 +123,27 @@ public class SpecialEventServiceImpl implements SpecialEventService {
         return dailyEvents;
     }
 
-    //根据填写专题的规则获取事件信息（事件均未处置）
+    //根据填写专题的地域获取事件信息（事件均未处置）
     private List<DailyEvent> getEventByRegions(List<String> regions) {
         List<DailyEvent> dailyEvents;
         dailyEvents = dailyEventDao.selectByRegions(regions);
 
         return dailyEvents;
+    }
+
+    private boolean matchEventByTopics(DailyEvent event, List<Topic> topics){
+        String content = event.getMainView();
+
+        for (Topic topic : topics) {
+            if (content.contains(topic.getRegion())) {
+                for (String rule : topic.getRules()) {
+                    if (content.contains(rule)) {
+                        return true;
+                    }
+                }
+            }
+        }
+
+        return false;
     }
 }
