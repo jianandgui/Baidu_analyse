@@ -16,7 +16,9 @@ import org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.net.URLEncoder;
 import java.util.Map;
@@ -27,7 +29,6 @@ import java.util.UUID;
  */
 @RequestMapping("/event")
 @RestController
-//@PreAuthorize("hasAnyRole('ADMIN','VIP')")
 public class ReportController {
     private ReportService reportService;
     private FreeMarkerConfigurer freeMarkerConfigurer;
@@ -45,23 +46,23 @@ public class ReportController {
             , @PathVariable int year
             , @PathVariable int issue
             , @RequestParam("permission") String permission
-            , HttpSession httpSession){
+            , HttpSession httpSession) {
         Template template = null;
-        Map<String , Object> reportDataMap = null;
+        Map<String, Object> reportDataMap = null;
 
         try {
             //check whether the session has the downloading permision
             String storedPermission = (String) httpSession.getAttribute("permission");
-            if(storedPermission == null || !storedPermission.equals(permission)){
-                throw new UserException("权限不足",HttpStatus.FORBIDDEN);
+            if (storedPermission == null || !storedPermission.equals(permission)) {
+                throw new UserException("权限不足", HttpStatus.FORBIDDEN);
             }
 
-            reportDataMap = reportService.getReportDataMap(year,issue);
+            reportDataMap = reportService.getReportDataMap(year, issue);
             template = freeMarkerConfigurer.getConfiguration().getTemplate("template.ftl");
             //文件类型
             response.setHeader("content-Type", "application/msword");
             // 下载文件的名称 "西南石油大学yyyy年m-m月舆情月报.doc"
-            String fileName = "西南石油大学" + year + "年" + issue + "-" + (issue+1) + "月舆情月报.doc";
+            String fileName = "西南石油大学" + year + "年" + issue + "-" + (issue + 1) + "月舆情月报.doc";
             //解决文件名乱码问题
             if (request.getHeader("User-Agent").toUpperCase().indexOf("MSIE") > 0) {
                 fileName = URLEncoder.encode(fileName, "UTF-8");
@@ -69,23 +70,25 @@ public class ReportController {
                 fileName = new String(fileName.getBytes("UTF-8"), "ISO8859-1");
             }
             response.setHeader("Content-Disposition", "attachment;filename=" + fileName);
+            ByteArrayOutputStream bao = new ByteArrayOutputStream();
             //将数据写入模板文件，写入流
-            template.process(reportDataMap, new OutputStreamWriter(response.getOutputStream()));
+            template.process(reportDataMap, new OutputStreamWriter(bao));
+            response.getOutputStream().write(bao.toByteArray());
         } catch (BaseException e) {
             response.setContentType("text/plain;charset=UTF-8");
             try {
                 response.setStatus(e.getStatus().value());
-                response.getWriter().write( e.getMessage());
+                response.getWriter().write(e.getMessage());
             } catch (IOException e1) {
                 e1.printStackTrace();
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             response.reset();
             response.setContentType("text/plain;charset=UTF-8");
             response.setStatus(500);
             try {
-                response.getWriter().write( e.getMessage());
+                response.getWriter().write(e.getMessage());
             } catch (IOException e1) {
                 e1.printStackTrace();
             }
@@ -94,10 +97,10 @@ public class ReportController {
 
     @PreAuthorize("hasAnyRole('ADMIN','VIP')")
     @GetMapping("/report/permission")
-    public ResponseEntity<?> permission(HttpSession session){
+    public ResponseEntity<?> permission(HttpSession session) {
         session.setMaxInactiveInterval(600);
-        String permission = UUID.randomUUID().toString().replace("-","").substring(0,16);
-        session.setAttribute("permission",permission);
+        String permission = UUID.randomUUID().toString().replace("-", "").substring(0, 16);
+        session.setAttribute("permission", permission);
         return new ResponseEntity<>(permission, HttpStatus.OK);
     }
 }

@@ -221,7 +221,7 @@
                                 <w:sz w:val="24"/>
                                 <w:szCs w:val="24"/>
                             </w:rPr>
-                            <w:t>${oddMonth}</w:t>
+                            <w:t>${beginMonth}</w:t>
                         </w:r>
                         <w:r w:rsidRPr="00F02968">
                             <w:rPr>
@@ -237,7 +237,7 @@
                                 <w:sz w:val="24"/>
                                 <w:szCs w:val="24"/>
                             </w:rPr>
-                            <w:t>${evenMonth}</w:t>
+                            <w:t>${endMonth}</w:t>
                         </w:r>
                         <w:r w:rsidRPr="00FD506F">
                             <w:rPr>
@@ -728,7 +728,7 @@
                                 <w:sz w:val="24"/>
                                 <w:szCs w:val="24"/>
                             </w:rPr>
-                            <w:t>${oddMonth}</w:t>
+                            <w:t>${beginMonth}</w:t>
                         </w:r>
                         <w:r w:rsidR="004D6D0E" w:rsidRPr="004B29FD">
                             <w:rPr>
@@ -742,7 +742,7 @@
                                 <w:sz w:val="24"/>
                                 <w:szCs w:val="24"/>
                             </w:rPr>
-                            <w:t>${evenMonth}</w:t>
+                            <w:t>${endMonth}</w:t>
                         </w:r>
                         <w:r w:rsidR="004D6D0E" w:rsidRPr="006E3581">
                             <w:rPr>
@@ -787,7 +787,7 @@
                                 <w:sz w:val="24"/>
                                 <w:szCs w:val="24"/>
                             </w:rPr>
-                            <w:t>${oddMonth}</w:t>
+                            <w:t>${beginMonth}</w:t>
                         </w:r>
                         <w:r w:rsidR="004D6D0E" w:rsidRPr="006E3581">
                             <w:rPr>
@@ -819,7 +819,7 @@
                                 <w:sz w:val="24"/>
                                 <w:szCs w:val="24"/>
                             </w:rPr>
-                            <w:t>${oddHandledCount}</w:t>
+                            <w:t>${beginHandledCount}</w:t>
                         </w:r>
                         <w:r w:rsidR="004D6D0E" w:rsidRPr="006E3581">
                             <w:rPr>
@@ -851,7 +851,7 @@
                                 <w:sz w:val="24"/>
                                 <w:szCs w:val="24"/>
                             </w:rPr>
-                            <w:t>${evenMonth}</w:t>
+                            <w:t>${endMonth}</w:t>
                         </w:r>
                         <w:r w:rsidR="004D6D0E" w:rsidRPr="006E3581">
                             <w:rPr>
@@ -883,7 +883,7 @@
                                 <w:sz w:val="24"/>
                                 <w:szCs w:val="24"/>
                             </w:rPr>
-                            <w:t>${evenHandledCount}</w:t>
+                            <w:t>${endHandledCount}</w:t>
                         </w:r>
                         <w:r w:rsidR="004D6D0E" w:rsidRPr="006E3581">
                             <w:rPr>
@@ -1061,7 +1061,7 @@
                                 <w:sz w:val="28"/>
                                 <w:szCs w:val="28"/>
                             </w:rPr>
-                            <w:t>${oddMonthChar}</w:t>
+                            <w:t>${beginMonthChar}</w:t>
                         </w:r>
                         <w:r w:rsidR="00BE0892" w:rsidRPr="006E3581">
                             <w:rPr>
@@ -1108,7 +1108,7 @@
                                 <w:sz w:val="24"/>
                                 <w:szCs w:val="24"/>
                             </w:rPr>
-                            <w:t>${oddMonth}</w:t>
+                            <w:t>${beginMonth}</w:t>
                         </w:r>
                         <w:r w:rsidR="00BE0892" w:rsidRPr="006E3581">
                             <w:rPr>
@@ -1125,7 +1125,7 @@
                                 <w:sz w:val="24"/>
                                 <w:szCs w:val="24"/>
                             </w:rPr>
-                            <w:t>${oddEventCount}</w:t>
+                            <w:t>${beginEventCount}</w:t>
                         </w:r>
                         <w:r w:rsidR="00BE0892" w:rsidRPr="006E3581">
                             <w:rPr>
@@ -1142,7 +1142,7 @@
                                 <w:sz w:val="24"/>
                                 <w:szCs w:val="24"/>
                             </w:rPr>
-                            <w:t>${oddCommentCount}</w:t>
+                            <w:t>${beginCommentCount}</w:t>
                         </w:r>
                         <w:r w:rsidR="00BE0892" w:rsidRPr="006E3581">
                             <w:rPr>
@@ -1337,7 +1337,7 @@
                                 <w:sz w:val="28"/>
                                 <w:szCs w:val="28"/>
                             </w:rPr>
-                            <w:t>${evenMonthChar}</w:t>
+                            <w:t>${endMonthChar}</w:t>
                         </w:r>
                         <w:r w:rsidR="00BE0892" w:rsidRPr="006E3581">
                             <w:rPr>
@@ -1384,7 +1384,7 @@
                                 <w:sz w:val="24"/>
                                 <w:szCs w:val="24"/>
                             </w:rPr>
-                            <w:t>${evenMonth}</w:t>
+                            <w:t>${endMonth}</w:t>
                         </w:r>
                         <w:r w:rsidR="00BE0892" w:rsidRPr="006E3581">
                             <w:rPr>
@@ -1401,7 +1401,7 @@
                                 <w:sz w:val="24"/>
                                 <w:szCs w:val="24"/>
                             </w:rPr>
-                            <w:t>${evenEventCount}</w:t>
+                            <w:t>${endEventCount}</w:t>
                         </w:r>
                         <w:r w:rsidR="00BE0892" w:rsidRPr="006E3581">
                             <w:rPr>
@@ -1419,7 +1419,7 @@
                                 <w:szCs w:val="24"/>
                             </w:rPr>
                             <w:lastRenderedPageBreak/>
-                            <w:t>${evenCommentCount}</w:t>
+                            <w:t>${endCommentCount}</w:t>
                         </w:r>
                         <w:r w:rsidR="00BE0892" w:rsidRPr="006E3581">
                             <w:rPr>
@@ -2709,19 +2709,19 @@
         </pkg:xmlData>
     </pkg:part>
     <pkg:part pkg:name="/word/media/image4.png" pkg:contentType="image/png" pkg:compression="store">
-        <pkg:binaryData>${evenMonthChart}</pkg:binaryData>
+        <pkg:binaryData>${endMonthChart}</pkg:binaryData>
     </pkg:part>
     <pkg:part pkg:name="/word/media/image3.png" pkg:contentType="image/png" pkg:compression="store">
-        <pkg:binaryData>${oddCommentChart}</pkg:binaryData>
+        <pkg:binaryData>${beginCommentChart}</pkg:binaryData>
     </pkg:part>
     <pkg:part pkg:name="/word/media/image1.png" pkg:contentType="image/png" pkg:compression="store">
         <pkg:binaryData>${doubleMonthChart}</pkg:binaryData>
     </pkg:part>
     <pkg:part pkg:name="/word/media/image5.png" pkg:contentType="image/png" pkg:compression="store">
-        <pkg:binaryData>${evenCommentChart}</pkg:binaryData>
+        <pkg:binaryData>${endCommentChart}</pkg:binaryData>
     </pkg:part>
     <pkg:part pkg:name="/word/media/image2.png" pkg:contentType="image/png" pkg:compression="store">
-        <pkg:binaryData>${oddMonthChart}</pkg:binaryData>
+        <pkg:binaryData>${beginMonthChart}</pkg:binaryData>
     </pkg:part>
     <pkg:part pkg:name="/word/settings.xml"
               pkg:contentType="application/vnd.openxmlformats-officedocument.wordprocessingml.settings+xml">

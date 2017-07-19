@@ -35,7 +35,7 @@ import java.util.List;
 
 public class ChartGenerator {
     private static final long DAY = 86400000L;
-    private static final DateFormat CHART_DISPLAY_DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd");
+    private static final String CHART_DISPLAY_DATE_PATTERN = "yyyy-MM-dd";
 
     /**
      *  获得
@@ -70,7 +70,7 @@ public class ChartGenerator {
      * @return
      * @throws IOException
      */
-    public static String chartToString(JFreeChart chart) throws IOException{
+    public static String chartToBASE64(JFreeChart chart) throws IOException{
         BASE64Encoder encoder = new BASE64Encoder();
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         String img = null;
@@ -85,7 +85,7 @@ public class ChartGenerator {
     }
 
     /**
-     * 生成折线图坐标集方法
+     * 生成折线图坐标集方法,将事件按天数分组
      * @param events events list
      * @param begin miliseconds of begin time
      * @param end miliseconds of end time
@@ -93,10 +93,10 @@ public class ChartGenerator {
      * @return
      */
     public static List<ChartPoint> getChartPoints(List<DailyEvent> events, long begin, long end, String dataType) {
-        List<ChartPoint> resultlist = new ArrayList<ChartPoint>();
 
         long curDay = begin; //当前天
         int dayCount = (int) ((end - begin) / DAY) + 1;//区间天数
+        List<ChartPoint> chartPoints = new ArrayList<ChartPoint>(dayCount);
         int[] day = new int[dayCount];//每天的统计量
         int dayNo = 0;//当前天对应index
         int count = 0;//统计量
@@ -130,16 +130,16 @@ public class ChartGenerator {
         }
 
         long beginTime = begin;
-
+        DateFormat displayFormat = new SimpleDateFormat(CHART_DISPLAY_DATE_PATTERN);
         for (int cnt : day) {
-            ChartPoint result = new ChartPoint();
-            result.setX(CHART_DISPLAY_DATE_FORMAT.format(new Date(beginTime)));
-            result.setY(cnt);
-            resultlist.add(result);
+            ChartPoint point = new ChartPoint();
+            point.setX(displayFormat.format(new Date(beginTime)));
+            point.setY(cnt);
+            chartPoints.add(point);
             beginTime += DAY;
         }
 
-        return resultlist;
+        return chartPoints;
     }
 
     private static JFreeChart generateSingleMonthChart(List<ChartPoint> list , String Title) throws ParseException{
