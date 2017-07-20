@@ -1,11 +1,13 @@
 package cn.edu.swpu.cins.event.analyse.platform.service.impl;
 
 import cn.edu.swpu.cins.event.analyse.platform.dao.DailyEventDao;
+import cn.edu.swpu.cins.event.analyse.platform.dao.HandledEventDao;
 import cn.edu.swpu.cins.event.analyse.platform.enums.ChartDataEnum;
 import cn.edu.swpu.cins.event.analyse.platform.enums.ChartTypeEnum;
 import cn.edu.swpu.cins.event.analyse.platform.exception.BaseException;
 import cn.edu.swpu.cins.event.analyse.platform.exception.IlleagalArgumentException;
 import cn.edu.swpu.cins.event.analyse.platform.model.persistence.DailyEvent;
+import cn.edu.swpu.cins.event.analyse.platform.model.persistence.HandledEvent;
 import cn.edu.swpu.cins.event.analyse.platform.model.view.ChartPoint;
 import cn.edu.swpu.cins.event.analyse.platform.service.ReportService;
 import cn.edu.swpu.cins.event.analyse.platform.utility.ChartGenerator;
@@ -26,10 +28,12 @@ import java.util.stream.Collectors;
 @Service
 public class ReportServiceImpl implements ReportService {
     private DailyEventDao dailyEventDao;
+    private HandledEventDao handledEventDao;
     private final String[] monthsChar = {"","一", "二", "三", "四", "五", "六", "七", "八", "九", "十", "十一", "十二"};
 
     @Autowired
-    public ReportServiceImpl(DailyEventDao dailyEventDao) {
+    public ReportServiceImpl(DailyEventDao dailyEventDao, HandledEventDao handledEventDao) {
+        this.handledEventDao = handledEventDao;
         this.dailyEventDao = dailyEventDao;
     }
 
@@ -64,16 +68,18 @@ public class ReportServiceImpl implements ReportService {
 
             endTime = calendar.getTime();
 
-            List<DailyEvent> list = dailyEventDao.selectEventsBetweenTime(dateFormat.format(beginTime), dateFormat.format(endTime), "百度贴吧", false);
+            List<DailyEvent> dailyEventList = dailyEventDao.selectByGivenTimes(dateFormat.format(beginTime), dateFormat.format(endTime), "百度贴吧", false);
 
-            List<DailyEvent> beginList = list.stream()
+            List<HandledEvent> handledEventList = handledEventDao.selectByGivenTimes(dateFormat.format(beginTime), dateFormat.format(endTime), "百度贴吧");
+
+            List<DailyEvent> beginList = dailyEventList.stream()
                     .filter(dailyEvent -> {
                         calendar.setTime(dailyEvent.getPostTime());
                         return calendar.get(Calendar.MONTH) % issue != 0; //Month value is 0-based. e.g., 0 for January.
                     })
                     .collect(Collectors.toList());//奇数月事件列表
 
-            List<DailyEvent> endList = list.stream()
+            List<DailyEvent> endList = dailyEventList.stream()
                     .filter(dailyEvent -> {
                         calendar.setTime(dailyEvent.getPostTime());
                         return calendar.get(Calendar.MONTH) % issue == 0;
@@ -96,17 +102,23 @@ public class ReportServiceImpl implements ReportService {
                     .summaryStatistics()
                     .getSum();//偶数月事件评论数
 
-            int beginHandledCount = (int) beginList
+            int beginHandledCount = (int) handledEventList
                     .stream()
-                    .filter(dailyEvent -> (dailyEvent.getCollectionStatus() == 1))
-                    .count();//偶数月事件处置数
+                    .filter(dailyEvent -> {
+                calendar.setTime(dailyEvent.getPostTime());
+                return calendar.get(Calendar.MONTH) % issue != 0 && dailyEvent.getFeedbackCondition() == 1; //Month value is 0-based. e.g., 0 for January.
+            })
+                    .count();//起始月事件妥善处置数
 
-            int endHandledCount = (int) endList
+            int endHandledCount = (int) handledEventList
                     .stream()
-                    .filter(dailyEvent -> (dailyEvent.getCollectionStatus() == 1))
-                    .count();//偶数月事件处置数
+                    .filter(dailyEvent -> {
+                        calendar.setTime(dailyEvent.getPostTime());
+                        return calendar.get(Calendar.MONTH) % issue == 0 && dailyEvent.getFeedbackCondition() == 1; //Month value is 0-based. e.g., 0 for January.
+                    })
+                    .count();//结束月事件妥善处置数
 
-            int heatCount = (int) list
+            int heatCount = (int) dailyEventList
                     .stream()
                     .filter(dailyEvent -> (dailyEvent.getFollowCount() > 20))
                     .count();//热点事件数
@@ -123,7 +135,7 @@ public class ReportServiceImpl implements ReportService {
             calendar.setTime(endTime);
             calendar.add(Calendar.DATE,-1);
             Date endDateOfEndMonth = calendar.getTime();
-            List<ChartPoint> pointList = ChartGenerator.getChartPoints(list, beginTime.getTime(), endDateOfEndMonth.getTime(), ChartDataEnum.POSTCOUNT.getDataType());
+            List<ChartPoint> pointList = ChartGenerator.getChartPoints(dailyEventList, beginTime.getTime(), endDateOfEndMonth.getTime(), ChartDataEnum.POSTCOUNT.getDataType());
             JFreeChart doubleMonthChart = ChartGenerator.generateChart(pointList, "专题信息量趋势图",ChartTypeEnum.DOUBLE_MONTH);
 
             calendar.setTime(beginTime);

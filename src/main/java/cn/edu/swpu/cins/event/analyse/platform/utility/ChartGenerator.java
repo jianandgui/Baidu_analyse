@@ -10,10 +10,7 @@ import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.ChartUtilities;
 import org.jfree.chart.JFreeChart;
-import org.jfree.chart.axis.DateAxis;
-import org.jfree.chart.axis.DateTickUnit;
-import org.jfree.chart.axis.DateTickUnitType;
-import org.jfree.chart.axis.ValueAxis;
+import org.jfree.chart.axis.*;
 import org.jfree.chart.plot.XYPlot;
 import org.jfree.chart.renderer.xy.XYLineAndShapeRenderer;
 import org.jfree.data.time.Day;
@@ -152,7 +149,6 @@ public class ChartGenerator {
         XYLineAndShapeRenderer xylinerenderer = (XYLineAndShapeRenderer) xyplot.getRenderer();
         xylinerenderer.setSeriesShape(0,new Ellipse2D.Double(-4,-4,8,8));
         xylinerenderer.setBaseShapesVisible(true);
-        xylinerenderer.setBasePaint(Color.BLUE);
         xylinerenderer.setSeriesPaint(0,Color.RED);
         xylinerenderer.setUseFillPaint(true);
 
@@ -164,6 +160,7 @@ public class ChartGenerator {
         dateaxis.setUpperMargin(0.01);
 
         ValueAxis rangeAxis = xyplot.getRangeAxis();//获取柱状
+        rangeAxis.setStandardTickUnits(NumberAxis.createIntegerTickUnits());//避免y轴出现小数
         rangeAxis.setLabelFont(new Font("黑体", Font.BOLD, 15));
         jfreechart.getTitle().setFont(new Font("宋体", Font.BOLD, 20));//设置标题字
         return jfreechart;
@@ -179,7 +176,6 @@ public class ChartGenerator {
         XYLineAndShapeRenderer xylinerenderer = (XYLineAndShapeRenderer) xyplot.getRenderer();
         xylinerenderer.setSeriesShape(0,new Ellipse2D.Double(-4,-4,8,8));
         xylinerenderer.setBaseShapesVisible(true);
-        xylinerenderer.setBasePaint(Color.BLUE);
         xylinerenderer.setSeriesPaint(0,Color.RED);
         xylinerenderer.setUseFillPaint(true);
         //设置刻度样式
@@ -191,6 +187,7 @@ public class ChartGenerator {
         dateaxis.setUpperMargin(0.06);
 
         ValueAxis rangeAxis = xyplot.getRangeAxis();//获取柱状
+        rangeAxis.setStandardTickUnits(NumberAxis.createIntegerTickUnits());//避免y轴出现小数
         rangeAxis.setLabelFont(new Font("黑体", Font.BOLD, 15));
         jfreechart.getTitle().setFont(new Font("宋体", Font.BOLD, 20));//设置标题字
 

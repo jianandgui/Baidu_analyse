@@ -2,7 +2,6 @@ package cn.edu.swpu.cins.event.analyse.platform.service.impl;
 
 import cn.edu.swpu.cins.event.analyse.platform.dao.DailyEventDao;
 import cn.edu.swpu.cins.event.analyse.platform.enums.ChartDataEnum;
-import cn.edu.swpu.cins.event.analyse.platform.enums.ChartTypeEnum;
 import cn.edu.swpu.cins.event.analyse.platform.enums.EventTableEnum;
 import cn.edu.swpu.cins.event.analyse.platform.exception.BaseException;
 import cn.edu.swpu.cins.event.analyse.platform.exception.IlleagalArgumentException;
@@ -83,9 +82,9 @@ public class ChartServiceImpl implements ChartService {
             List<DailyEvent> events = null;
 
             if (EventTableEnum.DAILY_EVENT.getEventTable().equals(eventTable)) {
-                events = dailyEventDao.selectEventsBetweenTime(beginDateFormat, endDateFormat, source, false);
+                events = dailyEventDao.selectByGivenTimes(beginDateFormat, endDateFormat, source, false);
             } else if (EventTableEnum.HANDLED_EVENT.getEventTable().equals(eventTable)) {
-                events = dailyEventDao.selectEventsBetweenTime(beginDateFormat, endDateFormat, source, true);
+                events = dailyEventDao.selectByGivenTimes(beginDateFormat, endDateFormat, source, true);
             } else if ((EventTableEnum.SPECIAL_EVENT.getEventTable().equals(eventTable))) {
                 events = specialEventService.getSpecialEvent(0, true,0);
                 events = events

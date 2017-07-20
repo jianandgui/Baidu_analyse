@@ -34,7 +34,7 @@
     </select>
 
     <!--按日期区间检索事件-->
-    <select id="selectEventsBetweenTime"
+    <select id="selectByGivenTimes"
             resultType="cn.edu.swpu.cins.event.analyse.platform.model.persistence.DailyEvent">
         SELECT
         <include refid="select_field"/>
