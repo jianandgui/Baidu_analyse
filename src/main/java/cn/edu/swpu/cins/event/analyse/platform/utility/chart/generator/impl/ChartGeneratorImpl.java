@@ -1,6 +1,6 @@
 package cn.edu.swpu.cins.event.analyse.platform.utility.chart.generator.impl;
 
-import cn.edu.swpu.cins.event.analyse.platform.enums.ChartDataEnum;
+import cn.edu.swpu.cins.event.analyse.platform.enums.ChartDataTypeEnum;
 import cn.edu.swpu.cins.event.analyse.platform.enums.ChartTypeEnum;
 import cn.edu.swpu.cins.event.analyse.platform.exception.OperationFailureException;
 import cn.edu.swpu.cins.event.analyse.platform.model.persistence.DailyEvent;
@@ -70,6 +70,12 @@ public class ChartGeneratorImpl implements ChartGenerator{
             throw new OperationFailureException();
     }
 
+    /**
+     * 将jfreechart转化为BASE64编码格式的字符串
+     * @param chart
+     * @return
+     * @throws IOException
+     */
     @Override
     public String chartToBASE64(JFreeChart chart) throws IOException {
         BASE64Encoder encoder = new BASE64Encoder();
@@ -94,7 +100,7 @@ public class ChartGeneratorImpl implements ChartGenerator{
      * @return
      */
     @Override
-    public List<ChartPoint> getChartPoints(List<DailyEvent> events, long begin, long end, String dataType) {
+    public List<ChartPoint> getChartPoints(List<DailyEvent> events, long begin, long end, ChartDataTypeEnum dataType) {
 
         long curDay = begin; //当前天
         int dayCount = (int) ((end - begin) / DAY) + 1;//区间天数
@@ -107,18 +113,18 @@ public class ChartGeneratorImpl implements ChartGenerator{
             long time = event.getPostTime().getTime();
             if (time - curDay < DAY) {
                 //事件的发帖时间在当天则统计
-                if (ChartDataEnum.POSTCOUNT.getDataType().equals(dataType)) {
+                if (ChartDataTypeEnum.POSTCOUNT.equals(dataType)) {
                     count++;
-                } else if (ChartDataEnum.FOLOWCOUNT.getDataType().equals(dataType)) {
+                } else if (ChartDataTypeEnum.FOLOWCOUNT.equals(dataType)) {
                     count += event.getFollowCount();
                 }
 
             } else {
                 //清算count,生成相应的chartresult插入list
                 day[dayNo] = count;
-                if (ChartDataEnum.POSTCOUNT.getDataType().equals(dataType)) {
+                if (ChartDataTypeEnum.POSTCOUNT.equals(dataType)) {
                     count = 1;
-                } else if (ChartDataEnum.FOLOWCOUNT.getDataType().equals(dataType)) {
+                } else if (ChartDataTypeEnum.FOLOWCOUNT.equals(dataType)) {
                     count = event.getFollowCount();
                 }
                 int dayMin = (int) ((time - curDay) / DAY);

@@ -1,13 +1,11 @@
 package cn.edu.swpu.cins.event.analyse.platform.utility.chart.generator;
 
+import cn.edu.swpu.cins.event.analyse.platform.enums.ChartDataTypeEnum;
 import cn.edu.swpu.cins.event.analyse.platform.enums.ChartTypeEnum;
-import cn.edu.swpu.cins.event.analyse.platform.exception.OperationFailureException;
 import cn.edu.swpu.cins.event.analyse.platform.model.persistence.DailyEvent;
 import cn.edu.swpu.cins.event.analyse.platform.model.view.ChartPoint;
 import org.jfree.chart.JFreeChart;
 
-import java.io.IOException;
-import java.text.ParseException;
 import java.util.List;
 
 /**
@@ -18,7 +16,7 @@ public interface ChartGenerator {
             , String title
             , ChartTypeEnum chartType) throws Exception;
 
-    public List<ChartPoint> getChartPoints(List<DailyEvent> events, long begin, long end, String dataType);
+    public List<ChartPoint> getChartPoints(List<DailyEvent> events, long begin, long end, ChartDataTypeEnum dataType);
 
     public String chartToBASE64(JFreeChart chart) throws Exception;
 }

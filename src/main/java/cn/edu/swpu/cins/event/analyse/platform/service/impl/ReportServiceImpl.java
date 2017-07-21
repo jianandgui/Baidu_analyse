@@ -2,7 +2,7 @@ package cn.edu.swpu.cins.event.analyse.platform.service.impl;
 
 import cn.edu.swpu.cins.event.analyse.platform.dao.DailyEventDao;
 import cn.edu.swpu.cins.event.analyse.platform.dao.HandledEventDao;
-import cn.edu.swpu.cins.event.analyse.platform.enums.ChartDataEnum;
+import cn.edu.swpu.cins.event.analyse.platform.enums.ChartDataTypeEnum;
 import cn.edu.swpu.cins.event.analyse.platform.enums.ChartTypeEnum;
 import cn.edu.swpu.cins.event.analyse.platform.exception.BaseException;
 import cn.edu.swpu.cins.event.analyse.platform.exception.IlleagalArgumentException;
@@ -140,26 +140,26 @@ public class ReportServiceImpl implements ReportService {
             calendar.setTime(endTime);
             calendar.add(Calendar.DATE, -1);
             Date endDateOfEndMonth = calendar.getTime();
-            List<ChartPoint> pointList = chartGenerator.getChartPoints(dailyEventList, beginTime.getTime(), endDateOfEndMonth.getTime(), ChartDataEnum.POSTCOUNT.getDataType());
+            List<ChartPoint> pointList = chartGenerator.getChartPoints(dailyEventList, beginTime.getTime(), endDateOfEndMonth.getTime(), ChartDataTypeEnum.POSTCOUNT);
             JFreeChart doubleMonthChart = chartGenerator.generateChart(pointList, "专题信息量趋势图", ChartTypeEnum.DOUBLE_MONTH);
 
             calendar.setTime(beginTime);
             calendar.add(Calendar.MONTH, 1);
             calendar.add(Calendar.DATE, -1);
             Date endDateOfBeginMonth = calendar.getTime();
-            List<ChartPoint> pointList1 = chartGenerator.getChartPoints(beginList, beginTime.getTime(), endDateOfBeginMonth.getTime(), ChartDataEnum.POSTCOUNT.getDataType());
+            List<ChartPoint> pointList1 = chartGenerator.getChartPoints(beginList, beginTime.getTime(), endDateOfBeginMonth.getTime(), ChartDataTypeEnum.POSTCOUNT);
             JFreeChart beginMonthChart = chartGenerator.generateChart(pointList1, beginMonthChar + "月份贴吧主题数趋势图", ChartTypeEnum.SINGLE_MONTH);
 
-            List<ChartPoint> pointList2 = chartGenerator.getChartPoints(beginList, beginTime.getTime(), endDateOfBeginMonth.getTime(), ChartDataEnum.FOLOWCOUNT.getDataType());
+            List<ChartPoint> pointList2 = chartGenerator.getChartPoints(beginList, beginTime.getTime(), endDateOfBeginMonth.getTime(), ChartDataTypeEnum.FOLOWCOUNT);
             JFreeChart beginCommentChart = chartGenerator.generateChart(pointList2, beginMonthChar + "月份贴吧跟帖数趋势图", ChartTypeEnum.SINGLE_MONTH);
 
             calendar.setTime(endDateOfBeginMonth);
             calendar.add(Calendar.DATE, 1);
             Date beginDateOfEndMonth = calendar.getTime();
-            List<ChartPoint> pointList3 = chartGenerator.getChartPoints(endList, beginDateOfEndMonth.getTime(), endDateOfEndMonth.getTime(), ChartDataEnum.POSTCOUNT.getDataType());
+            List<ChartPoint> pointList3 = chartGenerator.getChartPoints(endList, beginDateOfEndMonth.getTime(), endDateOfEndMonth.getTime(), ChartDataTypeEnum.POSTCOUNT);
             JFreeChart endMonthChart = chartGenerator.generateChart(pointList3, endMonthChar + "月份贴吧主题数趋势图", ChartTypeEnum.SINGLE_MONTH);
 
-            List<ChartPoint> pointList4 = chartGenerator.getChartPoints(endList, beginDateOfEndMonth.getTime(), endDateOfEndMonth.getTime(), ChartDataEnum.FOLOWCOUNT.getDataType());
+            List<ChartPoint> pointList4 = chartGenerator.getChartPoints(endList, beginDateOfEndMonth.getTime(), endDateOfEndMonth.getTime(), ChartDataTypeEnum.FOLOWCOUNT);
             JFreeChart endCommentChart = chartGenerator.generateChart(pointList4, endMonthChar + "月份贴吧跟帖数趋势图", ChartTypeEnum.SINGLE_MONTH);
 
             reportDataMap.put("year", year);
