@@ -9,7 +9,7 @@ import cn.edu.swpu.cins.event.analyse.platform.model.persistence.DailyEvent;
 import cn.edu.swpu.cins.event.analyse.platform.model.view.ChartPoint;
 import cn.edu.swpu.cins.event.analyse.platform.service.ChartService;
 import cn.edu.swpu.cins.event.analyse.platform.service.SpecialEventService;
-import cn.edu.swpu.cins.event.analyse.platform.utility.ChartGenerator;
+import cn.edu.swpu.cins.event.analyse.platform.utility.chart.generator.ChartGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
@@ -32,12 +32,14 @@ public class ChartServiceImpl implements ChartService {
 
     private DailyEventDao dailyEventDao;
     private SpecialEventService specialEventService;
+    private ChartGenerator chartGenerator;
     private int dateRange;
 
     @Autowired
     public ChartServiceImpl(DailyEventDao dailyEventDao
             , @Value("${event.service.chart-date-range}") int dateRange
-            , SpecialEventService specialEventService) {
+            , SpecialEventService specialEventService, ChartGenerator chartGenerator) {
+        this.chartGenerator = chartGenerator;
         this.dateRange = dateRange;
         this.dailyEventDao = dailyEventDao;
         this.specialEventService = specialEventService;
@@ -100,12 +102,12 @@ public class ChartServiceImpl implements ChartService {
             }
 
             if(ChartDataEnum.DOUBLELINE.getDataType().equals(data)){
-                List<ChartPoint> postCountPoints = ChartGenerator.getChartPoints(events, beginTimeLong, endTimeLong, ChartDataEnum.POSTCOUNT.getDataType());
-                List<ChartPoint> followCountPoints = ChartGenerator.getChartPoints(events, beginTimeLong, endTimeLong, ChartDataEnum.FOLOWCOUNT.getDataType());
+                List<ChartPoint> postCountPoints = chartGenerator.getChartPoints(events, beginTimeLong, endTimeLong, ChartDataEnum.POSTCOUNT.getDataType());
+                List<ChartPoint> followCountPoints = chartGenerator.getChartPoints(events, beginTimeLong, endTimeLong, ChartDataEnum.FOLOWCOUNT.getDataType());
                 map.put("postCountPoints",postCountPoints);
                 map.put("followCountPoints",followCountPoints);
             }else {
-                List<ChartPoint> list = ChartGenerator.getChartPoints(events, beginTimeLong, endTimeLong, data);
+                List<ChartPoint> list = chartGenerator.getChartPoints(events, beginTimeLong, endTimeLong, data);
                 map.put("chartPoints",list);
             }
 

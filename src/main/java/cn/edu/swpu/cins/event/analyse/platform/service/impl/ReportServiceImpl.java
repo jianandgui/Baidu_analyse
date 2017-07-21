@@ -10,7 +10,7 @@ import cn.edu.swpu.cins.event.analyse.platform.model.persistence.DailyEvent;
 import cn.edu.swpu.cins.event.analyse.platform.model.persistence.HandledEvent;
 import cn.edu.swpu.cins.event.analyse.platform.model.view.ChartPoint;
 import cn.edu.swpu.cins.event.analyse.platform.service.ReportService;
-import cn.edu.swpu.cins.event.analyse.platform.utility.ChartGenerator;
+import cn.edu.swpu.cins.event.analyse.platform.utility.chart.generator.ChartGenerator;
 import org.jfree.chart.JFreeChart;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -27,14 +27,19 @@ import java.util.stream.Collectors;
  */
 @Service
 public class ReportServiceImpl implements ReportService {
+    private final String[] monthsChar = {"", "一", "二", "三", "四", "五", "六", "七", "八", "九", "十", "十一", "十二"};
+
+    private ChartGenerator chartGenerator;
     private DailyEventDao dailyEventDao;
     private HandledEventDao handledEventDao;
-    private final String[] monthsChar = {"","一", "二", "三", "四", "五", "六", "七", "八", "九", "十", "十一", "十二"};
 
     @Autowired
-    public ReportServiceImpl(DailyEventDao dailyEventDao, HandledEventDao handledEventDao) {
+    public ReportServiceImpl(DailyEventDao dailyEventDao
+            , HandledEventDao handledEventDao
+            , ChartGenerator chartGenerator) {
         this.handledEventDao = handledEventDao;
         this.dailyEventDao = dailyEventDao;
+        this.chartGenerator = chartGenerator;
     }
 
     @Override
@@ -42,29 +47,29 @@ public class ReportServiceImpl implements ReportService {
         try {
             Map<String, Object> reportDataMap = new HashMap<>();
 
-            int beginMonth = issue ;//起始月
+            int beginMonth = issue;//起始月
 
             int endMonth = issue + 1;//结束月
 
             LocalDateTime localTime = LocalDateTime.now();
 
             //日期校验
-            if (issue > 11 || issue < 1 || localTime.isBefore(LocalDateTime.of(year,endMonth,15,0,0,0,0)))
+            if (issue > 11 || issue < 1 || localTime.isBefore(LocalDateTime.of(year, endMonth, 15, 0, 0, 0, 0)))
                 throw new IlleagalArgumentException();
 
             Date beginTime;//检索开始日期
 
-            Date endTime ;//检索结束日期
+            Date endTime;//检索结束日期
 
             DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd 00:00:00");
 
-            Calendar calendar = new GregorianCalendar(year, beginMonth - 1, 1,0,0,0);//不可使用无参构造器，因为会读入系统时间的毫秒数造成干扰
+            Calendar calendar = new GregorianCalendar(year, beginMonth - 1, 1, 0, 0, 0);//不可使用无参构造器，因为会读入系统时间的毫秒数造成干扰
 
-            calendar.set(year, beginMonth - 1, 1,0,0,0); //Month value is 0-based. e.g., 0 for January.
+            calendar.set(year, beginMonth - 1, 1, 0, 0, 0); //Month value is 0-based. e.g., 0 for January.
 
             beginTime = calendar.getTime();
 
-            calendar.set(year, endMonth, 1,0,0,0);
+            calendar.set(year, endMonth, 1, 0, 0, 0);
 
             endTime = calendar.getTime();
 
@@ -105,9 +110,9 @@ public class ReportServiceImpl implements ReportService {
             int beginHandledCount = (int) handledEventList
                     .stream()
                     .filter(dailyEvent -> {
-                calendar.setTime(dailyEvent.getPostTime());
-                return calendar.get(Calendar.MONTH) % issue != 0 && dailyEvent.getFeedbackCondition() == 1; //Month value is 0-based. e.g., 0 for January.
-            })
+                        calendar.setTime(dailyEvent.getPostTime());
+                        return calendar.get(Calendar.MONTH) % issue != 0 && dailyEvent.getFeedbackCondition() == 1; //Month value is 0-based. e.g., 0 for January.
+                    })
                     .count();//起始月事件妥善处置数
 
             int endHandledCount = (int) handledEventList
@@ -133,29 +138,29 @@ public class ReportServiceImpl implements ReportService {
             String generateDate = dateTimeFormatter.format(LocalDateTime.now());//报表生成日期
 
             calendar.setTime(endTime);
-            calendar.add(Calendar.DATE,-1);
+            calendar.add(Calendar.DATE, -1);
             Date endDateOfEndMonth = calendar.getTime();
-            List<ChartPoint> pointList = ChartGenerator.getChartPoints(dailyEventList, beginTime.getTime(), endDateOfEndMonth.getTime(), ChartDataEnum.POSTCOUNT.getDataType());
-            JFreeChart doubleMonthChart = ChartGenerator.generateChart(pointList, "专题信息量趋势图",ChartTypeEnum.DOUBLE_MONTH);
+            List<ChartPoint> pointList = chartGenerator.getChartPoints(dailyEventList, beginTime.getTime(), endDateOfEndMonth.getTime(), ChartDataEnum.POSTCOUNT.getDataType());
+            JFreeChart doubleMonthChart = chartGenerator.generateChart(pointList, "专题信息量趋势图", ChartTypeEnum.DOUBLE_MONTH);
 
             calendar.setTime(beginTime);
-            calendar.add(Calendar.MONTH,1);
-            calendar.add(Calendar.DATE,-1);
+            calendar.add(Calendar.MONTH, 1);
+            calendar.add(Calendar.DATE, -1);
             Date endDateOfBeginMonth = calendar.getTime();
-            List<ChartPoint> pointList1 = ChartGenerator.getChartPoints(beginList, beginTime.getTime(), endDateOfBeginMonth.getTime(), ChartDataEnum.POSTCOUNT.getDataType());
-            JFreeChart beginMonthChart = ChartGenerator.generateChart(pointList1, beginMonthChar + "月份贴吧主题数趋势图", ChartTypeEnum.SINGLE_MONTH);
+            List<ChartPoint> pointList1 = chartGenerator.getChartPoints(beginList, beginTime.getTime(), endDateOfBeginMonth.getTime(), ChartDataEnum.POSTCOUNT.getDataType());
+            JFreeChart beginMonthChart = chartGenerator.generateChart(pointList1, beginMonthChar + "月份贴吧主题数趋势图", ChartTypeEnum.SINGLE_MONTH);
 
-            List<ChartPoint> pointList2 = ChartGenerator.getChartPoints(beginList, beginTime.getTime(), endDateOfBeginMonth.getTime(), ChartDataEnum.FOLOWCOUNT.getDataType());
-            JFreeChart beginCommentChart = ChartGenerator.generateChart(pointList2, beginMonthChar + "月份贴吧跟帖数趋势图", ChartTypeEnum.SINGLE_MONTH);
+            List<ChartPoint> pointList2 = chartGenerator.getChartPoints(beginList, beginTime.getTime(), endDateOfBeginMonth.getTime(), ChartDataEnum.FOLOWCOUNT.getDataType());
+            JFreeChart beginCommentChart = chartGenerator.generateChart(pointList2, beginMonthChar + "月份贴吧跟帖数趋势图", ChartTypeEnum.SINGLE_MONTH);
 
             calendar.setTime(endDateOfBeginMonth);
-            calendar.add(Calendar.DATE,1);
+            calendar.add(Calendar.DATE, 1);
             Date beginDateOfEndMonth = calendar.getTime();
-            List<ChartPoint> pointList3 = ChartGenerator.getChartPoints(endList, beginDateOfEndMonth.getTime(), endDateOfEndMonth.getTime(), ChartDataEnum.POSTCOUNT.getDataType());
-            JFreeChart endMonthChart = ChartGenerator.generateChart(pointList3, endMonthChar + "月份贴吧主题数趋势图", ChartTypeEnum.SINGLE_MONTH);
+            List<ChartPoint> pointList3 = chartGenerator.getChartPoints(endList, beginDateOfEndMonth.getTime(), endDateOfEndMonth.getTime(), ChartDataEnum.POSTCOUNT.getDataType());
+            JFreeChart endMonthChart = chartGenerator.generateChart(pointList3, endMonthChar + "月份贴吧主题数趋势图", ChartTypeEnum.SINGLE_MONTH);
 
-            List<ChartPoint> pointList4 = ChartGenerator.getChartPoints(endList, beginDateOfEndMonth.getTime(), endDateOfEndMonth.getTime(), ChartDataEnum.FOLOWCOUNT.getDataType());
-            JFreeChart endCommentChart = ChartGenerator.generateChart(pointList4, endMonthChar + "月份贴吧跟帖数趋势图", ChartTypeEnum.SINGLE_MONTH);
+            List<ChartPoint> pointList4 = chartGenerator.getChartPoints(endList, beginDateOfEndMonth.getTime(), endDateOfEndMonth.getTime(), ChartDataEnum.FOLOWCOUNT.getDataType());
+            JFreeChart endCommentChart = chartGenerator.generateChart(pointList4, endMonthChar + "月份贴吧跟帖数趋势图", ChartTypeEnum.SINGLE_MONTH);
 
             reportDataMap.put("year", year);
             reportDataMap.put("generateDate", generateDate);
@@ -172,14 +177,14 @@ public class ReportServiceImpl implements ReportService {
             reportDataMap.put("heatCount", heatCount);
             reportDataMap.put("eventCount", eventCount);
             //将图表数据转换为BASE64编码的字符串
-            reportDataMap.put("doubleMonthChart", ChartGenerator.chartToBASE64(doubleMonthChart));
-            reportDataMap.put("beginMonthChart", ChartGenerator.chartToBASE64(beginMonthChart));
-            reportDataMap.put("beginCommentChart", ChartGenerator.chartToBASE64(beginCommentChart));
-            reportDataMap.put("endCommentChart", ChartGenerator.chartToBASE64(endCommentChart));
-            reportDataMap.put("endMonthChart", ChartGenerator.chartToBASE64(endMonthChart));
+            reportDataMap.put("doubleMonthChart", chartGenerator.chartToBASE64(doubleMonthChart));
+            reportDataMap.put("beginMonthChart", chartGenerator.chartToBASE64(beginMonthChart));
+            reportDataMap.put("beginCommentChart", chartGenerator.chartToBASE64(beginCommentChart));
+            reportDataMap.put("endCommentChart", chartGenerator.chartToBASE64(endCommentChart));
+            reportDataMap.put("endMonthChart", chartGenerator.chartToBASE64(endMonthChart));
 
             return reportDataMap;
-        }catch (BaseException e){
+        } catch (BaseException e) {
             throw e;
         } catch (Exception e) {
             throw e;

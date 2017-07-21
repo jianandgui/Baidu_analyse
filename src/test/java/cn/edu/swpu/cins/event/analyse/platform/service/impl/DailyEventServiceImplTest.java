@@ -56,7 +56,7 @@ public class DailyEventServiceImplTest {
 //        calendar.add(Calendar.DATE,12);
 //        long end = calendar.getTime().getTime();
 //        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-//        List<DailyEvent> events = dailyEventDao.selectEventsBetweenTime(format.format(new Date(begin)),format.format(new Date(end)));
+//        List<DailyEvent> events = dailyEventDao.selectByGivenTimes(format.format(new Date(begin)),format.format(new Date(end)));
 ////        getChart(events,begin,end);
 //    }
 

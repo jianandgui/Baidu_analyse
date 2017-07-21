@@ -1,11 +1,16 @@
 package cn.edu.swpu.cins.event.analyse.platform.controller;
 
+import cn.edu.swpu.cins.event.analyse.platform.enums.ChartDataEnum;
+import cn.edu.swpu.cins.event.analyse.platform.enums.ChartTypeEnum;
 import cn.edu.swpu.cins.event.analyse.platform.exception.BaseException;
+import cn.edu.swpu.cins.event.analyse.platform.exception.OperationFailureException;
 import cn.edu.swpu.cins.event.analyse.platform.exception.UserException;
+import cn.edu.swpu.cins.event.analyse.platform.model.persistence.DailyEvent;
+import cn.edu.swpu.cins.event.analyse.platform.model.view.ChartPoint;
 import cn.edu.swpu.cins.event.analyse.platform.service.ReportService;
+import cn.edu.swpu.cins.event.analyse.platform.utility.chart.generator.impl.ChartGeneratorImpl;
 import freemarker.template.Template;
-import freemarker.template.TemplateException;
-import jdk.nashorn.internal.ir.debug.JSONWriter;
+import org.jfree.chart.JFreeChart;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,9 +23,11 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.net.URLEncoder;
+import java.text.ParseException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
@@ -32,6 +39,9 @@ import java.util.UUID;
 public class ReportController {
     private ReportService reportService;
     private FreeMarkerConfigurer freeMarkerConfigurer;
+
+    @Autowired
+    private ChartGeneratorImpl chartGenerator;
 
     @Autowired
     public ReportController(ReportService reportService
