@@ -1,6 +1,7 @@
 package cn.edu.swpu.cins.event.analyse.platform.service;
 
 import cn.edu.swpu.cins.event.analyse.platform.exception.BaseException;
+import cn.edu.swpu.cins.event.analyse.platform.model.persistence.HandledEvent;
 import cn.edu.swpu.cins.event.analyse.platform.model.view.HandledEventPage;
 
 import java.util.List;
@@ -27,4 +28,13 @@ public interface HandledEventService {
      * @throws BaseException
      */
     int handle(HandledEventPage handledEventPage) throws BaseException;
+
+
+    /**
+     * 根据ｉd 批量删除事件
+     * @param ids
+     * @return
+     * @throws BaseException
+     */
+    int deleteEvents(List<Integer> ids) throws BaseException;
 }

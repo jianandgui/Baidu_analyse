@@ -45,4 +45,6 @@ public interface HandledEventDao {
             ", handled_time = #{handledTime} , detail = #{detail} , event_handler = #{eventHandler} "
             , " WHERE id = #{id}"})
     int updateHandledEvent(HandledEvent handledEvent);
+
+    int deleteByIds(List<Integer> ids);
 }

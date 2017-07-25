@@ -171,4 +171,16 @@ public class HandledEventServiceImpl implements HandledEventService {
 
         return 0;
     }
+
+    @Override
+    public int deleteEvents(List<Integer> ids) throws BaseException {
+
+        try{
+            return handledEventDao.deleteByIds(ids);
+        }catch (Exception e){
+            throw new BaseException("服务器内部错误",HttpStatus.BAD_REQUEST);
+        }
+
+
+    }
 }

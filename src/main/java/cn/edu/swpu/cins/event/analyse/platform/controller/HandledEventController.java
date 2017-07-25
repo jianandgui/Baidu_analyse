@@ -1,11 +1,14 @@
 package cn.edu.swpu.cins.event.analyse.platform.controller;
 
 import cn.edu.swpu.cins.event.analyse.platform.exception.BaseException;
+import cn.edu.swpu.cins.event.analyse.platform.model.persistence.HandledEvent;
+import cn.edu.swpu.cins.event.analyse.platform.model.view.EventDelete;
 import cn.edu.swpu.cins.event.analyse.platform.model.view.HandledEventPage;
 import cn.edu.swpu.cins.event.analyse.platform.service.HandledEventService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PostAuthorize;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
@@ -45,6 +48,20 @@ public class HandledEventController {
             return new ResponseEntity<>(handledEventService.getPageCount(more), HttpStatus.OK);
         } catch (BaseException e) {
             return new ResponseEntity<>(e.getMessage(), e.getStatus());
+        }
+    }
+
+    //增加批量删除的事件的接口（仅允许删除未处置的事件）
+    @PostMapping("/handledEvent")
+    public ResponseEntity<?> deleteEvents(@RequestBody EventDelete ids){
+        try {
+            int num=handledEventService.deleteEvents(ids.getIds());
+            if(num>0){
+                return new ResponseEntity<Object>("删除成功",HttpStatus.OK);
+            }
+            return new ResponseEntity<Object>("操作失败",HttpStatus.BAD_REQUEST);
+        }catch (BaseException e){
+            return new ResponseEntity<>(e.getMessage(),e.getStatus());
         }
     }
 
