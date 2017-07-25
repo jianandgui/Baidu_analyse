@@ -35,7 +35,7 @@ public class HandledEventServiceImpl implements HandledEventService {
     }
 
     @Override
-    public List<HandledEventPage> getHandledEvents(int page,int more) throws BaseException{
+    public List<HandledEventPage> getHandledEvents(int page,int more,int isHandled,int isFeedBack,boolean isAll) throws BaseException{
 
         int pageSize = this.pageSize;
 
@@ -49,13 +49,72 @@ public class HandledEventServiceImpl implements HandledEventService {
 
         List<HandledEvent> list = handledEventDao.selectAll((--page)* pageSize, pageSize);
 
+
+
         if(list.size()<=0){
             throw new NoEventException();
         }else {
-            return list.stream()
+            return findByConditions(list,isHandled,isFeedBack,isAll)
+                    .stream()
                     .map(HandledEventPage::new)
                     .collect(toList());
         }
+    }
+
+    //单独抽离一个方法出来作判断是否选择情况
+
+    //约定字段码　：　　０代表未处置或者未反馈　１代表已处置和已经反馈　　２代表未处置和已经作出处置的事件都要查询出来
+
+    public  List<HandledEvent> findByConditions(List<HandledEvent> handledEventList,int isHandled,int isFeedBack,boolean isAll ){
+
+        if(isAll){
+            return handledEventList;
+        }
+        if(isHandled==0){
+           if(isFeedBack==0) {
+               return handledEventList.stream()
+                       .filter(handledEvent -> handledEvent.getHandledCondition().equals("未处置") && handledEvent.getFeedbackCondition() == 0)
+                       .collect(toList());
+           }else {
+               return handledEventList.stream()
+                       .filter(handledEvent -> handledEvent.getHandledCondition().equals("未处置") )
+                       .collect(toList());
+           }
+        }
+        if(isHandled==1){
+            if(isFeedBack==0){
+                return handledEventList.stream()
+                        .filter(handledEvent -> !handledEvent.getHandledCondition().equals("未处置") && handledEvent.getFeedbackCondition()==0)
+                        .collect(toList());
+            }else if(isFeedBack==1){
+                return handledEventList.stream()
+                        .filter(handledEvent -> !handledEvent.getHandledCondition().equals("未处置") && handledEvent.getFeedbackCondition()==1)
+                        .collect(toList());
+            }else {
+                return handledEventList.stream()
+                        .filter(handledEvent -> !handledEvent.getHandledCondition().equals("未处置"))
+                        .collect(toList());
+            }
+        }
+        if(isHandled==2){
+            if(isFeedBack==0){
+                return handledEventList.stream()
+                        .filter(handledEvent -> handledEvent.getFeedbackCondition()==0)
+                        .collect(toList());
+            }
+            if(isFeedBack==1){
+                return handledEventList.stream()
+                        .filter(handledEvent -> handledEvent.getFeedbackCondition()==1)
+                        .collect(toList());
+            }
+            if(isFeedBack==2){
+                return handledEventList;
+            }
+        }
+
+
+
+        return null;
     }
 
     @Override

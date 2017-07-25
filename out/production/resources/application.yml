@@ -1,0 +1,31 @@
+mybatis:
+  postType-aliases-package: cn.edu.swpu.cins.event.analyse.platform.model.persistence
+  mapper-locations: classpath:mapper/*.xml
+  type-handlers-package: cn.edu.swpu.cins.event.analyse.platform.mybatis.typehandler
+  configuration:
+    cache-enabled: true
+    use-column-label: true
+    map-underscore-to-camel-case: true
+
+spring:
+  freemarker:
+    settings:
+      number_format: 0.##
+  datasource:
+    password: cinscinsb511
+    username: root
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://182.150.37.58:3306/university_event_analyse?useUnicode=true&characterEncoding=utf8&useSSL=false
+server:
+  port: 4000
+
+
+event:
+  service:
+    page-count: 5 #每页展示的事件个数
+    chart-date-range: 62 #查询图表的日期范围，单位为天
+jwt:
+  header: Authorization
+  secret: mySecret
+  expiration: 68400
+  tokenHead: "Bearer "

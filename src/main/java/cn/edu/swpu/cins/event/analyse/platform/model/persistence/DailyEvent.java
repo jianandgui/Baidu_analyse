@@ -49,6 +49,10 @@ public class DailyEvent {
         return EqualsBuilder.reflectionEquals(this,obj);
     }
 
+
+
+
+
     public int getId() {
         return id;
     }

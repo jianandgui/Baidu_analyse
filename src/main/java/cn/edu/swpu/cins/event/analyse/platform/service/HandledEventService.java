@@ -12,7 +12,7 @@ public interface HandledEventService {
      * @return
      * @throws BaseException
      */
-    List<HandledEventPage> getHandledEvents(int page, int more) throws BaseException;
+    List<HandledEventPage> getHandledEvents(int page, int more,int isHandled,int isFeedBack,boolean isAll) throws BaseException;
 
     /**
      * 获取处置事件页数接口

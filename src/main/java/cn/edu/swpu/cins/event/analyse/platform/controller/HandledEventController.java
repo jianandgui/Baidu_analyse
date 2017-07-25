@@ -25,11 +25,14 @@ public class HandledEventController {
     }
 
     @GetMapping("/handledEvent/{page}")
-    public ResponseEntity<?> getHandledEvents(@PathVariable("page") int page
-            , @RequestParam(required = false,name = "more",defaultValue = "0") int more) {
+    public ResponseEntity<?> getHandledEvents(@PathVariable("page") int page,
+                                              @RequestParam (required = false,name="isHandled",defaultValue = "2") int isHandled,
+                                              @RequestParam(required = false,name = "isFeedBack",defaultValue = "2") int isReflect,
+                                              @RequestParam(required = false,name = "more",defaultValue = "0") int more,
+                                              @RequestParam (required = false,name="isAll",defaultValue = "true") boolean isAll) {
         try {
             List<HandledEventPage> list;
-            list = handledEventService.getHandledEvents(page,more);
+            list = handledEventService.getHandledEvents(page,more,isHandled,isReflect,isAll);
             return new ResponseEntity<>(list, HttpStatus.OK);
         } catch (BaseException e) {
             return new ResponseEntity<>(e.getMessage(), e.getStatus());

@@ -41,13 +41,14 @@ public class ChartGenerator {
      *  获得
      * @param list
      * @param title
-     * @param seriesName
      * @param chartType
      * @return
      * @throws ParseException
      * @throws IOException
      * @throws OperationFailureException
      */
+
+
     public static JFreeChart generateChart(List<ChartPoint> list
             , String title
             , ChartTypeEnum chartType) throws ParseException,IOException,OperationFailureException{
