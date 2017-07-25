@@ -12,9 +12,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.util.*;
 
+import static java.util.Comparator.comparing;
 import static java.util.stream.Collectors.toList;
 
 /**
@@ -37,27 +39,38 @@ public class SpecialEventServiceImpl implements SpecialEventService {
 
 
     @Override
-    public List<DailyEvent> getSpecialEvent(int page, boolean getAll) throws BaseException {
-        int offset = --page * pageSize;
-        List<Topic> topics = topicDao.selectAll();
-        List<DailyEvent> dailyEvents;
-        ArrayList<String> rules = new ArrayList<>();
+    public List<DailyEvent> getSpecialEvent(int page, boolean getAll ,int more) throws BaseException {
 
-        for (Topic topic : topics) {
-            rules.addAll(topic.getRules());
+        int pageSize = this.pageSize;
+
+        if(more>0){
+            pageSize += more;
         }
 
+        int offset = --page * pageSize;
 
-        dailyEvents = getEventByRules(rules);
+        List<Topic> topics = topicDao.selectAll();
+        List<DailyEvent> dailyEvents;
+        ArrayList<String> regions = new ArrayList<>();
 
-        //获得结果集
+        for (Topic topic : topics) {
+            regions.add(topic.getRegion());
+        }
+
+        dailyEvents = getEventByRegions(regions);
+
+        //count begin
         List<DailyEvent> list = dailyEvents
                 .stream()
+                .filter(dailyEvent -> matchEventByTopics(dailyEvent,topics))
                 .filter(dailyEvent -> dailyEvent.getCollectionStatus() == 0)
+                .sorted(comparing(DailyEvent::getPostTime).reversed())
                 .collect(toList());
+        //count end
 
-        //分页获取事件
+        //判断是否需要分页。
         if (!getAll) {
+            //分页获取事件
             int limit = (offset + pageSize) > list.size() ? list.size() : (offset + pageSize);
 
             if (offset >= list.size() || offset < 0) {
@@ -71,41 +84,66 @@ public class SpecialEventServiceImpl implements SpecialEventService {
     }
 
     @Override
-    public int getPageCount() throws BaseException {
+    public int getPageCount(int more) throws BaseException {
+        int pageSize = this.pageSize;
+
+        if(more>0){
+            pageSize += more;
+        }
 
         List<Topic> topics = topicDao.selectAll();
         List<DailyEvent> dailyEvents;
-        ArrayList<String> rules = new ArrayList<>();
+        ArrayList<String> regions = new ArrayList<>();
 
         for (Topic topic : topics) {
-            rules.addAll(topic.getRules());
+            regions.add(topic.getRegion());
         }
 
-        if (topics == null) {
-            throw new OperationFailureException();
-        } else {
-            dailyEvents = getEventByRules(rules);
-        }
+        dailyEvents = getEventByRegions(regions);
 
-        //获得结果集
+        //count begin
         List<DailyEvent> list = dailyEvents
                 .stream()
+                .filter(dailyEvent -> matchEventByTopics(dailyEvent,topics))
                 .filter(dailyEvent -> dailyEvent.getCollectionStatus() == 0)
                 .collect(toList());
+        //count end
 
-        int pageCOunt = list.size() / 5 + (list.size() % 5 == 0 ? 0 : 1);
+        int pageCount = list.size() / pageSize + (list.size() % pageSize == 0 ? 0 : 1);
 
-        return pageCOunt;
+        return pageCount;
     }
 
 
     //根据填写专题的规则获取事件信息（事件均未处置）
-    private List<DailyEvent> getEventByRules(List<String> topicsRules) {
+    private List<DailyEvent> getEventByRules(List<String> rules) {
         List<DailyEvent> dailyEvents;
-        List<String> rules = topicsRules;
-
         dailyEvents = dailyEventDao.selectByRules(rules);
 
         return dailyEvents;
+    }
+
+    //根据填写专题的地域获取事件信息（事件均未处置）
+    private List<DailyEvent> getEventByRegions(List<String> regions) {
+        List<DailyEvent> dailyEvents;
+        dailyEvents = dailyEventDao.selectByRegions(regions);
+
+        return dailyEvents;
+    }
+
+    private boolean matchEventByTopics(DailyEvent event, List<Topic> topics){
+        String content = event.getMainView();
+
+        for (Topic topic : topics) {
+            if (content.contains(topic.getRegion())) {
+                for (String rule : topic.getRules()) {
+                    if (content.contains(rule)) {
+                        return true;
+                    }
+                }
+            }
+        }
+
+        return false;
     }
 }

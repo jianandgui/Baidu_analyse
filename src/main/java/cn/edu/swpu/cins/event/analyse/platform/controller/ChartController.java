@@ -26,13 +26,13 @@ public class ChartController {
 
     @GetMapping("/chart")
     public ResponseEntity<?> getChartPoints(@RequestParam(value = "source") String source,
-                                            @RequestParam(value = "data") String data,
+                                            @RequestParam(value = "data") String dataTypeName,
                                             @RequestParam(value = "beginTime") String beginTime,
                                             @RequestParam(value = "endTime") String endTime,
                                             @RequestParam(value = "table") String table ) {
         try {
             Map<String, List<ChartPoint>> result;
-            result = chartService.getChartPoints(source, data, beginTime, endTime, table);
+            result = chartService.getChartPoints(source, dataTypeName, beginTime, endTime, table);
             return new ResponseEntity<>(result, HttpStatus.OK);
         } catch (BaseException e) {
             return new ResponseEntity<>(e.getMessage(), e.getStatus());

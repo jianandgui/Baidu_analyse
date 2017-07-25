@@ -22,6 +22,7 @@ public class HandledEventPage {
     private String recorder;
     private String detail;
     private String eventHandler;
+    private String postType;
 
     public HandledEventPage() {
     }
@@ -38,7 +39,7 @@ public class HandledEventPage {
         setRecorder(handledEvent.getRecorder());
         setDetail(handledEvent.getDetail());
         setEventHandler(handledEvent.getEventHandler());
-
+        setPostType(handledEvent.getPostType());
         if (handledTime != null) {
             setHandledTime(handledEvent.getHandledTime().getTime());
         }
@@ -134,5 +135,13 @@ public class HandledEventPage {
 
     public void setEventHandler(String eventHandler) {
         this.eventHandler = eventHandler;
+    }
+
+    public String getPostType() {
+        return postType;
+    }
+
+    public void setPostType(String postType) {
+        this.postType = postType;
     }
 }

@@ -19,7 +19,7 @@ public class DailyEventDaoTest {
     DailyEventDao dailyEventDao;
     @Test
     public void should_print_daily_event_list()throws Exception{
-//        List<DailyEvent> list = dailyEventDao.selectEventsBetweenTime("2017-4-30 00:00:00","2017-5-3 00:00:00","西南石油大学");
+//        List<DailyEvent> list = dailyEventDao.selectByGivenTimes("2017-4-30 00:00:00","2017-5-3 00:00:00","西南石油大学");
         List<DailyEvent> list = dailyEventDao.selectAll(0,5);
         list.forEach(
                 (DailyEvent dailyEvent) -> {
@@ -30,7 +30,7 @@ public class DailyEventDaoTest {
 
     @Test
     public void should_get_chart_event_list()throws Exception{
-        List<DailyEvent> list = dailyEventDao.selectEventsBetweenTime("2017-4-30 00:00:00"
+        List<DailyEvent> list = dailyEventDao.selectByGivenTimes("2017-4-30 00:00:00"
                 ,"2017-5-3 00:00:00","西南石油大学",false);
         list.forEach(
                 (DailyEvent dailyEvent) -> {
