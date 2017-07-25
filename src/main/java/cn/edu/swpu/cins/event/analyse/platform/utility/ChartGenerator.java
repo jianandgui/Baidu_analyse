@@ -1,6 +1,7 @@
 package cn.edu.swpu.cins.event.analyse.platform.utility;
 
-import cn.edu.swpu.cins.event.analyse.platform.enums.ChartDataEnum;
+//import cn.edu.swpu.cins.event.analyse.platform.enums.ChartDataEnum;
+import cn.edu.swpu.cins.event.analyse.platform.enums.ChartDataTypeEnum;
 import cn.edu.swpu.cins.event.analyse.platform.enums.ChartTypeEnum;
 import cn.edu.swpu.cins.event.analyse.platform.exception.OperationFailureException;
 import cn.edu.swpu.cins.event.analyse.platform.model.persistence.DailyEvent;
@@ -107,18 +108,18 @@ public class ChartGenerator {
             long time = event.getPostTime().getTime();
             if (time - curDay < DAY) {
                 //事件的发帖时间在当天则统计
-                if (ChartDataEnum.POSTCOUNT.getDataType().equals(dataType)) {
+                if (ChartDataTypeEnum.POSTCOUNT.getDataType().equals(dataType)) {
                     count++;
-                } else if (ChartDataEnum.FOLOWCOUNT.getDataType().equals(dataType)) {
+                } else if (ChartDataTypeEnum.FOLOWCOUNT.getDataType().equals(dataType)) {
                     count += event.getFollowCount();
                 }
 
             } else {
                 //清算count,生成相应的chartresult插入list
                 day[dayNo] = count;
-                if (ChartDataEnum.POSTCOUNT.getDataType().equals(dataType)) {
+                if (ChartDataTypeEnum.POSTCOUNT.getDataType().equals(dataType)) {
                     count = 1;
-                } else if (ChartDataEnum.FOLOWCOUNT.getDataType().equals(dataType)) {
+                } else if (ChartDataTypeEnum.FOLOWCOUNT.getDataType().equals(dataType)) {
                     count = event.getFollowCount();
                 }
                 int dayMin = (int) ((time - curDay) / DAY);

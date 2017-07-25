@@ -4,16 +4,14 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.edu.swpu.cins.event.analyse.platform.dao.TopicDao">
 
-
-    <delete id="deleteByIds" >
+    <delete id="deleteByIds">
         DELETE
         FROM special_topic
-        WHERE id in
+        WHERE id IN
         <foreach item="id" index="index" collection="list"
                  open="(" separator="," close=")">
             #{id}
         </foreach>
     </delete>
-
 
 </mapper>
