@@ -8,6 +8,7 @@ import cn.edu.swpu.cins.event.analyse.platform.exception.NoEventException;
 import cn.edu.swpu.cins.event.analyse.platform.exception.OperationFailureException;
 import cn.edu.swpu.cins.event.analyse.platform.model.persistence.HandledEvent;
 import cn.edu.swpu.cins.event.analyse.platform.model.view.HandledEventPage;
+import cn.edu.swpu.cins.event.analyse.platform.model.view.VO;
 import cn.edu.swpu.cins.event.analyse.platform.service.HandledEventService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -34,9 +35,22 @@ public class HandledEventServiceImpl implements HandledEventService {
         this.pageSize = pageSize;
     }
 
+    /**
+     * 现在使用一个接口返回事件列表和相应总页数　　使用VO类　　
+     *
+     *
+     * @param page　
+     * @param more　
+     * @param isHandled　是否已处置
+     * @param isFeedBack 是否已反馈
+     * @param isAll　是否默认
+     * @return
+     * @throws BaseException
+     */
     @Override
-    public List<HandledEventPage> getHandledEvents(int page,int more,int isHandled,int isFeedBack,boolean isAll) throws BaseException{
+    public VO getHandledEvents(int page, int more, int isHandled, int isFeedBack, boolean isAll) throws BaseException{
 
+        VO vo=new VO();
         int pageSize = this.pageSize;
 
         if(more>0){
@@ -47,25 +61,57 @@ public class HandledEventServiceImpl implements HandledEventService {
             throw new IlleagalArgumentException();
         }
 
-        List<HandledEvent> list = handledEventDao.selectAll((--page)* pageSize, pageSize,isHandled,isFeedBack,isAll);
+        List<HandledEvent> list = handledEventDao.selectAll((--page)* pageSize, pageSize);
 
 
 
         if(list.size()<=0){
             throw new NoEventException();
         }else {
-            return //findByConditions(list,isHandled,isFeedBack,isAll)
-                     list
+
+            vo.setHandledEventPageList(findByConditions(list,isHandled,isFeedBack,isAll)
                     .stream()
                     .map(HandledEventPage::new)
-                    .collect(toList());
+                    .collect(toList()));
+
+
+            vo.setPages(getPageCount(more,(int)findByConditions(list,isHandled,isFeedBack,isAll)
+                    .stream()
+                    .count()));
+
+            return vo;
+
+        }
+    }
+
+    //这个方法修改使用方式
+
+    public int getPageCount(int more,int eventCount) throws BaseException {
+
+        int pageSize = this.pageSize;
+
+        if(more>0){
+            pageSize += more;
+        }
+
+        try {
+
+            int pageCount = eventCount/pageSize;
+
+            if(eventCount%pageSize!=0){
+                pageCount++;
+            }
+
+            return pageCount;
+        }catch (Exception e){
+            throw new BaseException("内部错误", HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
     //单独抽离一个方法出来作判断是否选择情况(由于事件列表必须有页数　所以此方法并不适用)
 
     //约定字段码　：　　０代表未处置或者未反馈　１代表已处置和已经反馈　　２代表未处置和已经作出处置的事件都要查询出
-    /**
+
 
     public  List<HandledEvent> findByConditions(List<HandledEvent> handledEventList,int isHandled,int isFeedBack,boolean isAll ){
 
@@ -75,7 +121,8 @@ public class HandledEventServiceImpl implements HandledEventService {
         if(isHandled==0){
            if(isFeedBack==0) {
                return handledEventList.stream()
-                       .filter(handledEvent -> handledEvent.getHandledCondition().equals("未处置") && handledEvent.getFeedbackCondition() == 0)
+                       .filter(handledEvent -> handledEvent.getHandledCondition().equals("未处置"))
+                       .filter(handledEvent -> handledEvent.getFeedbackCondition()==0)
                        .collect(toList());
            }else {
                return handledEventList.stream()
@@ -86,11 +133,13 @@ public class HandledEventServiceImpl implements HandledEventService {
         if(isHandled==1){
             if(isFeedBack==0){
                 return handledEventList.stream()
-                        .filter(handledEvent -> !handledEvent.getHandledCondition().equals("未处置") && handledEvent.getFeedbackCondition()==0)
+                        .filter(handledEvent -> !handledEvent.getHandledCondition().equals("未处置"))
+                        .filter(handledEvent -> handledEvent.getFeedbackCondition()==0)
                         .collect(toList());
             }else if(isFeedBack==1){
                 return handledEventList.stream()
-                        .filter(handledEvent -> !handledEvent.getHandledCondition().equals("未处置") && handledEvent.getFeedbackCondition()==1)
+                        .filter(handledEvent -> !handledEvent.getHandledCondition().equals("未处置"))
+                        .filter(handledEvent -> handledEvent.getFeedbackCondition()==1)
                         .collect(toList());
             }else {
                 return handledEventList.stream()
@@ -118,30 +167,8 @@ public class HandledEventServiceImpl implements HandledEventService {
 
         return null;
     }
-*/
-    @Override
-    public int getPageCount(int more) throws BaseException {
 
-        int pageSize = this.pageSize;
 
-        if(more>0){
-            pageSize += more;
-        }
-
-        try {
-            int eventCount = handledEventDao.selectCount();
-
-            int pageCount = eventCount/pageSize;
-
-            if(eventCount%pageSize!=0){
-                pageCount++;
-            }
-
-            return pageCount;
-        }catch (Exception e){
-            throw new BaseException("内部错误", HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-    }
 
     @Override
     public int handle(HandledEventPage handledEventPage) throws BaseException {

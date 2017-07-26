@@ -4,6 +4,7 @@ import cn.edu.swpu.cins.event.analyse.platform.exception.BaseException;
 import cn.edu.swpu.cins.event.analyse.platform.model.persistence.HandledEvent;
 import cn.edu.swpu.cins.event.analyse.platform.model.view.EventDelete;
 import cn.edu.swpu.cins.event.analyse.platform.model.view.HandledEventPage;
+import cn.edu.swpu.cins.event.analyse.platform.model.view.VO;
 import cn.edu.swpu.cins.event.analyse.platform.service.HandledEventService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -30,26 +31,25 @@ public class HandledEventController {
     @GetMapping("/handledEvent/{page}")
     public ResponseEntity<?> getHandledEvents(@PathVariable("page") int page,
                                               @RequestParam (required = false,name="isHandled",defaultValue = "2") int isHandled,
-                                              @RequestParam(required = false,name = "isFeedBack",defaultValue = "2") int isReflect,
+                                              @RequestParam(required = false,name = "isFeedBack",defaultValue = "2") int isFeedBack,
                                               @RequestParam(required = false,name = "more",defaultValue = "0") int more,
                                               @RequestParam (required = false,name="isAll",defaultValue = "true") boolean isAll) {
         try {
-            List<HandledEventPage> list;
-            list = handledEventService.getHandledEvents(page,more,isHandled,isReflect,isAll);
-            return new ResponseEntity<>(list, HttpStatus.OK);
+            VO vo=handledEventService.getHandledEvents(page,more,isHandled,isFeedBack,isAll);
+            return new ResponseEntity<>(vo, HttpStatus.OK);
         } catch (BaseException e) {
             return new ResponseEntity<>(e.getMessage(), e.getStatus());
         }
     }
 
-    @GetMapping(value = {"/handledEvent/pageCount"})
-    public ResponseEntity<?> getPageCount(@RequestParam(required = false,name = "more",defaultValue = "0") int more) {
-        try {
-            return new ResponseEntity<>(handledEventService.getPageCount(more), HttpStatus.OK);
-        } catch (BaseException e) {
-            return new ResponseEntity<>(e.getMessage(), e.getStatus());
-        }
-    }
+//    @GetMapping(value = {"/handledEvent/pageCount"})
+//    public ResponseEntity<?> getPageCount(@RequestParam(required = false,name = "more",defaultValue = "0") int more) {
+//        try {
+//            return new ResponseEntity<>(handledEventService.getPageCount(more), HttpStatus.OK);
+//        } catch (BaseException e) {
+//            return new ResponseEntity<>(e.getMessage(), e.getStatus());
+//        }
+//    }
 
     //增加批量删除的事件的接口（仅允许删除未处置的事件）
     @PostMapping("/handledEvent")
