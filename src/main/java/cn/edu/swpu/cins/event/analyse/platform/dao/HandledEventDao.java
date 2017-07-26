@@ -29,7 +29,7 @@ public interface HandledEventDao {
             , " ON he.daily_event_id = de.id "
             , " ORDER BY collected_time DESC"
             , " LIMIT #{offset} , #{limit}"})
-    List<HandledEvent> selectAll(@Param("offset") int offset, @Param("limit") int limit);
+    List<HandledEvent> selectAll(@Param("offset") int offset, @Param("limit") int limit,@Param("isHandled") int isHandled,@Param("isFeedBack") int isFeedBack,@Param("isAll") boolean isAll);
 
     @Select({" SELECT id " +
             "FROM ", TABLE_NAME,

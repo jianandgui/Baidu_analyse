@@ -14,4 +14,16 @@
 
     </delete>
 
+    <!--<select id="selectAll" resultType="HandledEvent">-->
+        <!--SELECT * from handled_event-->
+        <!--<where>-->
+            <!--<if test="#{isHandled}== 0">-->
+
+            <!--</if>-->
+
+
+        <!--</where>-->
+
+    <!--</select>-->
+
 </mapper>

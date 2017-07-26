@@ -47,23 +47,25 @@ public class HandledEventServiceImpl implements HandledEventService {
             throw new IlleagalArgumentException();
         }
 
-        List<HandledEvent> list = handledEventDao.selectAll((--page)* pageSize, pageSize);
+        List<HandledEvent> list = handledEventDao.selectAll((--page)* pageSize, pageSize,isHandled,isFeedBack,isAll);
 
 
 
         if(list.size()<=0){
             throw new NoEventException();
         }else {
-            return findByConditions(list,isHandled,isFeedBack,isAll)
+            return //findByConditions(list,isHandled,isFeedBack,isAll)
+                     list
                     .stream()
                     .map(HandledEventPage::new)
                     .collect(toList());
         }
     }
 
-    //单独抽离一个方法出来作判断是否选择情况
+    //单独抽离一个方法出来作判断是否选择情况(由于事件列表必须有页数　所以此方法并不适用)
 
-    //约定字段码　：　　０代表未处置或者未反馈　１代表已处置和已经反馈　　２代表未处置和已经作出处置的事件都要查询出来
+    //约定字段码　：　　０代表未处置或者未反馈　１代表已处置和已经反馈　　２代表未处置和已经作出处置的事件都要查询出
+    /**
 
     public  List<HandledEvent> findByConditions(List<HandledEvent> handledEventList,int isHandled,int isFeedBack,boolean isAll ){
 
@@ -116,7 +118,7 @@ public class HandledEventServiceImpl implements HandledEventService {
 
         return null;
     }
-
+*/
     @Override
     public int getPageCount(int more) throws BaseException {
 

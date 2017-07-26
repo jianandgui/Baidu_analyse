@@ -53,9 +53,9 @@ public class HandledEventController {
 
     //增加批量删除的事件的接口（仅允许删除未处置的事件）
     @PostMapping("/handledEvent")
-    public ResponseEntity<?> deleteEvents(@RequestBody List<Integer> ids){
+    public ResponseEntity<?> deleteEvents(@RequestBody EventDelete ids){
         try {
-            int num=handledEventService.deleteEvents(ids);
+            int num=handledEventService.deleteEvents(ids.getIds());
             if(num>0){
                 return new ResponseEntity<Object>("删除成功",HttpStatus.OK);
             }
