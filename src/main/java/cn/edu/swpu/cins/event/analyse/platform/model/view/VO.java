@@ -4,6 +4,8 @@ import java.util.List;
 
 public class VO {
 
+    //返回事件列表和总页数
+
     private List<HandledEventPage> handledEventPageList;
     private int pages;
 

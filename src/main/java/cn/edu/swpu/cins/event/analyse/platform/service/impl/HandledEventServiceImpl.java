@@ -61,23 +61,37 @@ public class HandledEventServiceImpl implements HandledEventService {
             throw new IlleagalArgumentException();
         }
 
-        List<HandledEvent> list = handledEventDao.selectAll((--page)* pageSize, pageSize);
+        //List<HandledEvent> list = handledEventDao.selectAll((--page)* pageSize, pageSize);
+
+        List<HandledEvent> list = handledEventDao.selectAll();
 
 
+        //事件总数
+        int eventCount=(int)findByConditions(list, isHandled, isFeedBack, isAll)
+                .stream()
+                .count();
+
+        int toIndex=0;
+        int fromIndex=(page-1) * pageSize;
 
         if(list.size()<=0){
             throw new NoEventException();
         }else {
+            if((page-1) * pageSize  +pageSize > eventCount){
+                toIndex=eventCount;
+            }
+            else {
+                toIndex=(page-1) * pageSize  +pageSize;
+            }
 
-            vo.setHandledEventPageList(findByConditions(list,isHandled,isFeedBack,isAll)
+            vo.setHandledEventPageList(findByConditions(list, isHandled, isFeedBack, isAll)
+                    .subList(fromIndex, toIndex)
                     .stream()
                     .map(HandledEventPage::new)
                     .collect(toList()));
 
 
-            vo.setPages(getPageCount(more,(int)findByConditions(list,isHandled,isFeedBack,isAll)
-                    .stream()
-                    .count()));
+            vo.setPages(getPageCount(more, eventCount));
 
             return vo;
 
