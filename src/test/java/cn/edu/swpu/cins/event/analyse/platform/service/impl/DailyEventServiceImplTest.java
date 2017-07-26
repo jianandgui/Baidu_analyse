@@ -32,18 +32,18 @@ public class DailyEventServiceImplTest {
         this.dailyEventService=new DailyEventServiceImpl(dailyEventDao,handledEventDao,5);
     }
 
-    @Test
-    public void should_collect_success() throws Exception {
-        HandledEvent handledEvent = new HandledEvent();
-        Mockito.when(handledEventDao.selectByDailyEvent(1)).thenReturn(null);
-        dailyEventService.collectEvent("林峰",1);
-    }
-
-    @Test(expected = RepeatlyCollectException.class)
-    public void should_throw_repeatCollectException_when_collectEvent() throws Exception{
-        Mockito.when(handledEventDao.selectByDailyEvent(1)).thenReturn(new HandledEvent());
-        dailyEventService.collectEvent("小明",1);
-    }
+//    @Test
+//    public void should_collect_success() throws Exception {
+//        HandledEvent handledEvent = new HandledEvent();
+//        Mockito.when(handledEventDao.selectByDailyEvent(1)).thenReturn(null);
+//        dailyEventService.collectEvent("林峰",1);
+//    }
+//
+//    @Test(expected = RepeatlyCollectException.class)
+//    public void should_throw_repeatCollectException_when_collectEvent() throws Exception{
+//        Mockito.when(handledEventDao.selectByDailyEvent(1)).thenReturn(new HandledEvent());
+//        dailyEventService.collectEvent("小明",1);
+//    }
 
 //    @Test
 //    public void test_chart_result() throws Exception{

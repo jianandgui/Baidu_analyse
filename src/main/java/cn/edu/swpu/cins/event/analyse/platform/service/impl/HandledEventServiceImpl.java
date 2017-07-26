@@ -98,7 +98,13 @@ public class HandledEventServiceImpl implements HandledEventService {
         }
     }
 
+//    @Override
+//    public int getPageCount(int more) throws BaseException {
+//        return 0;
+//    }
+
     //这个方法修改使用方式
+
 
     public int getPageCount(int more,int eventCount) throws BaseException {
 

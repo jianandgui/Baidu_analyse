@@ -14,4 +14,23 @@
         </foreach>
     </delete>
 
+    <resultMap id="topicResultMap" type="cn.edu.swpu.cins.event.analyse.platform.model.persistence.Topic">
+        <result typeHandler="cn.edu.swpu.cins.event.analyse.platform.mybatis.typehandler.StringArrayTypeHandler" column="region" javaType="list"
+                jdbcType="VARCHAR"
+                property="region"/>
+        <result typeHandler="cn.edu.swpu.cins.event.analyse.platform.mybatis.typehandler.StringArrayTypeHandler" column="rules" javaType="list"
+                jdbcType="VARCHAR"
+                property="rules"/>
+    </resultMap>
+
+    <select id="selectAll" resultMap="topicResultMap">
+        SELECT id,name,region,rules
+        from special_topic
+    </select>
+
+    <insert id="insertTopic" parameterType="cn.edu.swpu.cins.event.analyse.platform.model.persistence.Topic">
+
+        INSERT INTO special_topic (name,rules,region) VALUE (#{name},#{rules ,javaType = List , jdbcType = VARCHAR,typeHandler=cn.edu.swpu.cins.event.analyse.platform.mybatis.typehandler.StringArrayTypeHandler},#{region ,javaType = List , jdbcType = VARCHAR,typeHandler=cn.edu.swpu.cins.event.analyse.platform.mybatis.typehandler.StringArrayTypeHandler })
+    </insert>
+
 </mapper>

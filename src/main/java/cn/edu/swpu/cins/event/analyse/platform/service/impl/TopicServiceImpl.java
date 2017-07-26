@@ -33,23 +33,29 @@ public class TopicServiceImpl implements TopicService {
     public int addTopic(Topic topic) throws BaseException {
         try {
             String name = topic.getName();
-            String region = topic.getRegion();
+            List<String> regions = topic.getRegion();
             List<String> rules = topic.getRules();
 
-            if (rules == null || name == null || region == null
-                    || region.length() > 45 || name.length() > 45
-                    || "".equals(region.trim()) || "".equals(name.trim())) {
-                throw new IlleagalArgumentException();
+            for (String reg:regions){
+                if (rules == null || name == null || regions == null
+                        || reg.length() > 45 || name.length() > 45
+                        || "".equals(reg.trim()) || "".equals(name.trim())) {
+                    throw new IlleagalArgumentException();
+                }
+
+                //排除空字符串
+                rules = rules.stream()
+                        .filter(rule -> !"".equals(rule.trim()))
+                        .collect(Collectors.toList());
+
+                topic.setRules(rules);
+                topic.setName(name.trim());
+                topic.setRegion(regions.stream().filter(regs -> !"".equals(regs.trim())).collect(Collectors.toList()));
+
             }
 
-            //排除空字符串
-            rules = rules.stream()
-                    .filter(rule -> !"".equals(rule.trim()))
-                    .collect(Collectors.toList());
 
-            topic.setRules(rules);
-            topic.setName(name.trim());
-            topic.setRegion(region.trim());
+
 
             int insertCount = topicDao.insertTopic(topic);
 
@@ -76,7 +82,7 @@ public class TopicServiceImpl implements TopicService {
 
         List<Topic> list = topicDao.selectAll();
 
-        if (list.size() <= 0) {
+        if (list.isEmpty()) {
             throw new NoEventException();
         } else {
             return list;

@@ -11,13 +11,13 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/event/topic")
-public class TopicController {
+@RequestMapping("event/topic")
+public class TopicsController {
 
     private TopicService topicService;
 
     @Autowired
-    public TopicController(TopicService topicService) {
+    public TopicsController(TopicService topicService) {
         this.topicService = topicService;
     }
 

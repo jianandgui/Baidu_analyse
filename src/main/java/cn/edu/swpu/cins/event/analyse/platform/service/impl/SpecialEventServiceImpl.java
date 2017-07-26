@@ -53,9 +53,15 @@ public class SpecialEventServiceImpl implements SpecialEventService {
         List<DailyEvent> dailyEvents;
         ArrayList<String> regions = new ArrayList<>();
 
+
+
         for (Topic topic : topics) {
-            regions.add(topic.getRegion());
+            for(String reg:topic.getRegion()){
+                regions.add(reg);
+            }
+
         }
+
 
         dailyEvents = getEventByRegions(regions);
 
@@ -96,7 +102,10 @@ public class SpecialEventServiceImpl implements SpecialEventService {
         ArrayList<String> regions = new ArrayList<>();
 
         for (Topic topic : topics) {
-            regions.add(topic.getRegion());
+            for(String reg:topic.getRegion()){
+                regions.add(reg);
+            }
+
         }
 
         dailyEvents = getEventByRegions(regions);
@@ -135,13 +144,17 @@ public class SpecialEventServiceImpl implements SpecialEventService {
         String content = event.getMainView();
 
         for (Topic topic : topics) {
-            if (content.contains(topic.getRegion())) {
-                for (String rule : topic.getRules()) {
-                    if (content.contains(rule)) {
-                        return true;
+            for (String region:topic.getRegion()){
+
+                if (content.contains(region) ){
+                    for (String rule : topic.getRules()) {
+                        if (content.contains(rule)) {
+                            return true;
+                        }
                     }
                 }
             }
+
         }
 
         return false;

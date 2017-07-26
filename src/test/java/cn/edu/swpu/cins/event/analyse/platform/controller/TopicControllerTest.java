@@ -1,8 +1,6 @@
 package cn.edu.swpu.cins.event.analyse.platform.controller;
 
-import cn.edu.swpu.cins.event.analyse.platform.model.view.DailyEventPage;
-import cn.edu.swpu.cins.event.analyse.platform.service.DailyEventService;
-import org.assertj.core.util.Lists;
+import cn.edu.swpu.cins.event.analyse.platform.service.TopicService;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -16,41 +14,32 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
-import java.util.List;
-
-import static org.mockito.Mockito.when;
+import static org.junit.Assert.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-/**
- * Created by lp-deepin on 17-5-7.
- */
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class DailyEventControllerTest {
+public class TopicControllerTest {
+
 
     @MockBean
-    private DailyEventService dailyEventService;
+    private TopicService topicService;
 
     @Autowired
-    private DailyEventController controller;
+    private TopicController topicController;
 
     private MockMvc mockMvc;
 
     @Before
     public void initialize(){
         MockitoAnnotations.initMocks(this);
-        mockMvc = MockMvcBuilders.standaloneSetup(controller).build();
+        mockMvc = MockMvcBuilders.standaloneSetup(topicController).build();
     }
-
     @Test
-    public void should_get_events_return_OK()throws Exception{
-        int page = 1;
-        DailyEventPage event = new DailyEventPage();
-        List<DailyEventPage> list = Lists.newArrayList(event);
-        when(dailyEventService.getDailyEventsByPage(1,0)).thenReturn(list);
-        mockMvc.perform(MockMvcRequestBuilders.get("/event/dailyEvent/page/1")
+    public void getTopics() throws Exception {
+        mockMvc.perform(MockMvcRequestBuilders.get("/event/topic/list")
                 .accept(MediaType.APPLICATION_JSON_UTF8))
                 .andExpect(status().isOk());
-//                .andExpect(jsonPath("${0}").value(list));
     }
+
 }

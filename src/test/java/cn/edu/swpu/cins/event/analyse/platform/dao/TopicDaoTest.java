@@ -9,6 +9,12 @@ import org.springframework.test.context.junit4.SpringRunner;
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class TopicDaoTest {
+    @Test
+    public void selectAll() throws Exception {
+
+        System.out.println(topicDao.selectAll());
+    }
+
     @Autowired
     TopicDao topicDao;
 
@@ -34,4 +40,6 @@ public class TopicDaoTest {
 //        Integer[] arr = {1,2,3};
 //        topicDao.deleteByIds(Arrays.asList(arr));
     }
+
+
 }

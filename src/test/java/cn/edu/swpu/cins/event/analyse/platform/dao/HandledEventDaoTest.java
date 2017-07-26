@@ -32,12 +32,12 @@ public class HandledEventDaoTest {
 //        }
     }
 
-    @Test
-    public void test_selectAll() throws Exception{
-        List<HandledEvent> handledEvents = handledEventDao.selectAll(0,5);
-        handledEvents.forEach(
-                System.out::println
-        );
-
-    }
+//    @Test
+//    public void test_selectAll() throws Exception{
+//        List<HandledEvent> handledEvents = handledEventDao.selectAll(0,5);
+//        handledEvents.forEach(
+//                System.out::println
+//        );
+//
+//    }
 }

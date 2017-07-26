@@ -21,7 +21,7 @@ public interface HandledEventService {
      * @return
      * @throws BaseException
      */
-    //int getPageCount(int more) throws BaseException;
+//    int getPageCount(int more) throws BaseException;
 
     /**
      * 处置业务接口

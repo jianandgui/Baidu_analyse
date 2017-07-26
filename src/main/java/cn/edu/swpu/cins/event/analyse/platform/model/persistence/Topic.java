@@ -5,7 +5,7 @@ import java.util.List;
 public class Topic {
     private int id;
     private String name;
-    private String region;
+    private List<String> region;
     private List<String> rules;
 
     public Topic() {
@@ -27,12 +27,12 @@ public class Topic {
         this.name = name;
     }
 
-    public String getRegion() {
+    public List<String> getRegion() {
         return region;
     }
 
-    public void setRegion(String region) {
-        this.region = region;
+    public void setRegion(List<String> regions) {
+        this.region = regions;
     }
 
     public List<String> getRules() {
@@ -48,7 +48,7 @@ public class Topic {
         return "Topic{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", region='" + region + '\'' +
+                ", region=" + region +
                 ", rules=" + rules +
                 '}';
     }
