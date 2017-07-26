@@ -1,6 +1,5 @@
 package cn.edu.swpu.cins.event.analyse.platform.utility;
 
-//import cn.edu.swpu.cins.event.analyse.platform.enums.ChartDataEnum;
 import cn.edu.swpu.cins.event.analyse.platform.enums.ChartDataTypeEnum;
 import cn.edu.swpu.cins.event.analyse.platform.enums.ChartTypeEnum;
 import cn.edu.swpu.cins.event.analyse.platform.exception.OperationFailureException;
