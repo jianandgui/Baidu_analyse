@@ -9,12 +9,22 @@ public class VO<T> {
     private List<T> EventPageList;
     private int pages;
 
-    public List<T> EventPageList() {
+
+    public VO(List<T> eventPageList, int pages) {
+        EventPageList = eventPageList;
+        this.pages = pages;
+    }
+
+
+    public VO() {
+    }
+
+    public List<T> getEventPageList() {
         return EventPageList;
     }
 
-    public void EventPageList(List<T> EventPageList) {
-        this.EventPageList = EventPageList;
+    public void setEventPageList(List<T> eventPageList) {
+        EventPageList = eventPageList;
     }
 
     public int getPages() {
@@ -23,13 +33,5 @@ public class VO<T> {
 
     public void setPages(int pages) {
         this.pages = pages;
-    }
-
-    public VO(List<T> EventPageList, int pages) {
-        this.EventPageList = EventPageList;
-        this.pages = pages;
-    }
-
-    public VO() {
     }
 }
