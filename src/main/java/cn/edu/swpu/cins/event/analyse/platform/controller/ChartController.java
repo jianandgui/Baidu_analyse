@@ -29,10 +29,11 @@ public class ChartController {
                                             @RequestParam(value = "data") String dataTypeName,
                                             @RequestParam(value = "beginTime") String beginTime,
                                             @RequestParam(value = "endTime") String endTime,
-                                            @RequestParam(value = "table") String table ) {
+                                            @RequestParam(value = "table") String table,
+                                            @RequestParam(value = "ids") List<Integer> ids) {
         try {
             Map<String, List<ChartPoint>> result;
-            result = chartService.getChartPoints(source, dataTypeName, beginTime, endTime, table);
+            result = chartService.getChartPoints(source, dataTypeName, beginTime, endTime, table,ids);
             return new ResponseEntity<>(result, HttpStatus.OK);
         } catch (BaseException e) {
             return new ResponseEntity<>(e.getMessage(), e.getStatus());

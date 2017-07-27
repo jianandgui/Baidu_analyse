@@ -15,5 +15,5 @@ public interface ChartService {
      *
      * @return
      */
-    public Map<String, List<ChartPoint>> getChartPoints(String source, String dataTypeName, String beginTime, String endTime, String eventTable) throws BaseException;
+    public Map<String, List<ChartPoint>> getChartPoints(String source, String dataTypeName, String beginTime, String endTime, String eventTable,List<Integer> ids) throws BaseException;
 }

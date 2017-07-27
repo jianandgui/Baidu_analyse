@@ -2,19 +2,19 @@ package cn.edu.swpu.cins.event.analyse.platform.model.view;
 
 import java.util.List;
 
-public class VO {
+public class VO<T> {
 
     //返回事件列表和总页数
 
-    private List<HandledEventPage> handledEventPageList;
+    private List<T> EventPageList;
     private int pages;
 
-    public List<HandledEventPage> getHandledEventPageList() {
-        return handledEventPageList;
+    public List<T> EventPageList() {
+        return EventPageList;
     }
 
-    public void setHandledEventPageList(List<HandledEventPage> handledEventPageList) {
-        this.handledEventPageList = handledEventPageList;
+    public void EventPageList(List<T> EventPageList) {
+        this.EventPageList = EventPageList;
     }
 
     public int getPages() {
@@ -25,8 +25,8 @@ public class VO {
         this.pages = pages;
     }
 
-    public VO(List<HandledEventPage> handledEventPageList, int pages) {
-        this.handledEventPageList = handledEventPageList;
+    public VO(List<T> EventPageList, int pages) {
+        this.EventPageList = EventPageList;
         this.pages = pages;
     }
 

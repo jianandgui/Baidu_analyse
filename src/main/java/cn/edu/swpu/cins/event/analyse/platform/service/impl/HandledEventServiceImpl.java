@@ -84,7 +84,7 @@ public class HandledEventServiceImpl implements HandledEventService {
                 toIndex=(page-1) * pageSize  +pageSize;
             }
 
-            vo.setHandledEventPageList(findByConditions(list, isHandled, isFeedBack, isAll)
+            vo.EventPageList(findByConditions(list, isHandled, isFeedBack, isAll)
                     .subList(fromIndex, toIndex)
                     .stream()
                     .map(HandledEventPage::new)

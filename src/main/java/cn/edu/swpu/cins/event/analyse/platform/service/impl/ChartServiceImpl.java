@@ -51,7 +51,8 @@ public class ChartServiceImpl implements ChartService {
             , String dataTypeName
             , String beginTime
             , String endTime
-            , String eventTable) throws BaseException {
+            , String eventTable
+            , List<Integer> ids) throws BaseException {
         Map<String, List<ChartPoint>> map = new HashMap<String, List<ChartPoint>>();
         //判断数据类型是否正确
         if (!ChartDataTypeEnum.isInclude(dataTypeName)) {
@@ -88,7 +89,7 @@ public class ChartServiceImpl implements ChartService {
             } else if (EventTableEnum.HANDLED_EVENT.getEventTable().equals(eventTable)) {
                 events = dailyEventDao.selectByGivenTimes(beginDateFormat, endDateFormat, source, true);
             } else if ((EventTableEnum.SPECIAL_EVENT.getEventTable().equals(eventTable))) {
-                events = specialEventService.getSpecialEvent(0, true,0);
+                events = specialEventService.getSpecialEvent(0, true,0,ids).EventPageList();
                 events = events
                         .stream()
                         .filter((DailyEvent dailyEvent) -> {

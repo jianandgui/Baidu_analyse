@@ -7,6 +7,7 @@ import cn.edu.swpu.cins.event.analyse.platform.exception.NoEventException;
 import cn.edu.swpu.cins.event.analyse.platform.exception.OperationFailureException;
 import cn.edu.swpu.cins.event.analyse.platform.model.persistence.DailyEvent;
 import cn.edu.swpu.cins.event.analyse.platform.model.persistence.Topic;
+import cn.edu.swpu.cins.event.analyse.platform.model.view.VO;
 import cn.edu.swpu.cins.event.analyse.platform.service.SpecialEventService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -39,9 +40,11 @@ public class SpecialEventServiceImpl implements SpecialEventService {
 
 
     @Override
-    public List<DailyEvent> getSpecialEvent(int page, boolean getAll ,int more) throws BaseException {
+    public VO getSpecialEvent(int page, boolean getAll , int more, List<Integer> ids) throws BaseException {
 
+        VO vo=new VO();
         int pageSize = this.pageSize;
+        int pageCount=0;
 
         if(more>0){
             pageSize += more;
@@ -49,7 +52,8 @@ public class SpecialEventServiceImpl implements SpecialEventService {
 
         int offset = --page * pageSize;
 
-        List<Topic> topics = topicDao.selectAll();
+        List<Topic> topics = topicDao.selectAll().stream().filter(topic -> ids.contains(topic.getId())).collect(toList());
+
         List<DailyEvent> dailyEvents;
         ArrayList<String> regions = new ArrayList<>();
 
@@ -83,21 +87,26 @@ public class SpecialEventServiceImpl implements SpecialEventService {
                 throw new NoEventException();
             }
 
-            return list.subList(offset, limit);
+            vo.EventPageList(list.subList(offset, limit));
+            vo.setPages(getPageCount(more,topics));
+            return null;
         } else {
-            return list;
+            //return list;
+            vo.EventPageList(list);
+            vo.setPages(getPageCount(more,topics));
+            return null;
         }
     }
 
-    @Override
-    public int getPageCount(int more) throws BaseException {
+
+    public int getPageCount(int more,List<Topic> topics) throws BaseException {
         int pageSize = this.pageSize;
 
         if(more>0){
             pageSize += more;
         }
 
-        List<Topic> topics = topicDao.selectAll();
+//        List<Topic> topics = topicDao.selectAll();
         List<DailyEvent> dailyEvents;
         ArrayList<String> regions = new ArrayList<>();
 
@@ -124,13 +133,13 @@ public class SpecialEventServiceImpl implements SpecialEventService {
     }
 
 
-    //根据填写专题的规则获取事件信息（事件均未处置）
-    private List<DailyEvent> getEventByRules(List<String> rules) {
-        List<DailyEvent> dailyEvents;
-        dailyEvents = dailyEventDao.selectByRules(rules);
-
-        return dailyEvents;
-    }
+//    //根据填写专题的规则获取事件信息（事件均未处置）
+//    private List<DailyEvent> getEventByRules(List<String> rules) {
+//        List<DailyEvent> dailyEvents;
+//        dailyEvents = dailyEventDao.selectByRules(rules);
+//
+//        return dailyEvents;
+//    }
 
     //根据填写专题的地域获取事件信息（事件均未处置）
     private List<DailyEvent> getEventByRegions(List<String> regions) {
@@ -145,7 +154,6 @@ public class SpecialEventServiceImpl implements SpecialEventService {
 
         for (Topic topic : topics) {
             for (String region:topic.getRegion()){
-
                 if (content.contains(region) ){
                     for (String rule : topic.getRules()) {
                         if (content.contains(rule)) {

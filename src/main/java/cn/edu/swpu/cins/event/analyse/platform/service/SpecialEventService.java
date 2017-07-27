@@ -2,6 +2,7 @@ package cn.edu.swpu.cins.event.analyse.platform.service;
 
 import cn.edu.swpu.cins.event.analyse.platform.exception.BaseException;
 import cn.edu.swpu.cins.event.analyse.platform.model.persistence.DailyEvent;
+import cn.edu.swpu.cins.event.analyse.platform.model.view.VO;
 
 import java.util.List;
 
@@ -10,7 +11,7 @@ import java.util.List;
  */
 public interface SpecialEventService{
 
-    public List<DailyEvent> getSpecialEvent(int page, boolean getAll ,int more) throws BaseException;
+    public VO getSpecialEvent(int page, boolean getAll , int more, List<Integer> ids) throws BaseException;
 
-    public int getPageCount(int more) throws BaseException;
+    //public int getPageCount(int more) throws BaseException;
 }
