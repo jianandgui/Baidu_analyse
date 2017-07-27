@@ -51,8 +51,7 @@ public class ChartServiceImpl implements ChartService {
             , String dataTypeName
             , String beginTime
             , String endTime
-            , String eventTable
-            , List<Integer> ids) throws BaseException {
+            , String eventTable) throws BaseException {
         Map<String, List<ChartPoint>> map = new HashMap<String, List<ChartPoint>>();
         //判断数据类型是否正确
         if (!ChartDataTypeEnum.isInclude(dataTypeName)) {
@@ -89,7 +88,7 @@ public class ChartServiceImpl implements ChartService {
             } else if (EventTableEnum.HANDLED_EVENT.getEventTable().equals(eventTable)) {
                 events = dailyEventDao.selectByGivenTimes(beginDateFormat, endDateFormat, source, true);
             } else if ((EventTableEnum.SPECIAL_EVENT.getEventTable().equals(eventTable))) {
-                events = specialEventService.getSpecialEvent(0, true,0,ids).getEventPageList();
+                events = specialEventService.getSpecialEventForChart(0, true, 0);
                 events = events
                         .stream()
                         .filter((DailyEvent dailyEvent) -> {
@@ -103,14 +102,14 @@ public class ChartServiceImpl implements ChartService {
             }
 
             ChartDataTypeEnum dataType = ChartDataTypeEnum.getDataType(dataTypeName);
-            if(ChartDataTypeEnum.DOUBLELINE.getDataType().equals(dataTypeName)){
+            if (ChartDataTypeEnum.DOUBLELINE.getDataType().equals(dataTypeName)) {
                 List<ChartPoint> postCountPoints = chartGenerator.getChartPoints(events, beginTimeLong, endTimeLong, ChartDataTypeEnum.POSTCOUNT);
                 List<ChartPoint> followCountPoints = chartGenerator.getChartPoints(events, beginTimeLong, endTimeLong, ChartDataTypeEnum.FOLOWCOUNT);
-                map.put("postCountPoints",postCountPoints);
-                map.put("followCountPoints",followCountPoints);
-            }else {
+                map.put("postCountPoints", postCountPoints);
+                map.put("followCountPoints", followCountPoints);
+            } else {
                 List<ChartPoint> list = chartGenerator.getChartPoints(events, beginTimeLong, endTimeLong, dataType);
-                map.put("chartPoints",list);
+                map.put("chartPoints", list);
             }
 
             return map;

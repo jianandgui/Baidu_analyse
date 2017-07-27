@@ -44,7 +44,7 @@ public class SpecialEventServiceImpl implements SpecialEventService {
 
         VO vo=new VO();
         int pageSize = this.pageSize;
-        int pageCount=0;
+
 
         if(more>0){
             pageSize += more;
@@ -89,13 +89,69 @@ public class SpecialEventServiceImpl implements SpecialEventService {
 
             vo.setEventPageList(list.subList(offset, limit));
             vo.setPages(getPageCount(more,topics));
-            return null;
+            return vo;
         } else {
             //return list;
             vo.setEventPageList(list);
             vo.setPages(getPageCount(more,topics));
-            return null;
+            return vo;
         }
+    }
+
+    @Override
+    public List<DailyEvent> getSpecialEventForChart(int page, boolean getAll, int more) throws BaseException {
+
+        int pageSize = this.pageSize;
+//        int pageCount=0;
+
+        if(more>0){
+            pageSize += more;
+        }
+
+        int offset = --page * pageSize;
+
+        List<Topic> topics = topicDao.selectAll();
+
+        List<DailyEvent> dailyEvents;
+        ArrayList<String> regions = new ArrayList<>();
+
+
+
+        for (Topic topic : topics) {
+            for(String reg:topic.getRegion()){
+                regions.add(reg);
+            }
+
+        }
+
+
+        dailyEvents = getEventByRegions(regions);
+
+        //count begin
+        List<DailyEvent> list = dailyEvents
+                .stream()
+                .filter(dailyEvent -> matchEventByTopics(dailyEvent,topics))
+                .filter(dailyEvent -> dailyEvent.getCollectionStatus() == 0)
+                .sorted(comparing(DailyEvent::getPostTime).reversed())
+                .collect(toList());
+        //count end
+
+        //判断是否需要分页。
+        if (!getAll) {
+            //分页获取事件
+            int limit = (offset + pageSize) > list.size() ? list.size() : (offset + pageSize);
+
+            if (offset >= list.size() || offset < 0) {
+                throw new NoEventException();
+            }
+
+            return list;
+        } else {
+            return list;
+
+        }
+
+
     }
 
 

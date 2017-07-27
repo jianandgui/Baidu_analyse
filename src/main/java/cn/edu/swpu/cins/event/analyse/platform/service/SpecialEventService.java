@@ -14,4 +14,6 @@ public interface SpecialEventService{
     public VO getSpecialEvent(int page, boolean getAll , int more, List<Integer> ids) throws BaseException;
 
     //public int getPageCount(int more) throws BaseException;
+
+    List<DailyEvent> getSpecialEventForChart(int page, boolean getAll , int more) throws BaseException;
 }
