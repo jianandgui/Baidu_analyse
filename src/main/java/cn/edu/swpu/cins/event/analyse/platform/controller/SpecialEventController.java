@@ -2,6 +2,7 @@ package cn.edu.swpu.cins.event.analyse.platform.controller;
 
 import cn.edu.swpu.cins.event.analyse.platform.exception.BaseException;
 import cn.edu.swpu.cins.event.analyse.platform.model.persistence.DailyEvent;
+import cn.edu.swpu.cins.event.analyse.platform.model.view.SpecialEventPage;
 import cn.edu.swpu.cins.event.analyse.platform.model.view.VO;
 import cn.edu.swpu.cins.event.analyse.platform.service.SpecialEventService;
 import org.apache.ibatis.annotations.Param;
@@ -24,11 +25,11 @@ public class SpecialEventController {
      */
 
     //获取专题事件的集合
-    @GetMapping("/{page}")
+    @PostMapping("/{page}")
     public ResponseEntity<?> getTopics(@PathVariable int page
-            , @RequestParam(value = "more" , required = false , defaultValue = "0") int more,@RequestParam List<Integer> ids) {
+            , @RequestBody SpecialEventPage specialEventPage) {
         try {
-            VO vo= specialEventService.getSpecialEvent(page,false , more,ids);
+            VO vo= specialEventService.getSpecialEvent(page,false , specialEventPage.getMore(),specialEventPage.getIds());
             return new ResponseEntity<>(vo, HttpStatus.OK);
         } catch (BaseException e) {
             return new ResponseEntity<>(e.getMessage(), e.getStatus());

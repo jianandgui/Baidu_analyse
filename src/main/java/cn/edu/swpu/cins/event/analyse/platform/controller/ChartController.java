@@ -2,6 +2,7 @@ package cn.edu.swpu.cins.event.analyse.platform.controller;
 
 import cn.edu.swpu.cins.event.analyse.platform.exception.BaseException;
 import cn.edu.swpu.cins.event.analyse.platform.model.view.ChartPoint;
+import cn.edu.swpu.cins.event.analyse.platform.model.view.SpecialEventChart;
 import cn.edu.swpu.cins.event.analyse.platform.service.ChartService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -24,16 +25,16 @@ public class ChartController {
         this.chartService = chartService;
     }
 
-    @GetMapping("/chart")
-    public ResponseEntity<?> getChartPoints(@RequestParam(value = "source") String source,
-                                            @RequestParam(value = "data") String dataTypeName,
-                                            @RequestParam(value = "beginTime") String beginTime,
-                                            @RequestParam(value = "endTime") String endTime,
-                                            @RequestParam(value = "table") String table,
-                                            @RequestParam(value = "ids") List<Integer> ids) {
+    @PostMapping("/chart")
+    public ResponseEntity<?> getChartPoints(@RequestBody SpecialEventChart specialEventChart) {
         try {
             Map<String, List<ChartPoint>> result;
-            result = chartService.getChartPoints(source, dataTypeName, beginTime, endTime, table,ids);
+            result = chartService.getChartPoints(specialEventChart.getSource(),
+                    specialEventChart.getDataTypeName(),
+                    specialEventChart.getBeginTime(),
+                    specialEventChart.getEndTime(),
+                    specialEventChart.getTable(),
+                    specialEventChart.getIds());
             return new ResponseEntity<>(result, HttpStatus.OK);
         } catch (BaseException e) {
             return new ResponseEntity<>(e.getMessage(), e.getStatus());
