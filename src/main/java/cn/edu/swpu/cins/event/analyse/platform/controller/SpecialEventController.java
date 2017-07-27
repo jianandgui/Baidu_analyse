@@ -29,6 +29,10 @@ public class SpecialEventController {
     public ResponseEntity<?> getTopics(@PathVariable int page
             , @RequestBody SpecialEventPage specialEventPage) {
         try {
+
+            if(specialEventPage.getIds().isEmpty()){
+                return new ResponseEntity<Object>("0",HttpStatus.OK);
+            }
             VO vo= specialEventService.getSpecialEvent(page,false , specialEventPage.getMore(),specialEventPage.getIds());
             return new ResponseEntity<>(vo, HttpStatus.OK);
         } catch (BaseException e) {
