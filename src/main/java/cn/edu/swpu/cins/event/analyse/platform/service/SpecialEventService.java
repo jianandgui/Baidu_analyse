@@ -11,7 +11,7 @@ import java.util.List;
  */
 public interface SpecialEventService{
 
-    public VO getSpecialEvent(int page, boolean getAll , int more, List<Integer> ids) throws BaseException;
+    VO getSpecialEvent(int page, boolean getAll , int more, List<Integer> ids) throws BaseException;
 
     //public int getPageCount(int more) throws BaseException;
 

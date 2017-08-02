@@ -18,9 +18,11 @@ public interface DailyEventDao {
     static String TABLE_NAME = " daily_event ";
     static String SELECT_FIELD = " id,url,theme,main_view,follow_count,post_type,created_time,source,collection_status,post_time ";
 
+
+//    DATE(post_time)
     @Select({" select ", SELECT_FIELD
             , " from ", TABLE_NAME
-            , " order by DATE(post_time) desc , follow_count desc "
+            , " order by DATE(post_time) desc, follow_count desc,post_time desc"
             , " limit #{offset},#{limit}"})
     List<DailyEvent> selectAll(@Param("offset") int offset, @Param("limit") int limit);
 
