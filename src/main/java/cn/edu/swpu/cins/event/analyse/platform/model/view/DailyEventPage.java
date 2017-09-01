@@ -15,6 +15,7 @@ public class DailyEventPage {
     private int followCount;
     private String postType;
     private long postTime;
+    private long lastFollowTime;
     private String source;
     private short collectionStatus;
 
@@ -31,6 +32,7 @@ public class DailyEventPage {
         source=dailyEvent.getSource();
         collectionStatus =dailyEvent.getCollectionStatus();
         postTime=dailyEvent.getPostTime().getTime();
+        lastFollowTime = dailyEvent.getLastFollowTime().getTime();
     }
 
     public int getId() {
@@ -103,6 +105,14 @@ public class DailyEventPage {
 
     public void setCollectionStatus(short collectionStatus) {
         this.collectionStatus = collectionStatus;
+    }
+
+    public long getLastFollowTime() {
+        return lastFollowTime;
+    }
+
+    public void setLastFollowTime(long lastFollowTime) {
+        this.lastFollowTime = lastFollowTime;
     }
 
     @Override

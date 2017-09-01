@@ -16,7 +16,7 @@ import java.util.List;
 @Mapper
 public interface DailyEventDao {
     static String TABLE_NAME = " daily_event ";
-    static String SELECT_FIELD = " id,url,theme,main_view,follow_count,post_type,created_time,source,collection_status,post_time ";
+    static String SELECT_FIELD = " id,url,theme,main_view,follow_count,post_type,created_time,source,collection_status,post_time,last_follow_time";
 
 
 //    DATE(post_time)

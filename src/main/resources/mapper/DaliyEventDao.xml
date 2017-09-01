@@ -46,14 +46,6 @@
         ORDER BY `post_time` ASC
     </select>
 
-    <!--<select id="selectAll" resultType="cn.edu.swpu.cins.event.analyse.platform.model.persistence.DailyEvent">-->
 
-        <!--SELECT-->
-        <!--id,url,theme,main_view,follow_count,post_type,created_time,source,collection_status,post_time-->
-        <!--from daily_event ORDER BY id DESC  )-->
-        <!--AS t ORDER BY follow_count DESC-->
-        <!--limit #{offset},#{limit}-->
-
-    <!--</select>-->
 
 </mapper>
