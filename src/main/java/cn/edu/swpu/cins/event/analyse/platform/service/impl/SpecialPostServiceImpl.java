@@ -7,7 +7,6 @@ import cn.edu.swpu.cins.event.analyse.platform.exception.OperationFailureExcepti
 import cn.edu.swpu.cins.event.analyse.platform.model.persistence.SpecialPost;
 import cn.edu.swpu.cins.event.analyse.platform.service.SpecialPostService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
