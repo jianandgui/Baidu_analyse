@@ -26,7 +26,7 @@ public class TopicControllerTest {
     private TopicService topicService;
 
     @Autowired
-    private TopicController topicController;
+    private TopicsController topicController;
 
     private MockMvc mockMvc;
 
