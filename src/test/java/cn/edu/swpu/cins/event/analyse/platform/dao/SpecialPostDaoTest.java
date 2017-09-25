@@ -49,4 +49,12 @@ public class SpecialPostDaoTest {
         assertEquals(2,specialPostDao.deleteByIds(ids));
     }
 
+    @Test
+    public void test_specialPostDao() throws Exception {
+        List<Integer> list = new ArrayList<>();
+        list.add(25);
+        List<String> list1=specialPostDao.selectSpecialPostByIds(list);
+        log.info(list1.toString());
+    }
+
 }

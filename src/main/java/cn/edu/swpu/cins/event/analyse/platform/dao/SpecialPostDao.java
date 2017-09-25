@@ -23,6 +23,7 @@ public interface SpecialPostDao {
     })
     int insertSpecialPost(SpecialPost specialPost);
 
+    //专帖页面显示所有专帖名
     @Select({
             " select ",
             SELECT_FIELD ,
@@ -31,5 +32,7 @@ public interface SpecialPostDao {
     List<SpecialPost> selectAllSpecialPost();
 
     int deleteByIds(List<Integer> ids);
+
+    List<String> selectSpecialPostByIds(List<Integer> ids);
 
 }

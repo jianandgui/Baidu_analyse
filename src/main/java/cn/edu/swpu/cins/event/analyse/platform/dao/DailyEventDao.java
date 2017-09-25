@@ -22,7 +22,7 @@ public interface DailyEventDao {
 //    DATE(post_time)
     @Select({" select ", SELECT_FIELD
             , " from ", TABLE_NAME
-            , " order by DATE(post_time) desc, follow_count desc,post_time desc"
+            , " order by DATE(post_time) desc, follow_count desc,post_time desc "
             , " limit #{offset},#{limit}"})
     List<DailyEvent> selectAll(@Param("offset") int offset, @Param("limit") int limit);
 
