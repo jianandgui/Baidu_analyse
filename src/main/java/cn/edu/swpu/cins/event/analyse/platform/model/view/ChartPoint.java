@@ -7,6 +7,14 @@ public class ChartPoint {
     private String x;
     private long y;
 
+    public ChartPoint(String key, Integer value) {
+        this.x = key;
+        this.y = value;
+    }
+
+    public ChartPoint() {
+    }
+
     public String getX() {
         return x;
     }

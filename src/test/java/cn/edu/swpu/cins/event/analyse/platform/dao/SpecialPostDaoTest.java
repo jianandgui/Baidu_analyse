@@ -10,7 +10,6 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.LinkedList;
 import java.util.List;
 
 import static org.junit.Assert.*;
@@ -53,7 +52,7 @@ public class SpecialPostDaoTest {
     public void test_specialPostDao() throws Exception {
         List<Integer> list = new ArrayList<>();
         list.add(25);
-        List<String> list1=specialPostDao.selectSpecialPostByIds(list);
+        List<SpecialPost> list1=specialPostDao.selectSpecialPostByIds(list);
         log.info(list1.toString());
     }
 

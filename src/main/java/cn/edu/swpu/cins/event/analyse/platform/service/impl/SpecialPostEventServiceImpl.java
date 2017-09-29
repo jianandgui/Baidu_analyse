@@ -31,7 +31,7 @@ public class SpecialPostEventServiceImpl implements SpecialPostEventService {
             throw new NoEventException("没有对应的专帖名");
         }
         List<String> urls = new ArrayList<>();
-        
+
         specialPostList.forEach(specialPost -> urls.addAll(specialPost.getUrl()));
         List<SpecialPostEvent> specialPostEventList = specialPostEventDao.selectAll(urls);
 

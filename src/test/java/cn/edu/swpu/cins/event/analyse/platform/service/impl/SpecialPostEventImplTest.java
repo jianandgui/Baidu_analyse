@@ -1,3 +1,4 @@
+/*
 package cn.edu.swpu.cins.event.analyse.platform.service.impl;
 
 
@@ -51,3 +52,4 @@ public class SpecialPostEventImplTest {
         verify(specialPostEventDao).selectAll(urls);
     }
 }
+*/
