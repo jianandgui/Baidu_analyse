@@ -5,7 +5,6 @@ import cn.edu.swpu.cins.event.analyse.platform.model.view.ChartPoint;
 import cn.edu.swpu.cins.event.analyse.platform.service.SpecialPostEventChartService;
 import cn.edu.swpu.cins.event.analyse.platform.utility.FileReader;
 import cn.edu.swpu.cins.event.analyse.platform.utility.MapToList;
-import com.oracle.jrockit.jfr.NoSuchEventException;
 import org.json.JSONException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
