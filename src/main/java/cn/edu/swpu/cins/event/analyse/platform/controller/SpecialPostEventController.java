@@ -2,7 +2,7 @@ package cn.edu.swpu.cins.event.analyse.platform.controller;
 
 import cn.edu.swpu.cins.event.analyse.platform.exception.NoEventException;
 import cn.edu.swpu.cins.event.analyse.platform.model.persistence.SpecialPostEvent;
-import cn.edu.swpu.cins.event.analyse.platform.model.view.DeleteIds;
+import cn.edu.swpu.cins.event.analyse.platform.model.view.Ids;
 import cn.edu.swpu.cins.event.analyse.platform.service.SpecialPostEventService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -23,7 +23,7 @@ public class SpecialPostEventController {
     }
 
     @PostMapping("/specialPostEvents")
-    public ResponseEntity queryAllByIds(@RequestBody DeleteIds ids) throws NoEventException {
+    public ResponseEntity queryAllByIds(@RequestBody Ids ids) throws NoEventException {
         try {
             List<SpecialPostEvent> specialPostEventList = specialPostEventService.queryAll(ids.getIds());
             return new ResponseEntity(specialPostEventList, HttpStatus.OK);

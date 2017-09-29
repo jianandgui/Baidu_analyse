@@ -2,7 +2,7 @@ package cn.edu.swpu.cins.event.analyse.platform.controller;
 
 import cn.edu.swpu.cins.event.analyse.platform.exception.BaseException;
 import cn.edu.swpu.cins.event.analyse.platform.model.persistence.SpecialPost;
-import cn.edu.swpu.cins.event.analyse.platform.model.view.DeleteIds;
+import cn.edu.swpu.cins.event.analyse.platform.model.view.Ids;
 import cn.edu.swpu.cins.event.analyse.platform.service.SpecialPostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -43,7 +43,7 @@ public class SpecialPostController {
     }
 
     @PostMapping("/delete")
-    public ResponseEntity deleteByIds(@RequestBody DeleteIds ids){
+    public ResponseEntity deleteByIds(@RequestBody Ids ids){
         try{
             specialPostService.deleteSpecialPostByIds(ids.getIds());
             return new ResponseEntity("删除成功", HttpStatus.OK);

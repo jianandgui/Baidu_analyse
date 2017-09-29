@@ -14,10 +14,11 @@
         FROM
         <include refid="table"/>
         WHERE url IN
-        <foreach item= "urls" index="index" collection="list"
+        <foreach item= "item" index="index" collection="list"
                  open="(" separator="," close=")">
-            #{urls}
+            #{item}
         </foreach>
+
     </select>
 
 </mapper>

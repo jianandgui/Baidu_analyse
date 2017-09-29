@@ -5,9 +5,9 @@ import lombok.Data;
 import java.util.List;
 
 @Data
-public class DeleteIds {
+public class Ids {
    private List<Integer> ids;
 
-    public DeleteIds() {
+    public Ids() {
     }
 }

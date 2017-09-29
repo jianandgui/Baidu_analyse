@@ -33,6 +33,6 @@ public interface SpecialPostDao {
 
     int deleteByIds(List<Integer> ids);
 
-    List<String> selectSpecialPostByIds(List<Integer> ids);
+    List<SpecialPost> selectSpecialPostByIds(List<Integer> ids);
 
 }

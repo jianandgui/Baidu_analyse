@@ -55,6 +55,7 @@ public class ChartServiceImpl implements ChartService {
         Map<String, List<ChartPoint>> map = new HashMap<String, List<ChartPoint>>();
         //判断数据类型是否正确
         if (!ChartDataTypeEnum.isInclude(dataTypeName)) {
+
             throw new IlleagalArgumentException();
         }
 
