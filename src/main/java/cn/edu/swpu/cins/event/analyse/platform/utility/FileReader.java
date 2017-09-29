@@ -12,7 +12,7 @@ import java.util.HashMap;
 public class FileReader {
 
     public HashMap<String, Integer> dateAndFollowCout(String urlOfPost) throws IOException,JSONException {
-        BufferedReader reader = new BufferedReader(new java.io.FileReader("/home/yang/file/baidu_test.json"));
+        BufferedReader reader = new BufferedReader(new java.io.FileReader("/opt/baidu-event/trend_file.json"));
         StringBuilder stringBuilder = new StringBuilder();
         String str = reader.readLine();
         //先将所有的都读取到内存
