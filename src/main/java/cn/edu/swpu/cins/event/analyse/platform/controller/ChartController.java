@@ -5,7 +5,6 @@ import cn.edu.swpu.cins.event.analyse.platform.exception.NoEventException;
 import cn.edu.swpu.cins.event.analyse.platform.model.view.ChartPoint;
 import cn.edu.swpu.cins.event.analyse.platform.service.ChartService;
 import cn.edu.swpu.cins.event.analyse.platform.service.SpecialPostEventChartService;
-import org.json.JSONException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -54,7 +53,7 @@ public class ChartController {
             return new ResponseEntity<Object>(chartPointList, HttpStatus.OK);
         } catch (RuntimeException e) {
             return new ResponseEntity<Object>(e.getMessage(), INTERNAL_SERVER_ERROR);
-        } catch (JSONException e) {
+        } catch (Exception e) {
             return new ResponseEntity<Object>(e.getMessage(), INTERNAL_SERVER_ERROR);
         }
     }

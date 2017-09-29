@@ -1,9 +1,7 @@
 package cn.edu.swpu.cins.event.analyse.platform.utility;
 
-import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.stereotype.Service;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.util.HashMap;
@@ -25,7 +23,7 @@ public class FileReader {
         JSONObject dataJson = null;
         try {
             dataJson = new JSONObject(stringBuilder.toString());
-        } catch (JSONException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
         //传入需要查询热度的url
@@ -34,7 +32,7 @@ public class FileReader {
         JSONObject followCount = null;
         try {
             followCount = dataJson.getJSONObject(urlOfPost);
-        } catch (JSONException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
         HashMap<String, Integer> followCountMap = new HashMap<>();

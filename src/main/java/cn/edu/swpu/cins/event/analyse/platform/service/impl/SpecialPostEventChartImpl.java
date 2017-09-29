@@ -5,10 +5,8 @@ import cn.edu.swpu.cins.event.analyse.platform.model.view.ChartPoint;
 import cn.edu.swpu.cins.event.analyse.platform.service.SpecialPostEventChartService;
 import cn.edu.swpu.cins.event.analyse.platform.utility.FileReader;
 import cn.edu.swpu.cins.event.analyse.platform.utility.MapToList;
-import org.json.JSONException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
@@ -26,7 +24,7 @@ public class SpecialPostEventChartImpl implements SpecialPostEventChartService {
     }
 
     @Override
-    public List<ChartPoint> getChartPoints(String url) throws IOException, JSONException, NoEventException {
+    public List<ChartPoint> getChartPoints(String url) throws IOException, NoEventException {
 
         if (url == null || url.equals("") || url.equals(" ")) {
             throw new IllegalArgumentException("参数异常！");

@@ -9,5 +9,5 @@ import java.util.List;
 
 public interface SpecialPostEventChartService {
 
-    List<ChartPoint> getChartPoints(String url) throws IOException, JSONException, NoEventException;
+    List<ChartPoint> getChartPoints(String url) throws JSONException, NoEventException, IOException;
 }
