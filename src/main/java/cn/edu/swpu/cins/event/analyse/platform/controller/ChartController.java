@@ -15,6 +15,8 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
+import static org.springframework.http.HttpStatus.INTERNAL_SERVER_ERROR;
+
 /**
  * Created by lp-deepin on 17-5-20.
  */
@@ -46,12 +48,14 @@ public class ChartController {
     }
 
     @GetMapping("/specialPostEventChart")
-    public ResponseEntity<?> getSpecialPostEventChart(@RequestParam String url) throws IOException, JSONException, NoEventException {
+    public ResponseEntity<?> getSpecialPostEventChart(@RequestParam String url) throws IOException, NoEventException {
         try {
             List<ChartPoint> chartPointList = specialPostEventChartService.getChartPoints(url);
             return new ResponseEntity<Object>(chartPointList, HttpStatus.OK);
         } catch (RuntimeException e) {
-            return new ResponseEntity<Object>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<Object>(e.getMessage(), INTERNAL_SERVER_ERROR);
+        } catch (JSONException e) {
+            return new ResponseEntity<Object>(e.getMessage(), INTERNAL_SERVER_ERROR);
         }
     }
 

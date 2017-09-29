@@ -11,8 +11,9 @@ import java.util.HashMap;
 @Service
 public class FileReader {
 
-    public HashMap<String, Integer> dateAndFollowCout(String urlOfPost) throws IOException,JSONException {
+    public HashMap<String, Integer> dateAndFollowCout(String urlOfPost) throws IOException {
         BufferedReader reader = new BufferedReader(new java.io.FileReader("/opt/baidu-event/trend_file.json"));
+//        BufferedReader reader = new BufferedReader(new java.io.FileReader("/home/yang/file/baidu_test.json"));
         StringBuilder stringBuilder = new StringBuilder();
         String str = reader.readLine();
         //先将所有的都读取到内存
@@ -21,11 +22,21 @@ public class FileReader {
             str = reader.readLine();
         }
         //生成json源
-        JSONObject dataJson = new JSONObject(stringBuilder.toString());
+        JSONObject dataJson = null;
+        try {
+            dataJson = new JSONObject(stringBuilder.toString());
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
         //传入需要查询热度的url
 //        String url = "http://tieba.baidu.com/p/4753089223";
         //获取该对象的信息
-        JSONObject followCount = dataJson.getJSONObject(urlOfPost);
+        JSONObject followCount = null;
+        try {
+            followCount = dataJson.getJSONObject(urlOfPost);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
         HashMap<String, Integer> followCountMap = new HashMap<>();
         //删除首尾{ }
         StringBuilder follow = new StringBuilder(followCount.toString()).deleteCharAt(0);
