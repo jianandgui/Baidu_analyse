@@ -12,5 +12,6 @@ import java.util.List;
 public interface SpecialPostEventDao {
 
     List<SpecialPostEvent> selectAll(List<String> urls);
-    
+
+    String selectByUrl(String url);
 }

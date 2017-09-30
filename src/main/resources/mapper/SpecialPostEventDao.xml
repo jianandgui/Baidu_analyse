@@ -21,4 +21,11 @@
 
     </select>
 
+    <select id="selectByUrl" parameterType="String" resultType="String">
+        SELECT theme
+        FROM
+        <include refid="table"/>
+        WHERE url = #{url} limit 1
+    </select>
+
 </mapper>

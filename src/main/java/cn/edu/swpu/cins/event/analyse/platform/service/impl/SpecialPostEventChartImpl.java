@@ -2,6 +2,8 @@ package cn.edu.swpu.cins.event.analyse.platform.service.impl;
 
 import cn.edu.swpu.cins.event.analyse.platform.exception.NoEventException;
 import cn.edu.swpu.cins.event.analyse.platform.model.view.ChartPoint;
+import cn.edu.swpu.cins.event.analyse.platform.model.view.FileChartPoint;
+import cn.edu.swpu.cins.event.analyse.platform.model.view.SpecialPostEventChart;
 import cn.edu.swpu.cins.event.analyse.platform.service.SpecialPostEventChartService;
 import cn.edu.swpu.cins.event.analyse.platform.utility.FileReader;
 import cn.edu.swpu.cins.event.analyse.platform.utility.MapToList;
@@ -24,25 +26,30 @@ public class SpecialPostEventChartImpl implements SpecialPostEventChartService {
     }
 
     @Override
-    public List<ChartPoint> getChartPoints(String url) throws IOException, NoEventException {
+    public List<SpecialPostEventChart> getChartPoints(List<String> urls) throws IOException, NoEventException {
 
-        if (url == null || url.equals("") || url.equals(" ")) {
+        if (urls.isEmpty() || urls.size() > 5) {
             throw new IllegalArgumentException("参数异常！");
         }
-        HashMap<String, Integer> map = null;
-        List<ChartPoint> chartPointList = null;
+        for (String url : urls) {
+            if (url == null || url.equals("") || url.equals(" ")) {
+                throw new IllegalArgumentException("参数异常！");
+            }
+        }
+        List<FileChartPoint> fileChartPointList= null;
+        List<SpecialPostEventChart> chartPointList = null;
 
         try{
-            map = fileReader.dateAndFollowCout(url);
+            fileChartPointList = fileReader.dateAndFollowCout(urls);
 
         }catch (IOException e){
             throw new IOException("读取文件失败！");
         }
 
-        if (map.isEmpty()) {
+        if (fileChartPointList.isEmpty()) {
             throw new NoEventException("没有该事件！");
         }
-        chartPointList = mapToList.mapToList(map);
+        chartPointList = mapToList.mapToList(fileChartPointList);
         return chartPointList;
     }
 }

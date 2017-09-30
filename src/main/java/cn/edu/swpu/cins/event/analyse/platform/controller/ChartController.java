@@ -3,6 +3,7 @@ package cn.edu.swpu.cins.event.analyse.platform.controller;
 import cn.edu.swpu.cins.event.analyse.platform.exception.BaseException;
 import cn.edu.swpu.cins.event.analyse.platform.exception.NoEventException;
 import cn.edu.swpu.cins.event.analyse.platform.model.view.ChartPoint;
+import cn.edu.swpu.cins.event.analyse.platform.model.view.SpecialPostEventChart;
 import cn.edu.swpu.cins.event.analyse.platform.service.ChartService;
 import cn.edu.swpu.cins.event.analyse.platform.service.SpecialPostEventChartService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,11 +47,11 @@ public class ChartController {
         }
     }
 
-    @GetMapping("/specialPostEventChart")
-    public ResponseEntity<?> getSpecialPostEventChart(@RequestParam String url) throws IOException, NoEventException {
+    @PostMapping("/specialPostEventChart")
+    public ResponseEntity<?> getSpecialPostEventChart(@RequestBody List<String> urls) throws IOException, NoEventException {
         try {
-            List<ChartPoint> chartPointList = specialPostEventChartService.getChartPoints(url);
-            return new ResponseEntity<Object>(chartPointList, HttpStatus.OK);
+            List<SpecialPostEventChart> specialPostEventChartList = specialPostEventChartService.getChartPoints(urls);
+            return new ResponseEntity<Object>(specialPostEventChartList, HttpStatus.OK);
         } catch (RuntimeException e) {
             return new ResponseEntity<Object>(e.getMessage(), INTERNAL_SERVER_ERROR);
         } catch (Exception e) {
