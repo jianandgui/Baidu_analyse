@@ -18,8 +18,8 @@ public class FileReader {
     private SpecialPostEventDao specialPostEventDao;
 
     public List<FileChartPoint> dateAndFollowCout(List<String> urlOfPosts) throws IOException {
-//        BufferedReader reader = new BufferedReader(new java.io.FileReader("/opt/baidu-event/trend_file.json"));
-        BufferedReader reader = new BufferedReader(new java.io.FileReader("/home/yang/file/baidu_test.json"));
+        BufferedReader reader = new BufferedReader(new java.io.FileReader("/opt/baidu-event/trend_file.json"));
+//        BufferedReader reader = new BufferedReader(new java.io.FileReader("/home/yang/file/baidu_test.json"));
 
         StringBuilder stringBuilder = new StringBuilder();
         String str = reader.readLine();
