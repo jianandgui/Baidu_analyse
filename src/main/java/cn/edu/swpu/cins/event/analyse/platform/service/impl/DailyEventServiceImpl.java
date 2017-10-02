@@ -106,10 +106,15 @@ public class DailyEventServiceImpl implements DailyEventService {
         handledEvent.setHandledTime(null);
 
         int insertCount = handledEventDao.insertHandledEvent(handledEvent);
-
-        int updateCount = dailyEventDao.updateCollectStatus(dailyEventId);
-
-        int updateDailyCount = dailyEventDao.updateMainViewAndPostTypeById(dailyEventId,mainView,type);
+        int updateCount ;
+        int updateDailyCount ;
+        if(table.equals("daily")){
+            table = "daily_event";
+        }else {
+            table = "special_post_event";
+        }
+        updateCount = dailyEventDao.updateCollectStatus(dailyEventId,table);
+        updateDailyCount = dailyEventDao.updateMainViewAndPostTypeById(dailyEventId,mainView,type,table);
 
         if (insertCount + updateCount + updateDailyCount!= 3) {
             throw new OperationFailureException();
