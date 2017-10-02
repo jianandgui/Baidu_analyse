@@ -48,9 +48,10 @@ public class DailyEventController {
     public ResponseEntity<?> collectEvent(@RequestParam("recorder") String recorder
             , @PathVariable("id") int id
             , @RequestParam("mainView") String mainView
-            , @RequestParam("postType") String postType){
+            , @RequestParam("postType") String postType
+            , @RequestParam("table") String table ){
         try {
-            dailyEventService.collectEvent(mainView, postType, recorder, id);
+            dailyEventService.collectEvent(mainView, postType, recorder, id,table);
         }catch (BaseException e){
             return new ResponseEntity<>(e.getMessage(),e.getStatus());
         }

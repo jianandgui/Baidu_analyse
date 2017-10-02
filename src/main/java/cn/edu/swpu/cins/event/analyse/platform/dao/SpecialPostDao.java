@@ -3,6 +3,7 @@ package cn.edu.swpu.cins.event.analyse.platform.dao;
 import cn.edu.swpu.cins.event.analyse.platform.model.persistence.SpecialPost;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Repository;
 
@@ -35,4 +36,5 @@ public interface SpecialPostDao {
 
     List<SpecialPost> selectSpecialPostByIds(List<Integer> ids);
 
+    int updateSpecialPost(@Param("id") Integer id, @Param("urls") List<String> urls);
 }

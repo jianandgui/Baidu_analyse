@@ -7,6 +7,7 @@ import cn.edu.swpu.cins.event.analyse.platform.exception.OperationFailureExcepti
 import cn.edu.swpu.cins.event.analyse.platform.model.persistence.SpecialPost;
 import cn.edu.swpu.cins.event.analyse.platform.service.SpecialPostService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -65,5 +66,22 @@ public class SpecialPostServiceImpl implements SpecialPostService {
         }catch (Exception e){
             throw e;
         }
+    }
+
+    @Override
+    public int updateById(Integer id, List<String> urls) throws OperationFailureException {
+        if (urls.isEmpty()) {
+            throw new IllegalArgumentException("url不能为空");
+        }
+        if (id == null) {
+            throw new IllegalArgumentException("id不能为空");
+        }
+        try {
+            specialPostDao.updateSpecialPost(id, urls);
+        } catch (Exception e) {
+            throw new OperationFailureException();
+        }
+
+        return 1;
     }
 }

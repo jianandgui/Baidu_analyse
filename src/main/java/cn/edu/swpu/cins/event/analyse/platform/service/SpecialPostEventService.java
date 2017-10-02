@@ -8,4 +8,5 @@ import java.util.List;
 public interface SpecialPostEventService {
 
     List<SpecialPostEvent> queryAll(List<Integer> ids) throws NoEventException;
+
 }

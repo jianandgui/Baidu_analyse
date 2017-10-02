@@ -21,30 +21,13 @@ public class MapToList {
 
     public List<SpecialPostEventChart> mapToList(List<FileChartPoint> fileChartPoints) {
 
-/*
-        //总的事件坐标点集合
-        List<SpecialPostEventChart> chartPointList = new ArrayList<>();
-        map.entrySet()
-                .forEach(stringIntegerEntry ->
-                        chartPointList.add(new ChartPoint(stringIntegerEntry.getKey(), stringIntegerEntry.getValue())));
-*/
-
-
-
-        //mapList.stream().forEach(map -> new SpecialPostEventChart()map.entrySet().forEach(stringIntegerEntry ->));
-
-        /*for (HashMap<String, Integer> map : mapList) {
-            SpecialPostEventChart specialPostEventChart = new SpecialPostEventChart();
-            map.entrySet().forEach(stringIntegerEntry -> specialPostEventChart.setChartPoint() );
-        }*/
-
-        //FileChartPoint
-        //HashMap<date,count>  String theme
-
-
         List<SpecialPostEventChart> specialPostEventChartList = new ArrayList<>(fileChartPoints.size());
-        for (FileChartPoint fileChartPoint : fileChartPoints) {
 
+//        List<SpecialPostEventChart> specialPostEventChartList1=fileChartPoints.stream().filter(fileChartPoint -> {
+//            return new SpecialPostEventChart(new List<ChartPoint>().fileChartPoint.getMap().entrySet().stream().filter(), fileChartPoint.getTheme());
+//        });
+
+        for (FileChartPoint fileChartPoint : fileChartPoints) {
             //获取map
             HashMap<String, Integer> map = fileChartPoint.getMap();
             //获取主题名

@@ -17,4 +17,6 @@ public class SpecialPostEventChart {
 
     public SpecialPostEventChart() {
     }
+
+
 }

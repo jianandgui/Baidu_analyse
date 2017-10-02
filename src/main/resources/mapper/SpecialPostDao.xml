@@ -27,4 +27,11 @@
             #{id}
         </foreach>
     </select>
+
+    <update id="updateSpecialPost">
+       UPDATE
+       special_post
+       SET url=#{urls, javaType = List , jdbcType = VARCHAR}
+       WHERE id=#{id}
+    </update>
 </mapper>

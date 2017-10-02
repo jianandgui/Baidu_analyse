@@ -26,5 +26,5 @@ public interface DailyEventService {
      * 归集事件接口
      * @return
      */
-    public int collectEvent(String mainView, String type, String recorder, int dailyEventId) throws BaseException;
+    public int collectEvent(String mainView, String type, String recorder, int dailyEventId,String table) throws BaseException;
 }

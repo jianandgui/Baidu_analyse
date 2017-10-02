@@ -84,7 +84,7 @@ public class DailyEventServiceImpl implements DailyEventService {
 
     @Override
     @Transactional(rollbackFor = {RuntimeException.class,BaseException.class})
-    public int collectEvent(String mainView, String type, String recorder, int dailyEventId) throws BaseException {
+    public int collectEvent(String mainView, String type, String recorder, int dailyEventId,String table) throws BaseException {
         //todo 1判断recorder是否合法
         if (recorder.length()>10){
             throw new IlleagalArgumentException("记录人不存在");

@@ -56,4 +56,13 @@ public class SpecialPostDaoTest {
         log.info(list1.toString());
     }
 
+    @Test
+    public void updateById() {
+        //["http://tieba.baidu.com/p/5340802178","http://tieba.baidu.com/p/5340022602","http://tieba.baidu.com/p/5335559380"]
+        List<String> urls = new ArrayList<>();
+        urls.add("http://tieba.baidu.com/p/5340022602");
+        urls.add("www.google.com");
+        log.info(String.valueOf(specialPostDao.updateSpecialPost(26, urls)));
+    }
+
 }
