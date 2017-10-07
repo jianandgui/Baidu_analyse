@@ -19,19 +19,29 @@ public class SpecialPostServiceImpl implements SpecialPostService {
     private SpecialPostDao specialPostDao;
 
     @Override
-    public int addSpecialPost(SpecialPost specialPost) throws BaseException {
+    public boolean addSpecialPost(SpecialPost specialPost) throws BaseException {
             String name = specialPost.getName();
             List<String> url = specialPost.getUrl();
-            if(name ==null ||name== " "||url.isEmpty() ){
-                throw new IllegalArgumentException();
+        if (name == null || name == " " || url.isEmpty()) {
+            throw new IllegalArgumentException();
+        }
+        List<SpecialPost> specialPostList = specialPostDao.selectAllSpecialPost();
+        specialPostList.stream().filter(specialPost1 -> {
+            if (specialPost.getName().equals(name)) {
+                try {
+                    throw new OperationFailureException("重复添加");
+                } catch (OperationFailureException e) {
+                    e.printStackTrace();
+                }
             }
-
+            return true;
+        });
             try{
                 int num = specialPostDao.insertSpecialPost(specialPost);
                 if(num != 1){
                     throw new OperationFailureException();
                 }
-                return num;
+                return true;
             }catch (Exception e){
                 throw e;
             }

@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface SpecialPostService {
 
-    int addSpecialPost(SpecialPost specialPost) throws BaseException;
+    boolean addSpecialPost(SpecialPost specialPost) throws BaseException;
 
     int deleteSpecialPostByIds(List<Integer> ids) throws BaseException;
 
