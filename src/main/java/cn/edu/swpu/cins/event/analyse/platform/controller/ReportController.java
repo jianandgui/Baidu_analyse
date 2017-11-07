@@ -53,11 +53,10 @@ public class ReportController {
 
         try {
             //check whether the session has the downloading permision
-            String storedPermission = (String) httpSession.getAttribute("permission");
-            if (storedPermission == null || !storedPermission.equals(permission)) {
-                throw new UserException("权限不足", HttpStatus.FORBIDDEN);
-            }
-
+            //String storedPermission = (String) httpSession.getAttribute("permission");
+//            if (storedPermission == null || !storedPermission.equals(permission)) {
+//                throw new UserException("权限不足", HttpStatus.FORBIDDEN);
+//            }
             reportDataMap = reportService.getReportDataMap(year, issue);
             template = freeMarkerConfigurer.getConfiguration().getTemplate("template.ftl");
             //文件类型
