@@ -41,13 +41,12 @@ public class ReportController {
         this.freeMarkerConfigurer = freeMarkerConfigurer;
     }
 
+    @PreAuthorize("hasAnyRole('ADMIN','VIP')")
     @GetMapping("/report/{year}/{issue}")
     public void getReport(HttpServletRequest request
             , HttpServletResponse response
             , @PathVariable int year
-            , @PathVariable int issue
-            , @RequestParam("permission") String permission
-            , HttpSession httpSession) {
+            , @PathVariable int issue) {
         Template template = null;
         Map<String, Object> reportDataMap = null;
 
