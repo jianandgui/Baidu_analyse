@@ -10,4 +10,12 @@ public class Ids {
 
     public Ids() {
     }
+
+    public List<Integer> getIds() {
+        return ids;
+    }
+
+    public void setIds(List<Integer> ids) {
+        this.ids = ids;
+    }
 }

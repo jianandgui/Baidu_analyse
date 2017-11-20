@@ -18,5 +18,19 @@ public class SpecialPostEventChart {
     public SpecialPostEventChart() {
     }
 
+    public List<ChartPoint> getChartPoint() {
+        return chartPoint;
+    }
 
+    public void setChartPoint(List<ChartPoint> chartPoint) {
+        this.chartPoint = chartPoint;
+    }
+
+    public String getTheme() {
+        return theme;
+    }
+
+    public void setTheme(String theme) {
+        this.theme = theme;
+    }
 }

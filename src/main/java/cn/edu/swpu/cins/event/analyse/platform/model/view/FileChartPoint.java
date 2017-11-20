@@ -17,4 +17,20 @@ public class FileChartPoint {
 
     public FileChartPoint() {
     }
+
+    public HashMap<String, Integer> getMap() {
+        return map;
+    }
+
+    public void setMap(HashMap<String, Integer> map) {
+        this.map = map;
+    }
+
+    public String getTheme() {
+        return theme;
+    }
+
+    public void setTheme(String theme) {
+        this.theme = theme;
+    }
 }

@@ -9,4 +9,6 @@ import java.util.Map;
  */
 public interface ReportService {
     public Map<String ,Object> getReportDataMap(int year, int issue) throws Exception;
+
+    public Map<String, Object> getPostReportDataMap(int year, int issue) throws Exception;
 }

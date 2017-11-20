@@ -5,7 +5,8 @@ package cn.edu.swpu.cins.event.analyse.platform.enums;
  */
 public enum ChartTypeEnum {
     DOUBLE_MONTH("doubleMonthChartStyle"),
-    SINGLE_MONTH("singleMonthChartStyle")
+    SINGLE_MONTH("singleMonthChartStyle"),
+    SPECIAL_POST("specialPostChartStyle")
     ;
 
     String styleBeanId;

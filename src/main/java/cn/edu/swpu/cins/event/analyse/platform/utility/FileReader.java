@@ -45,7 +45,7 @@ public class FileReader {
             for (String urlOfPost : urlOfPosts) {
                 followCount = dataJson.getJSONObject(urlOfPost);
                 HashMap<String, Integer> followCountMap = new HashMap<>();
-                String theme = specialPostEventDao.selectByUrl(urlOfPost);
+                String theme = specialPostEventDao.selectThemeByUrl(urlOfPost);
                 //删除首尾{ }
                 StringBuilder follow = new StringBuilder(followCount.toString()).deleteCharAt(0);
                 follow.deleteCharAt(follow.length() - 1);

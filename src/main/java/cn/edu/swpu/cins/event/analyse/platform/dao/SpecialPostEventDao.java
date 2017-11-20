@@ -13,5 +13,5 @@ public interface SpecialPostEventDao {
 
     List<SpecialPostEvent> selectAll(List<String> urls);
 
-    String selectByUrl(String url);
+    String selectThemeByUrl(String url);
 }

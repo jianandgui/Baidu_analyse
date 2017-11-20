@@ -2,22 +2,32 @@ package cn.edu.swpu.cins.event.analyse.platform.service.impl;
 
 import cn.edu.swpu.cins.event.analyse.platform.dao.DailyEventDao;
 import cn.edu.swpu.cins.event.analyse.platform.dao.HandledEventDao;
+import cn.edu.swpu.cins.event.analyse.platform.dao.SpecialPostDao;
+import cn.edu.swpu.cins.event.analyse.platform.dao.SpecialPostEventDao;
 import cn.edu.swpu.cins.event.analyse.platform.enums.ChartDataTypeEnum;
 import cn.edu.swpu.cins.event.analyse.platform.enums.ChartTypeEnum;
 import cn.edu.swpu.cins.event.analyse.platform.exception.BaseException;
 import cn.edu.swpu.cins.event.analyse.platform.exception.IlleagalArgumentException;
+import cn.edu.swpu.cins.event.analyse.platform.exception.NoEventException;
 import cn.edu.swpu.cins.event.analyse.platform.model.persistence.DailyEvent;
 import cn.edu.swpu.cins.event.analyse.platform.model.persistence.HandledEvent;
+import cn.edu.swpu.cins.event.analyse.platform.model.persistence.SpecialPost;
 import cn.edu.swpu.cins.event.analyse.platform.model.view.ChartPoint;
+import cn.edu.swpu.cins.event.analyse.platform.model.view.Post;
+import cn.edu.swpu.cins.event.analyse.platform.model.view.SpecialPostEventChart;
 import cn.edu.swpu.cins.event.analyse.platform.service.ReportService;
+import cn.edu.swpu.cins.event.analyse.platform.service.SpecialPostEventChartService;
 import cn.edu.swpu.cins.event.analyse.platform.utility.chart.generator.ChartGenerator;
+import javafx.geometry.Pos;
 import org.jfree.chart.JFreeChart;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -32,11 +42,20 @@ public class ReportServiceImpl implements ReportService {
     private ChartGenerator chartGenerator;
     private DailyEventDao dailyEventDao;
     private HandledEventDao handledEventDao;
+    private SpecialPostDao specialPostDao;
+    private SpecialPostEventDao specialPostEventDao;
+    private SpecialPostEventChartService specialPostEventChartService;
 
     @Autowired
     public ReportServiceImpl(DailyEventDao dailyEventDao
             , HandledEventDao handledEventDao
-            , ChartGenerator chartGenerator) {
+            , ChartGenerator chartGenerator
+            , SpecialPostEventDao specialPostEventDao
+            , SpecialPostDao specialPostDao
+            , SpecialPostEventChartService specialPostEventChartService) {
+        this.specialPostEventChartService = specialPostEventChartService;
+        this.specialPostDao = specialPostDao;
+        this.specialPostEventDao = specialPostEventDao;
         this.handledEventDao = handledEventDao;
         this.dailyEventDao = dailyEventDao;
         this.chartGenerator = chartGenerator;
@@ -189,5 +208,45 @@ public class ReportServiceImpl implements ReportService {
         } catch (Exception e) {
             throw e;
         }
+    }
+
+    @Override
+    public Map<String, Object> getPostReportDataMap(int year, int issue) throws Exception{
+        Map<String, Object> reportDataMap = new HashMap<>();
+        int beginMonth = issue;
+        int endMonth = issue + 1;
+        String generateDate = DateTimeFormatter.ofPattern("yyyy年MM月dd日").format(LocalDateTime.now());
+        List<Post> postList;
+
+        List<SpecialPost> list = specialPostDao.selectAllSpecialPost();
+        postList = mapToPostList(list);
+        reportDataMap.put("year", year);
+        reportDataMap.put("generateDate", generateDate);
+        reportDataMap.put("beginMonth", beginMonth);
+        reportDataMap.put("endMonth", endMonth);
+        reportDataMap.put("postCount", postList.size());
+        reportDataMap.put("postList", postList);
+
+        return reportDataMap;
+    }
+
+    private List<Post> mapToPostList(List<SpecialPost> list) throws IOException,NoEventException,Exception {
+        List<Post> result = new ArrayList<>();
+        List<String> urls = new ArrayList<>();
+        list.forEach(specialPost -> urls.addAll(specialPost.getUrl()));
+        List<SpecialPostEventChart>  list1 = specialPostEventChartService.getChartPoints(urls.subList(0,5));
+
+        for(int i = 0; i < list1.size(); i++){
+            SpecialPostEventChart specialPostEventChart = list1.get(i);
+            Post post = new Post();
+            post.setIndex(i);
+            post.setUrl(urls.get(i));
+            post.setTheme(specialPostEventChart.getTheme());
+            JFreeChart jFreeChart = chartGenerator.generateChart(specialPostEventChart.getChartPoint(),"帖子趋势图",ChartTypeEnum.SPECIAL_POST);
+            post.setImageContent(chartGenerator.chartToBASE64(jFreeChart));
+            result.add(post);
+        }
+
+        return result;
     }
 }
