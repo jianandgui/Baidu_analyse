@@ -1696,7 +1696,7 @@
                                 <w:sz w:val="24"/>
                                 <w:szCs w:val="24"/>
                             </w:rPr>
-                            <w:t>（归集数量）</w:t>
+                            <#--<w:t>（归集数量）</w:t>-->
                         </w:r>
                         <w:r w:rsidRPr="006E3581">
                             <w:rPr>
@@ -1723,7 +1723,7 @@
                                 <w:sz w:val="24"/>
                                 <w:szCs w:val="24"/>
                             </w:rPr>
-                            <w:t>归集事件里涉及到的</w:t>
+                            <#--<w:t>归集事件里涉及到的</w:t>-->
                         </w:r>
                         <w:r w:rsidRPr="004B2DC0">
                             <w:rPr>
@@ -1791,7 +1791,7 @@
                                 <w:sz w:val="28"/>
                                 <w:szCs w:val="28"/>
                             </w:rPr>
-                            <w:t>人工做</w:t>
+                            <#--<w:t>人工做</w:t>-->
                         </w:r>
                         <w:r w:rsidR="00D57BF1" w:rsidRPr="006E3581">
                             <w:rPr>
@@ -2203,161 +2203,161 @@
                             </w:rPr>
                         </w:pPr>
                     </w:p>
-                    <w:p w:rsidR="006F26AF" w:rsidRDefault="006F26AF" w:rsidP="006F26AF">
-                        <w:pPr>
-                            <w:pStyle w:val="a3"/>
-                            <w:ind w:right="960" w:firstLineChars="0" w:firstLine="0"/>
-                            <w:rPr>
-                                <w:color w:val="000000" w:themeColor="text1"/>
-                                <w:sz w:val="24"/>
-                                <w:szCs w:val="24"/>
-                            </w:rPr>
-                        </w:pPr>
-                        <w:r>
-                            <w:rPr>
-                                <w:rFonts w:hint="eastAsia"/>
-                                <w:color w:val="000000" w:themeColor="text1"/>
-                                <w:sz w:val="24"/>
-                                <w:szCs w:val="24"/>
-                            </w:rPr>
-                            <w:t>说明：</w:t>
-                        </w:r>
-                        <w:r w:rsidR="003B4A4E">
-                            <w:rPr>
-                                <w:rFonts w:hint="eastAsia"/>
-                                <w:color w:val="000000" w:themeColor="text1"/>
-                                <w:sz w:val="24"/>
-                                <w:szCs w:val="24"/>
-                            </w:rPr>
-                            <w:t xml:space="preserve"> </w:t>
-                        </w:r>
-                        <w:r>
-                            <w:rPr>
-                                <w:rFonts w:hint="eastAsia"/>
-                                <w:color w:val="000000" w:themeColor="text1"/>
-                                <w:sz w:val="24"/>
-                                <w:szCs w:val="24"/>
-                            </w:rPr>
-                            <w:t>红色：代表需要自动计算生成</w:t>
-                        </w:r>
-                    </w:p>
-                    <w:p w:rsidR="003B4A4E" w:rsidRDefault="003B4A4E" w:rsidP="006F26AF">
-                        <w:pPr>
-                            <w:pStyle w:val="a3"/>
-                            <w:ind w:right="960" w:firstLineChars="0" w:firstLine="0"/>
-                            <w:rPr>
-                                <w:color w:val="000000" w:themeColor="text1"/>
-                                <w:sz w:val="24"/>
-                                <w:szCs w:val="24"/>
-                            </w:rPr>
-                        </w:pPr>
-                        <w:r>
-                            <w:rPr>
-                                <w:color w:val="000000" w:themeColor="text1"/>
-                                <w:sz w:val="24"/>
-                                <w:szCs w:val="24"/>
-                            </w:rPr>
-                            <w:tab/>
-                        </w:r>
-                        <w:r>
-                            <w:rPr>
-                                <w:color w:val="000000" w:themeColor="text1"/>
-                                <w:sz w:val="24"/>
-                                <w:szCs w:val="24"/>
-                            </w:rPr>
-                            <w:tab/>
-                        </w:r>
-                        <w:r>
-                            <w:rPr>
-                                <w:rFonts w:hint="eastAsia"/>
-                                <w:color w:val="000000" w:themeColor="text1"/>
-                                <w:sz w:val="24"/>
-                                <w:szCs w:val="24"/>
-                            </w:rPr>
-                            <w:t>蓝色：代表需要空出的位置</w:t>
-                        </w:r>
-                    </w:p>
-                    <w:p w:rsidR="003B4A4E" w:rsidRDefault="003B4A4E" w:rsidP="006F26AF">
-                        <w:pPr>
-                            <w:pStyle w:val="a3"/>
-                            <w:ind w:right="960" w:firstLineChars="0" w:firstLine="0"/>
-                            <w:rPr>
-                                <w:color w:val="000000" w:themeColor="text1"/>
-                                <w:sz w:val="24"/>
-                                <w:szCs w:val="24"/>
-                            </w:rPr>
-                        </w:pPr>
-                        <w:r>
-                            <w:rPr>
-                                <w:color w:val="000000" w:themeColor="text1"/>
-                                <w:sz w:val="24"/>
-                                <w:szCs w:val="24"/>
-                            </w:rPr>
-                            <w:tab/>
-                        </w:r>
-                        <w:r>
-                            <w:rPr>
-                                <w:color w:val="000000" w:themeColor="text1"/>
-                                <w:sz w:val="24"/>
-                                <w:szCs w:val="24"/>
-                            </w:rPr>
-                            <w:tab/>
-                        </w:r>
-                        <w:r>
-                            <w:rPr>
-                                <w:rFonts w:hint="eastAsia"/>
-                                <w:color w:val="000000" w:themeColor="text1"/>
-                                <w:sz w:val="24"/>
-                                <w:szCs w:val="24"/>
-                            </w:rPr>
-                            <w:t>紫色：代表解释备注</w:t>
-                        </w:r>
-                    </w:p>
-                    <w:p w:rsidR="00D013D6" w:rsidRPr="00333735" w:rsidRDefault="00D013D6" w:rsidP="006F26AF">
-                        <w:pPr>
-                            <w:pStyle w:val="a3"/>
-                            <w:ind w:right="960" w:firstLineChars="0" w:firstLine="0"/>
-                            <w:rPr>
-                                <w:color w:val="000000" w:themeColor="text1"/>
-                                <w:sz w:val="24"/>
-                                <w:szCs w:val="24"/>
-                            </w:rPr>
-                        </w:pPr>
-                        <w:r>
-                            <w:rPr>
-                                <w:color w:val="000000" w:themeColor="text1"/>
-                                <w:sz w:val="24"/>
-                                <w:szCs w:val="24"/>
-                            </w:rPr>
-                            <w:tab/>
-                        </w:r>
-                        <w:r>
-                            <w:rPr>
-                                <w:color w:val="000000" w:themeColor="text1"/>
-                                <w:sz w:val="24"/>
-                                <w:szCs w:val="24"/>
-                            </w:rPr>
-                            <w:tab/>
-                            <w:t>“*”</w:t>
-                        </w:r>
-                        <w:r>
-                            <w:rPr>
-                                <w:color w:val="000000" w:themeColor="text1"/>
-                                <w:sz w:val="24"/>
-                                <w:szCs w:val="24"/>
-                            </w:rPr>
-                            <w:t>：</w:t>
-                        </w:r>
-                        <w:r>
-                            <w:rPr>
-                                <w:rFonts w:hint="eastAsia"/>
-                                <w:color w:val="000000" w:themeColor="text1"/>
-                                <w:sz w:val="24"/>
-                                <w:szCs w:val="24"/>
-                            </w:rPr>
-                            <w:t>里面内容暂时不做</w:t>
-                        </w:r>
-                    </w:p>
+                    <#--<w:p w:rsidR="006F26AF" w:rsidRDefault="006F26AF" w:rsidP="006F26AF">-->
+                        <#--<w:pPr>-->
+                            <#--<w:pStyle w:val="a3"/>-->
+                            <#--<w:ind w:right="960" w:firstLineChars="0" w:firstLine="0"/>-->
+                            <#--<w:rPr>-->
+                                <#--<w:color w:val="000000" w:themeColor="text1"/>-->
+                                <#--<w:sz w:val="24"/>-->
+                                <#--<w:szCs w:val="24"/>-->
+                            <#--</w:rPr>-->
+                        <#--</w:pPr>-->
+                        <#--<w:r>-->
+                            <#--<w:rPr>-->
+                                <#--<w:rFonts w:hint="eastAsia"/>-->
+                                <#--<w:color w:val="000000" w:themeColor="text1"/>-->
+                                <#--<w:sz w:val="24"/>-->
+                                <#--<w:szCs w:val="24"/>-->
+                            <#--</w:rPr>-->
+                            <#--<w:t>说明：</w:t>-->
+                        <#--</w:r>-->
+                        <#--<w:r w:rsidR="003B4A4E">-->
+                            <#--<w:rPr>-->
+                                <#--<w:rFonts w:hint="eastAsia"/>-->
+                                <#--<w:color w:val="000000" w:themeColor="text1"/>-->
+                                <#--<w:sz w:val="24"/>-->
+                                <#--<w:szCs w:val="24"/>-->
+                            <#--</w:rPr>-->
+                            <#--<w:t xml:space="preserve"> </w:t>-->
+                        <#--</w:r>-->
+                        <#--<w:r>-->
+                            <#--<w:rPr>-->
+                                <#--<w:rFonts w:hint="eastAsia"/>-->
+                                <#--<w:color w:val="000000" w:themeColor="text1"/>-->
+                                <#--<w:sz w:val="24"/>-->
+                                <#--<w:szCs w:val="24"/>-->
+                            <#--</w:rPr>-->
+                            <#--<w:t>红色：代表需要自动计算生成</w:t>-->
+                        <#--</w:r>-->
+                    <#--</w:p>-->
+                    <#--<w:p w:rsidR="003B4A4E" w:rsidRDefault="003B4A4E" w:rsidP="006F26AF">-->
+                        <#--<w:pPr>-->
+                            <#--<w:pStyle w:val="a3"/>-->
+                            <#--<w:ind w:right="960" w:firstLineChars="0" w:firstLine="0"/>-->
+                            <#--<w:rPr>-->
+                                <#--<w:color w:val="000000" w:themeColor="text1"/>-->
+                                <#--<w:sz w:val="24"/>-->
+                                <#--<w:szCs w:val="24"/>-->
+                            <#--</w:rPr>-->
+                        <#--</w:pPr>-->
+                        <#--<w:r>-->
+                            <#--<w:rPr>-->
+                                <#--<w:color w:val="000000" w:themeColor="text1"/>-->
+                                <#--<w:sz w:val="24"/>-->
+                                <#--<w:szCs w:val="24"/>-->
+                            <#--</w:rPr>-->
+                            <#--<w:tab/>-->
+                        <#--</w:r>-->
+                        <#--<w:r>-->
+                            <#--<w:rPr>-->
+                                <#--<w:color w:val="000000" w:themeColor="text1"/>-->
+                                <#--<w:sz w:val="24"/>-->
+                                <#--<w:szCs w:val="24"/>-->
+                            <#--</w:rPr>-->
+                            <#--<w:tab/>-->
+                        <#--</w:r>-->
+                        <#--<w:r>-->
+                            <#--<w:rPr>-->
+                                <#--<w:rFonts w:hint="eastAsia"/>-->
+                                <#--<w:color w:val="000000" w:themeColor="text1"/>-->
+                                <#--<w:sz w:val="24"/>-->
+                                <#--<w:szCs w:val="24"/>-->
+                            <#--</w:rPr>-->
+                            <#--<w:t>蓝色：代表需要空出的位置</w:t>-->
+                        <#--</w:r>-->
+                    <#--</w:p>-->
+                    <#--<w:p w:rsidR="003B4A4E" w:rsidRDefault="003B4A4E" w:rsidP="006F26AF">-->
+                        <#--<w:pPr>-->
+                            <#--<w:pStyle w:val="a3"/>-->
+                            <#--<w:ind w:right="960" w:firstLineChars="0" w:firstLine="0"/>-->
+                            <#--<w:rPr>-->
+                                <#--<w:color w:val="000000" w:themeColor="text1"/>-->
+                                <#--<w:sz w:val="24"/>-->
+                                <#--<w:szCs w:val="24"/>-->
+                            <#--</w:rPr>-->
+                        <#--</w:pPr>-->
+                        <#--<w:r>-->
+                            <#--<w:rPr>-->
+                                <#--<w:color w:val="000000" w:themeColor="text1"/>-->
+                                <#--<w:sz w:val="24"/>-->
+                                <#--<w:szCs w:val="24"/>-->
+                            <#--</w:rPr>-->
+                            <#--<w:tab/>-->
+                        <#--</w:r>-->
+                        <#--<w:r>-->
+                            <#--<w:rPr>-->
+                                <#--<w:color w:val="000000" w:themeColor="text1"/>-->
+                                <#--<w:sz w:val="24"/>-->
+                                <#--<w:szCs w:val="24"/>-->
+                            <#--</w:rPr>-->
+                            <#--<w:tab/>-->
+                        <#--</w:r>-->
+                        <#--<w:r>-->
+                            <#--<w:rPr>-->
+                                <#--<w:rFonts w:hint="eastAsia"/>-->
+                                <#--<w:color w:val="000000" w:themeColor="text1"/>-->
+                                <#--<w:sz w:val="24"/>-->
+                                <#--<w:szCs w:val="24"/>-->
+                            <#--</w:rPr>-->
+                            <#--<w:t>紫色：代表解释备注</w:t>-->
+                        <#--</w:r>-->
+                    <#--</w:p>-->
+                    <#--<w:p w:rsidR="00D013D6" w:rsidRPr="00333735" w:rsidRDefault="00D013D6" w:rsidP="006F26AF">-->
+                        <#--<w:pPr>-->
+                            <#--<w:pStyle w:val="a3"/>-->
+                            <#--<w:ind w:right="960" w:firstLineChars="0" w:firstLine="0"/>-->
+                            <#--<w:rPr>-->
+                                <#--<w:color w:val="000000" w:themeColor="text1"/>-->
+                                <#--<w:sz w:val="24"/>-->
+                                <#--<w:szCs w:val="24"/>-->
+                            <#--</w:rPr>-->
+                        <#--</w:pPr>-->
+                        <#--<w:r>-->
+                            <#--<w:rPr>-->
+                                <#--<w:color w:val="000000" w:themeColor="text1"/>-->
+                                <#--<w:sz w:val="24"/>-->
+                                <#--<w:szCs w:val="24"/>-->
+                            <#--</w:rPr>-->
+                            <#--<w:tab/>-->
+                        <#--</w:r>-->
+                        <#--<w:r>-->
+                            <#--<w:rPr>-->
+                                <#--<w:color w:val="000000" w:themeColor="text1"/>-->
+                                <#--<w:sz w:val="24"/>-->
+                                <#--<w:szCs w:val="24"/>-->
+                            <#--</w:rPr>-->
+                            <#--<w:tab/>-->
+                            <#--<w:t>“*”</w:t>-->
+                        <#--</w:r>-->
+                        <#--<w:r>-->
+                            <#--<w:rPr>-->
+                                <#--<w:color w:val="000000" w:themeColor="text1"/>-->
+                                <#--<w:sz w:val="24"/>-->
+                                <#--<w:szCs w:val="24"/>-->
+                            <#--</w:rPr>-->
+                            <#--<w:t>：</w:t>-->
+                        <#--</w:r>-->
+                        <#--<w:r>-->
+                            <#--<w:rPr>-->
+                                <#--<w:rFonts w:hint="eastAsia"/>-->
+                                <#--<w:color w:val="000000" w:themeColor="text1"/>-->
+                                <#--<w:sz w:val="24"/>-->
+                                <#--<w:szCs w:val="24"/>-->
+                            <#--</w:rPr>-->
+                            <#--<w:t>里面内容暂时不做</w:t>-->
+                        <#--</w:r>-->
+                    <#--</w:p>-->
                     <w:sectPr w:rsidR="00D013D6" w:rsidRPr="00333735">
                         <w:pgSz w:w="11906" w:h="16838"/>
                         <w:pgMar w:top="1440" w:right="1800" w:bottom="1440" w:left="1800" w:header="851" w:footer="992"

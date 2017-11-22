@@ -211,15 +211,14 @@ public class ReportServiceImpl implements ReportService {
     }
 
     @Override
-    public Map<String, Object> getPostReportDataMap(int year, int issue) throws Exception{
+    public Map<String, Object> getPostReportDataMap(int year, int issue, List<String> urls) throws Exception {
         Map<String, Object> reportDataMap = new HashMap<>();
         int beginMonth = issue;
         int endMonth = issue + 1;
         String generateDate = DateTimeFormatter.ofPattern("yyyy年MM月dd日").format(LocalDateTime.now());
         List<Post> postList;
-
-        List<SpecialPost> list = specialPostDao.selectAllSpecialPost();
-        postList = mapToPostList(list);
+//        List<SpecialPost> list = specialPostDao.selectAllSpecialPost();
+        postList = mapToPostList(urls);
         reportDataMap.put("year", year);
         reportDataMap.put("generateDate", generateDate);
         reportDataMap.put("beginMonth", beginMonth);
@@ -230,12 +229,16 @@ public class ReportServiceImpl implements ReportService {
         return reportDataMap;
     }
 
-    private List<Post> mapToPostList(List<SpecialPost> list) throws IOException,NoEventException,Exception {
+    //TODO
+    private List<Post> mapToPostList(List<String> urls) throws IOException,NoEventException,Exception {
         List<Post> result = new ArrayList<>();
-        List<String> urls = new ArrayList<>();
-        list.forEach(specialPost -> urls.addAll(specialPost.getUrl()));
-        List<SpecialPostEventChart>  list1 = specialPostEventChartService.getChartPoints(urls.subList(0,5));
-
+//        list.forEach(specialPost -> urls.addAll(specialPost.getUrl()));
+        List<SpecialPostEventChart> list1;
+        if (urls.size() >= 5) {
+            list1 = specialPostEventChartService.getChartPoints(urls.subList(0, 5));
+        } else {
+            list1 = specialPostEventChartService.getChartPoints(urls);
+        }
         for(int i = 0; i < list1.size(); i++){
             SpecialPostEventChart specialPostEventChart = list1.get(i);
             Post post = new Post();

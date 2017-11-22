@@ -30,14 +30,5 @@ jwt:
   expiration: 68400
   tokenHead: "Bearer "
 
-endpoints:
-  shutdown:
-    enabled: true
-    sensitive: false
-    path: /shutdown
-  actuator:
 
-management:
-  port: 4000
-  address: 127.0.0.1
 

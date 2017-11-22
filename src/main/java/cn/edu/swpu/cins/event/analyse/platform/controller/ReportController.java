@@ -5,6 +5,7 @@ import cn.edu.swpu.cins.event.analyse.platform.exception.UserException;
 import cn.edu.swpu.cins.event.analyse.platform.service.ReportService;
 import cn.edu.swpu.cins.event.analyse.platform.utility.chart.generator.impl.ChartGeneratorImpl;
 import freemarker.template.Template;
+import jdk.nashorn.internal.objects.annotations.Getter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,6 +20,8 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.net.URLEncoder;
+import java.time.LocalDate;
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
@@ -94,26 +97,23 @@ public class ReportController {
         }
     }
 
-    @GetMapping("/report/postReport/{year}/{issue}")
+    @PostMapping("/report/postReport")
     public void getPostReport(HttpServletRequest request
             , HttpServletResponse response
-            , @PathVariable int year
-            , @PathVariable int issue) {
+            , @RequestBody List<String> urls) {
         Template template = null;
         Map<String, Object> reportDataMap = null;
 
         try {
-            //check whether the session has the downloading permision
-            //String storedPermission = (String) httpSession.getAttribute("permission");
-//            if (storedPermission == null || !storedPermission.equals(permission)) {
-//                throw new UserException("权限不足", HttpStatus.FORBIDDEN);
-//            }
-            reportDataMap = reportService.getPostReportDataMap(year, issue);
+            int year= LocalDate.now().getYear();
+            int issue=LocalDate.now().getDayOfMonth();
+
+            reportDataMap = reportService.getPostReportDataMap(year, issue,urls);
             template = freeMarkerConfigurer.getConfiguration().getTemplate("post-template.ftl");
             //文件类型
             response.setHeader("content-Type", "application/msword");
             // 下载文件的名称 "西南石油大学yyyy年m-m月舆情月报.doc"
-            String fileName = "西南石油大学" + year + "年" + issue + "-" + (issue + 1) + "转帖报表.doc";
+            String fileName = "西南石油大学" + year + "年" + issue + "-" + (issue + 1) + "专帖报表.doc";
             //解决文件名乱码问题
             if (request.getHeader("User-Agent").toUpperCase().indexOf("MSIE") > 0) {
                 fileName = URLEncoder.encode(fileName, "UTF-8");
